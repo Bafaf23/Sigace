@@ -4,6 +4,7 @@ export default function Selector({
   label,
   options = [],
   name,
+  nameInput,
   id,
   placeholder,
   onChange,
@@ -29,7 +30,7 @@ export default function Selector({
             </option>
           ))}
         </select>
-        <Input placeholder={placeholder} />
+        <Input placeholder={placeholder} name={nameInput} />
       </div>
     </div>
   );

@@ -6,10 +6,16 @@ export default function Button({
   classNameIcon,
   icon,
   onClick,
+  disabled,
   type,
 }) {
   return (
-    <button className={classNameBtn} onClick={onClick} type={type}>
+    <button
+      className={classNameBtn}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       <Icon icon={icon} className={classNameIcon}></Icon>
       {children}
     </button>

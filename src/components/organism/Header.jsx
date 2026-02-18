@@ -13,14 +13,14 @@ export default function Header() {
   return (
     <div className="p-6 bg-white border border-gray-100 sshadow flex flex-col gap-5 items-center sticky top-0 z-100">
       <div className="flex justify-between w-full">
-        <SigaceLogo></SigaceLogo>
+        <SigaceLogo className="text-slate-300"></SigaceLogo>
         <div className="flex gap-3 items-center">
           <nav className="flex gap-2">
             <NavLink
               icon={faHouseUser}
               label={"Inicio"}
               classNameLink={
-                "flex gap-1 p-1 justify-center items-center text-indigo-600"
+                "flex gap-1 p-1 justify-center items-center text-indigo-600 font-bold text-xl hover:bg-indigo-400/20 border border-transparent hover:border-indigo-600 rounded-2xl "
               }
               direcction={"#hero"}
             ></NavLink>
@@ -28,14 +28,14 @@ export default function Header() {
               icon={faUsers}
               label={"Sobre el proyecto"}
               classNameLink={
-                "flex gap-1 p-1 justify-center items-center text-amber-600"
+                "flex gap-1 p-2 justify-center items-center text-amber-600 text-xl font-bold hover:bg-amber-400/20 border border-transparent hover:border-amber-600 rounded-2xl "
               }
               direcction={"#nosotros"}
             ></NavLink>
           </nav>
           <Button
             classNameBtn={
-              "bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-2 group cursor-pointer hidden md:block lg:block"
+              "bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-2 group cursor-pointer hidden md:block lg:block text-xl"
             }
             children={"Acceso"}
             icon={faKey}
@@ -45,9 +45,10 @@ export default function Header() {
           ></Button>
         </div>
       </div>
+      {/* boton login para telefonos moviles */}
       <Button
         classNameBtn={
-          "bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-2 group cursor-pointer md:hidden lg:hidden block w-full justify-center"
+          "bg-cyan-600 hover:bg-cyan-500 text-white py-3 rounded-xl font-bold transition-all flex items-center gap-2 group cursor-pointer md:hidden lg:hidden block w-full justify-center text-xl"
         }
         children={"Acceso"}
         icon={faKey}

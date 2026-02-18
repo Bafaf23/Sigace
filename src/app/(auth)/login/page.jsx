@@ -1,8 +1,12 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Para redireccionar
+import { signIn } from "next-auth/react"; // El motor de NextAuth
+import { toast } from "react-hot-toast";
 import Input from "@/components/atom/Input";
 import Button from "@/components/atom/Button";
 import Icon from "@/components/atom/Icon";
+
 import {
   faKey,
   faEnvelope,
@@ -11,16 +15,31 @@ import {
 import Link from "next/link";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Datos de SIGACE:", formData);
-    // Aquí conectarías con tu API más adelante
+    setLoading(true);
+
+    const result = await signIn("credentials", {
+      email: formData.email,
+      password: formData.password,
+      redirect: false, // Evita que la página recargue bruscamente
+    });
+
+    if (result?.error) {
+      toast.error("Correo o contraseña incorrectos");
+      setLoading(false);
+    } else {
+      router.push("/dashboard"); // O la ruta principal de SIGACE
+      router.refresh(); // Refresca para que el layout reconozca la sesión
+    }
   };
 
   return (
@@ -86,9 +105,9 @@ export default function LoginPage() {
               classNameBtn="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-200 transition-all flex justify-center items-center gap-2"
               icon={faKey}
               type="submit"
-            >
-              Iniciar Sesión
-            </Button>
+              disabled={loading}
+              children={loading ? "Verificando..." : "Iniciar Sesión"}
+            ></Button>
           </form>
 
           <p className="text-center mt-8 text-slate-500 text-sm">

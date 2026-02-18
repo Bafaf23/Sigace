@@ -1,11 +1,45 @@
+"use client";
+import { useRouter } from "next/navigation"; // 1. Importación necesaria
+import { useState } from "react"; // ✅ ¡No olvides esta línea!
 import NavLink from "@/components/molecules/NavLink";
 import { faArrowLeft, faEye, faUser } from "@fortawesome/free-solid-svg-icons";
 import Selector from "@/components/molecules/Selector";
 import Input from "@/components/atom/Input";
 import InputPass from "@/components/atom/InputPass";
 import Button from "@/components/atom/Button";
+import { register } from "@/actions/register";
+import { toast } from "react-hot-toast";
 
-export default function register() {
+export default function RegisterPage() {
+  const router = useRouter(); // 2. Inicialización del hook
+
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const rawDatos = Object.fromEntries(formData);
+
+    // 3. Unir el tipo de identidad con el número
+    // Ejemplo: "V-" + "12345678" => "V-12345678"
+    const datosFinales = {
+      ...rawDatos,
+      dniUsuario: `${rawDatos.typeDni}${rawDatos.dniUsuario}`,
+    };
+
+    const respuesta = await register(datosFinales);
+
+    if (respuesta.success) {
+      toast.success("¡Registro completado en SIGACE!");
+      router.push("/login");
+    } else {
+      toast.error(
+        `Hubo un error ${respuesta.error}` || "Hubo un error al registrar"
+      );
+      setLoading(false);
+    }
+  }
   const options = [
     {
       label: "Cedula",
@@ -42,11 +76,12 @@ export default function register() {
               Control de Estudios Inteligente
             </p>
           </div>
-          <form action="#" className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <Selector
               label={"Tipo de Identidad"}
               options={options}
-              name={"optionIdentidad"}
+              name={"typeDni"}
+              nameInput={"dniUsuario"}
               id={"optionId"}
               placeholder={"3242343"}
             />
@@ -66,20 +101,36 @@ export default function register() {
             </div>
             <Input
               label={"Correo Electronico"}
-              type={"emal"}
+              type={"email"}
               placeholder={"usuario@ejemplo.com"}
+              name={"email"}
             />
+            <Input
+              label={"Telefono"}
+              type={"text"}
+              placeholder={"0424..."}
+              name={"phone"}
+            />
+            <Input
+              label={"Fecha de Nacimiento"}
+              type={"date"}
+              placeholder={"23-09-2003"}
+              name={"birthdate"}
+            />
+
             <InputPass
               label={"Contrasena"}
               placeholder={"******"}
-              name={"pass"}
+              name={"password"}
             />
 
             <Button
               classNameBtn={
                 "bg-indigo-600 w-full p-2 rounded-md text-slate-50 font-bold"
               }
-              children={"Resgistar"}
+              type={"submit"}
+              disabled={loading}
+              children={loading ? "Registrando..." : "Registrar"}
               icon={faUser}
             />
           </form>

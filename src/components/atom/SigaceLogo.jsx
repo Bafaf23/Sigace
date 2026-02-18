@@ -8,7 +8,7 @@ export default function SigaceLogo({ className = "text-slate-100" }) {
       </div>
       <div className="flex flex-col">
         <h1
-          className={`${className} font-bold leading-none text-xl tracking-tight`}
+          className={`${className} font-bold leading-none text-3xl tracking-tight`}
         >
           SIGA<span className={`text-cyan-500`}>CE</span>
         </h1>

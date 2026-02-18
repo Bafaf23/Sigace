@@ -24,7 +24,6 @@ export default function Input({
         className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 
                    focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 
                    transition-all placeholder:text-slate-400 relative"
-        required
       />
     </div>
   );
