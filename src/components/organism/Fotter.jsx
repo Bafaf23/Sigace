@@ -1,8 +1,8 @@
-import Link from "next/link";
-import SigaceLogo from "../atom/SigaceLogo";
-import Icon from "../atom/Icon";
 import Etiqueta from "../atom/Etiqueta";
+import Icon from "../atom/Icon";
+import SigaceLogo from "../atom/SigaceLogo";
 import { faMobilePhone } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function Fotter() {
   const desarrolladores = [
@@ -55,16 +55,16 @@ export default function Fotter() {
   ];
 
   return (
-    <footer className="py-4 px-6 bg-indigo-900 flex flex-col gap-2">
-      <div className="flex flex-col md:flex-row gap-2 items-center">
+    <footer className="flex flex-col gap-2 bg-indigo-900 px-6 py-4">
+      <div className="flex flex-col items-center gap-2 md:flex-row">
         <SigaceLogo></SigaceLogo>
-        <hr className="border border-amber-500 h-10 hidden md:block" />
+        <hr className="hidden h-10 border border-amber-500 md:block" />
         <div>
           <p className="text-[13px] text-gray-400 italic">Desarrollado por:</p>
           <div className="flex flex-col gap-3">
             {desarrolladores.map((desarrollador, index) => (
               <div key={index}>
-                <div className="flex gap-2 flex-col">
+                <div className="flex flex-col gap-2">
                   <h1 className="text-xl text-cyan-500">
                     {desarrollador.development}
                   </h1>
@@ -72,7 +72,7 @@ export default function Fotter() {
                     {desarrollador.social.map((item, index) => (
                       <div
                         key={index}
-                        className={`flex gap-1 p-1 rounded-2xl ${item.className}`}
+                        className={`flex gap-1 rounded-2xl p-1 ${item.className}`}
                       >
                         <Link href={item.url}>
                           <Icon icon={item.icon}></Icon>
@@ -87,13 +87,13 @@ export default function Fotter() {
           </div>
         </div>
       </div>
-      <div className=" flex flex-col items-end">
-        <p className=" text-2xl italic text-gray-300/50 z-10">
+      <div className="flex flex-col items-end">
+        <p className="z-10 text-2xl text-gray-300/50 italic">
           "Un ser sin estudios, es un ser incompleto."
         </p>
         <Etiqueta
           children={"Simon Bolivar"}
-          className="bg-amber-500/50 text-amber-500 "
+          className="bg-amber-500/50 text-amber-500"
         ></Etiqueta>
       </div>
     </footer>

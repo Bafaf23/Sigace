@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation"; // 1. Importación necesaria
 import { useState } from "react"; // ✅ ¡No olvides esta línea!
 import NavLink from "@/components/molecules/NavLink";
 import { faArrowLeft, faEye, faUser } from "@fortawesome/free-solid-svg-icons";
-import Selector from "@/components/molecules/Selector";
+import Selector from "@/components/molecules/SelectorInput";
 import Input from "@/components/atom/Input";
 import InputPass from "@/components/atom/InputPass";
 import Button from "@/components/atom/Button";

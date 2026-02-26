@@ -5,7 +5,7 @@ export default function Etiqueta({
   return (
     <div>
       <span
-        className={`inline-block py-1 px-3 rounded-full ${className} text-xs font-bold tracking-widest uppercase mb-4`}
+        className={`inline-block rounded-full px-3 py-1 ${className} mb-4 text-xs font-bold tracking-widest uppercase`}
       >
         {children}
       </span>

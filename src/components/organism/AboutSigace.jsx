@@ -26,44 +26,44 @@ export default function AboutSigace() {
   ];
 
   return (
-    <section id="nosotros" className="py-24 px-6 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+    <section id="nosotros" className="border-t border-gray-200 px-6 py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col items-center gap-16 lg:flex-row">
           {/* Lado Izquierdo: Imagen o Composición Visual */}
-          <div className="flex-1 relative">
-            <div className="relative z-10 rounded-2xl overflow-hidden border-2 border-orange-500/20 shadow-2xl">
-              <div className="bg-white/20 p-8 flex flex-col gap-4">
+          <div className="relative flex-1">
+            <div className="relative z-10 overflow-hidden rounded-2xl border-2 border-orange-500/20 shadow-2xl">
+              <div className="flex flex-col gap-4 bg-white/20 p-8">
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-rose-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+                  <div className="h-3 w-3 rounded-full bg-rose-500"></div>
+                  <div className="h-3 w-3 rounded-full bg-amber-500"></div>
+                  <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
                 </div>
                 <div className="space-y-4">
-                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full"></div>
-                  <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                  <div className="h-24 bg-orange-500/10 rounded-xl border border-orange-500/30 flex items-center justify-center">
+                  <div className="h-4 w-3/4 rounded bg-gray-200"></div>
+                  <div className="h-4 w-full rounded bg-gray-200"></div>
+                  <div className="h-4 w-5/6 rounded bg-gray-200"></div>
+                  <div className="flex h-24 items-center justify-center rounded-xl border border-orange-500/30 bg-orange-500/10">
                     <Icon
                       icon={faGraduationCap}
-                      className="text-orange-500 text-4xl"
+                      className="text-4xl text-orange-500"
                     />
                   </div>
                 </div>
               </div>
             </div>
             {/* Elemento Decorativo */}
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-orange-600/20 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-orange-600/20 blur-2xl"></div>
           </div>
 
           {/* Lado Derecho: Contenido */}
           <div className="flex-1">
-            <h2 className="text-orange-500 font-bold tracking-widest uppercase text-sm mb-4">
+            <h2 className="mb-4 text-sm font-bold tracking-widest text-orange-500 uppercase">
               Sobre el Proyecto
             </h2>
-            <h3 className="text-3xl md:text-4xl font-black text-cyan-500 mb-6">
+            <h3 className="mb-6 text-3xl font-black text-cyan-500 md:text-4xl">
               Transformando la Gestión Escolar a una nueva experiencia digital
             </h3>
-            <p className="text-gray-400 text-lg mb-10">
+            <p className="mb-10 text-lg text-gray-400">
               SIGACE nace como una solución moderna para superar las barreras
               del registro manual. Nuestra misión es empoderar a la institución
               con herramientas digitales que garanticen la transparencia y la
@@ -73,15 +73,15 @@ export default function AboutSigace() {
             {/* Listado de Valores (Moléculas) */}
             <div className="space-y-6">
               {valores.map((val, index) => (
-                <div key={index} className="flex gap-4 group">
-                  <div className="mt-1 bg-white w-12 h-12 shrink-0 rounded-lg flex items-center justify-center text-cyan-500 border border-gray-300 group-hover:border-cyan-500/50 transition-colors">
+                <div key={index} className="group flex gap-4">
+                  <div className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-gray-300 bg-white text-cyan-500 transition-colors group-hover:border-cyan-500/50">
                     <Icon icon={val.icono} />
                   </div>
                   <div>
-                    <h4 className="text-cyan-500 font-bold text-lg mb-1">
+                    <h4 className="mb-1 text-lg font-bold text-cyan-500">
                       {val.titulo}
                     </h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">
+                    <p className="text-sm leading-relaxed text-slate-500">
                       {val.desc}
                     </p>
                   </div>

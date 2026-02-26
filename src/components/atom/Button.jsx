@@ -7,17 +7,18 @@ export default function Button({
   icon,
   onClick,
   disabled,
-  type,
+  type = "button",
+  isCollapsed,
 }) {
   return (
     <button
-      className={classNameBtn}
+      className={`${classNameBtn}`}
       onClick={onClick}
       type={type}
       disabled={disabled}
     >
       <Icon icon={icon} className={classNameIcon}></Icon>
-      {children}
+      {!isCollapsed && <span className="whitespace-nowrap">{children}</span>}
     </button>
   );
 }

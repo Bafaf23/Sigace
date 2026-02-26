@@ -1,8 +1,10 @@
 import Icon from "./Icon";
-export default function CardEstado({ titel, info, icon }) {
+export default function CardEstado({ titel, info, icon, className }) {
   return (
     <div>
-      <div className="bg-white p-6 rounded-2xl border border-gray-200 backdrop-blur-sm hover:border-cyan-500/50 transition-colors">
+      <div
+        className={`${className} bg-white p-6 rounded-2xl border border-gray-200 backdrop-blur-sm hover:border-cyan-500/50 transition-colors`}
+      >
         <div className="bg-cyan-500/40 w-10 h-10 rounded-lg flex items-center justify-center mb-4 text-cyan-500">
           <Icon icon={icon} className={"text-xl"} />
         </div>

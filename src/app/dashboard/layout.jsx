@@ -1,18 +1,26 @@
+import Sidebar from "@/components/organism/Sidebar";
 import "@/globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-config.autoAddCss = false;
 import { Toaster } from "react-hot-toast";
 
+config.autoAddCss = false;
+
 export const metadata = {
-  title: "Sigace | Dashboard",
+  title: "Sigace | Gestión Escolar",
   description: "Sistema de Control de Estudios para Liceos",
 };
 
-export default function DashboarLayout({ children }) {
+export default function DashboardLayuot({ children }) {
   return (
     <>
-      <main className="flex flex-col">{children}</main>
+      <div className="flex flex-1 gap-2">
+        <Sidebar />
+        <main className="flex h-screen flex-1 flex-col overflow-hidden overflow-y-auto scroll-smooth p-3">
+          {children}
+        </main>
+      </div>
+
       <Toaster position="top-center" reverseOrder={false} />
     </>
   );

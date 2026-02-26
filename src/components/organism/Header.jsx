@@ -1,8 +1,8 @@
 "use client";
 
+import Button from "../atom/Button";
 import SigaceLogo from "../atom/SigaceLogo";
 import NavLink from "../molecules/NavLink";
-import Button from "../atom/Button";
 import { faHouseUser, faUsers, faKey } from "@fortawesome/free-solid-svg-icons";
 
 function irLogin() {
@@ -11,10 +11,10 @@ function irLogin() {
 
 export default function Header() {
   return (
-    <div className="p-6 bg-white border border-gray-100 sshadow flex flex-col gap-5 items-center sticky top-0 z-100">
-      <div className="flex justify-between w-full">
+    <div className="sshadow sticky top-0 z-100 flex flex-col items-center gap-5 border border-gray-100 bg-white p-6">
+      <div className="flex w-full justify-between">
         <SigaceLogo className="text-slate-300"></SigaceLogo>
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center gap-3">
           <nav className="flex gap-2">
             <NavLink
               icon={faHouseUser}
