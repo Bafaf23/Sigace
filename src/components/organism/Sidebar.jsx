@@ -36,8 +36,8 @@ export default function Sidebar() {
           icon={faFile}
           label={"Reportes"}
           classNameLink={` `}
-          direcction={"/reportes"}
-          active={patthename === `/reportes`}
+          direcction={"/dashboard/profesor/reportes"}
+          active={patthename === `/dashboard/profesor/reportes`}
         />
         <NavLink
           icon={faPenToSquare}

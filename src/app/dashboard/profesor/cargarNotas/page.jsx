@@ -106,8 +106,11 @@ export default function cargarNotas() {
           </div>
         </div>
       </div>
-
-      <TablaNotas />
+      <div className="flex flex-col">
+        <TablaNotas />
+        <TablaNotas />
+        <TablaNotas />
+      </div>
     </>
   );
 }
