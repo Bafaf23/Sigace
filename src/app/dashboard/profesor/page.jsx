@@ -1,6 +1,5 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { auth } from "@/auth";
 import CardEstado from "@/components/atom/CardEstado";
 import Selector from "@/components/atom/Selector";
 import {
@@ -9,7 +8,8 @@ import {
   faUser,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import { auth } from "@/auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Profesor() {
   const router = useRouter();
@@ -55,8 +55,8 @@ export default function Profesor() {
 
   if (user.rol !== "profesor") {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg font-semibold text-red-600 animate-pulse">
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="animate-pulse text-lg font-semibold text-red-600">
           Redireccionando... No tienes permiso para estar aquí.
         </p>
       </div>
@@ -64,19 +64,19 @@ export default function Profesor() {
   }
   return (
     <>
-      <div className="flex justify-between bg-white p-3 rounded-xl border border-slate-200">
+      <div className="flex justify-between rounded-xl p-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">
-            Bienvenido Prof.{" "}
-            <span className="text-sky-500 font-bold">
+          <h1 className="text-3xl font-bold text-slate-500 uppercase">
+            Bienvenido, {""}
+            <span className="font-bold text-indigo-500 normal-case">
               {user.name} {user.lastName}
             </span>
           </h1>
           <div>
-            <p className="text-xs italic text-gray-400/40">
+            <p className="text-xs text-gray-400/40 italic">
               Tu ultima coneccion
             </p>
-            <span className="text-xs italic text-gray-400/40">12/2/2030</span>
+            <span className="text-xs text-gray-400/40 italic">12/2/2030</span>
           </div>
         </div>
         <Selector
@@ -87,7 +87,7 @@ export default function Profesor() {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5">
+      <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-4">
         <CardEstado
           titel={"Secciones"}
           info="5"
