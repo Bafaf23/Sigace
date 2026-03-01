@@ -8,6 +8,89 @@ import { useState } from "react";
 export default function cargarNotas() {
   const [MateriaSelecioada, setMateriaSelecioada] = useState();
 
+  const db = {
+    infoMateria: {
+      id: "8902",
+      nombre: "Matemática",
+      anio: "5to",
+      seccion: "A",
+      profesor: "Bryant Facenda",
+    },
+
+    lapsos: [
+      {
+        id_lapso: 1,
+        nombre: "Primer Lapso",
+        estatus: "cerrado",
+        alumnos: [
+          {
+            id: "28.123.456",
+            nombre: "Juan Pérez",
+            n1: 15.0,
+            n2: 12.5,
+            n3: 18.0,
+          },
+          {
+            id: "28.123.476",
+            nombre: "Antonio Pérez",
+            n1: 10.0,
+            n2: 10.0,
+            n3: 14.5,
+          },
+          {
+            id: "29.999.888",
+            nombre: "María García",
+            n1: 20.0,
+            n2: 19.0,
+            n3: 20.0,
+          },
+        ],
+      },
+      {
+        id_lapso: 2,
+        nombre: "Segundo Lapso",
+        estatus: "cerrado",
+        alumnos: [
+          {
+            id: "28.123.456",
+            nombre: "Juan Pérez",
+            n1: 14.0,
+            n2: 16.0,
+            n3: 15.0,
+          },
+          {
+            id: "28.123.476",
+            nombre: "Antonio Pérez",
+            n1: 0.0,
+            n2: 0.0,
+            n3: 0.0,
+          },
+        ],
+      },
+      {
+        id_lapso: "3",
+        nombre: "Tercer Lapso",
+        estatus: "abierto",
+        alumnos: [
+          {
+            id: "28.123.456",
+            nombre: "Juan Pérez",
+            n1: 14.0,
+            n2: 16.0,
+            n3: 15.0,
+          },
+          {
+            id: "28.123.476",
+            nombre: "Antonio Pérez",
+            n1: 0.0,
+            n2: 0.0,
+            n3: 0.0,
+          },
+        ],
+      },
+    ],
+  };
+
   const user = {
     name: "Bryant",
     lastName: "Facenda",
@@ -65,51 +148,27 @@ export default function cargarNotas() {
 
   return (
     <>
-      <div className="flex items-center justify-between rounded-xl bg-white p-3 shadow">
-        <h1 className="text-3xl font-bold text-blue-500">Cargar Notas</h1>
-      </div>
-      <div className="mt-5 flex items-center justify-between rounded-xl bg-white p-2 shadow">
-        <div className="flex w-full justify-between">
-          <div className="flex w-full items-center gap-3">
-            <Selector
-              id={"materiasId"}
-              name={"Materia"}
-              options={materias}
-              label={"Materias"}
-              onChange={(e) => setMateriaSelecioada(e.target.value)}
-            />
-
-            <Selector
-              id={"yaer"}
-              name={"year"}
-              label={"Selecciona el año"}
-              options={yearMateria}
-            />
-
-            <Selector
-              id={"section"}
-              name={"section"}
-              label={"Selecciona la seccion"}
-              options={secctioMateria}
-            />
-          </div>
-
-          <div className="flex items-center">
-            <Button
-              classNameBtn={
-                "bg-indigo-500 p-2 rounded-md text-slate-50 font-bold cursor-pointer flex items-center gap-1"
-              }
-              icon={faPlus}
-            >
-              {"Cargar nota"}
-            </Button>
-          </div>
+      <div className="flex items-center justify-between rounded-xl p-3">
+        <h1 className="text-3xl font-bold text-slate-500 uppercase">
+          Cargar Notas
+        </h1>
+        <div className="flex items-center">
+          <Button
+            classNameBtn={
+              "bg-indigo-500 p-2 rounded-md text-slate-50 font-bold cursor-pointer flex items-center gap-1"
+            }
+            icon={faPlus}
+          >
+            {"Nueva nota"}
+          </Button>
         </div>
       </div>
-      <div className="flex flex-col">
-        <TablaNotas />
-        <TablaNotas />
-        <TablaNotas />
+
+      <div className="text-orange mt-6 flex flex-col gap-5 font-bold text-gray-500/60">
+        <h1 className="text-2xl">Notas cargadas por lapso</h1>
+        {db.lapsos.map((lapso) => (
+          <TablaNotas data={lapso} key={lapso.id_lapso} />
+        ))}
       </div>
     </>
   );
