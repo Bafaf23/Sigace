@@ -122,7 +122,6 @@ export default function FormCargaNotas({
         ))}
       </div>
 
-      {/* 4. Botones de Acción */}
       <div className="flex gap-3 pt-2">
         <Button
           type="button"

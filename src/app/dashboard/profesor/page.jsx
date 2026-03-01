@@ -1,10 +1,13 @@
 "use client";
 import { auth } from "@/auth";
 import CardEstado from "@/components/atom/CardEstado";
+import InfoCard from "@/components/atom/InfoCard";
 import Selector from "@/components/atom/Selector";
+import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import {
-  faChartLine,
-  faGraduationCap,
+  faExclamationTriangle,
+  faCheckCircle,
+  faUsers,
   faUser,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
@@ -64,9 +67,9 @@ export default function Profesor() {
   }
   return (
     <>
-      <div className="flex justify-between rounded-xl p-3">
+      <div className="flex w-full flex-col p-3 md:flex-row md:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-500 uppercase">
+          <h1 className="text-2xl font-bold text-slate-500 uppercase md:text-3xl">
             Bienvenido, {""}
             <span className="font-bold text-indigo-500 normal-case">
               {user.name} {user.lastName}
@@ -79,6 +82,7 @@ export default function Profesor() {
             <span className="text-xs text-gray-400/40 italic">12/2/2030</span>
           </div>
         </div>
+
         <Selector
           id={"materias"}
           name={"Materia"}
@@ -86,31 +90,45 @@ export default function Profesor() {
           label={"Materias"}
         />
       </div>
-
-      <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-4">
-        <CardEstado
-          titel={"Secciones"}
-          info="5"
+      <AccionesRapidas />
+      <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+        <InfoCard
+          label={"Secciones"}
+          value={"1"}
           icon={faUser}
-          color="bg-blue-500"
+          colorClass={"bg-orange-500/40 text-orange-500"}
+          description={"Secciones asignadas al profesor"}
         />
-        <CardEstado
-          titel="Alumnos"
-          info={"160"}
-          icon={faGraduationCap}
-          color="bg-indigo-500"
+
+        <InfoCard
+          label="Notas Cargadas"
+          value={`9`}
+          icon={faCheckCircle}
+          colorClass="bg-green-500/40 text-green-500"
+          description={`89% del trimestre listo`}
         />
-        <CardEstado
-          titel={"Promedio"}
-          info={"14.5"}
-          icon={faChartLine}
-          color="bg-emerald-500"
+
+        <InfoCard
+          label="Total Estudiantes"
+          value={"90"}
+          icon={faUsers}
+          colorClass="bg-blue-500/40 text-blue-500"
+          description="Inscritos en la sección"
         />
-        <CardEstado
-          titel={"Pendientes"}
-          info="12"
+        <InfoCard
+          label="Promedio Grupal"
+          value="14.5"
+          icon={faExclamationTriangle}
+          colorClass="bg-indigo-500/40 text-indigo-500"
+          description="Rendimiento actual"
+        />
+
+        <InfoCard
+          label="Pendientes"
+          value={"8"}
           icon={faClock}
-          color="bg-orange-500"
+          colorClass="bg-amber-500/40 text-orange-500"
+          description="Faltan por procesar"
         />
       </div>
     </>

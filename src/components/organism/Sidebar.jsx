@@ -17,7 +17,9 @@ export default function Sidebar() {
   const patthename = usePathname();
 
   return (
-    <aside className={`flex flex-col p-3 transition-all duration-300`}>
+    <aside
+      className={`hidden p-3 transition-all duration-300 md:flex md:flex-col`}
+    >
       <div className={`mb-8 flex items-center border-b border-gray-200 pb-3`}>
         <div className="truncate">
           <SigaceLogo className={"text-indigo-500"} />

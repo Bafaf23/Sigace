@@ -216,7 +216,10 @@ export default function cargarNotas() {
       </div>
 
       <div className="text-orange mt-6 flex flex-col gap-5 font-bold text-gray-500/60">
-        <h1 className="text-2xl">Notas cargadas por lapso</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl">Notas cargadas por lapso</h1>
+          <p>Materia</p>
+        </div>
         {db.lapsos.map((lapso) => (
           <TablaNotas data={lapso} key={lapso.id_lapso} />
         ))}
