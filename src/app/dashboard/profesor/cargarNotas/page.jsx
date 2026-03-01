@@ -1,12 +1,13 @@
 "use client";
 import Button from "@/components/atom/Button";
-import Selector from "@/components/atom/Selector";
+import FormCargaNotas from "@/components/molecules/FromCargaNotas";
+import Modal from "@/components/organism/Modal";
 import TablaNotas from "@/components/organism/TablaNotas";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 export default function cargarNotas() {
-  const [MateriaSelecioada, setMateriaSelecioada] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const db = {
     infoMateria: {
@@ -134,17 +135,50 @@ export default function cargarNotas() {
     ],
   };
 
-  const materias = [
-    ...new Map(user.materias.map((materia) => [materia.id, materia])).values(),
+  const alumnosDisponibles = [
+    {
+      id: "30123456",
+      nombre: "Adriana Villalobos",
+      seccion: "A",
+      anio: "5to",
+    },
+    {
+      id: "31987654",
+      nombre: "Brayan Martínez",
+      seccion: "A",
+      anio: "5to",
+    },
+    {
+      id: "29555444",
+      nombre: "Carlos Rodríguez",
+      seccion: "A",
+      anio: "5to",
+    },
+    {
+      id: "32111222",
+      nombre: "Daniela Sosa",
+      seccion: "A",
+      anio: "5to",
+    },
+    {
+      id: "30888999",
+      nombre: "Esteban Quito",
+      seccion: "A",
+      anio: "5to",
+    },
   ];
 
-  const materia = user.materias.find((m) => m.id === MateriaSelecioada);
+  /*  const materias = [
+    ...new Map(user.materias.map((materia) => [materia.id, materia])).values(),
+  ]; */
 
-  const yearMateria = materia?.year.map((y) => ({ value: y, label: y }) || []);
+  /*   const materia = user.materias.find((m) => m.id === MateriaSelecioada); */
 
+  /* const yearMateria = materia?.year.map((y) => ({ value: y, label: y }) || []); */
+  /* 
   const secctioMateria = materia?.section.map(
     (set) => ({ value: set, label: set }) || [],
-  );
+  ); */
 
   return (
     <>
@@ -158,9 +192,26 @@ export default function cargarNotas() {
               "bg-indigo-500 p-2 rounded-md text-slate-50 font-bold cursor-pointer flex items-center gap-1"
             }
             icon={faPlus}
+            onClick={() => {
+              setIsModalOpen(!isModalOpen);
+            }}
           >
-            {"Nueva nota"}
+            {"Añadir Nueva Calificación"}
           </Button>
+          <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            title="Cargar Calificaciones"
+          >
+            <FormCargaNotas
+              listaAlumnosSinNotas={alumnosDisponibles}
+              onSave={(data) => {
+                // Aquí haces el fetch POST a tu base de datos
+                console.log("Guardando nueva nota para:", data.alumnoId);
+              }}
+              onCancel={() => setIsModalOpen(false)}
+            />
+          </Modal>
         </div>
       </div>
 
