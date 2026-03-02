@@ -9,12 +9,39 @@ import {
   faFile,
   faCogs,
   faPenToSquare,
+  faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
-  /* indicador de ruta */
   const patthename = usePathname();
+
+  const linkProfesor = [
+    {
+      icon: faHome,
+      label: "Inicio",
+      active: patthename === `/dashboard/profesor`,
+      direccion: `/dashboard/profesor`,
+    },
+    {
+      icon: faFile,
+      label: "Reportes",
+      active: patthename === `/dashboard/profesor/reportes`,
+      direccion: `/dashboard/profesor/reportes`,
+    },
+    {
+      icon: faPenToSquare,
+      label: "Cargas de Notas",
+      active: patthename === `/dashboard/profesor/cargarNotas`,
+      direccion: `/dashboard/profesor/cargarNotas`,
+    },
+    {
+      icon: faUserCheck,
+      label: "Asistencias",
+      active: patthename === `/dashboard/profesor/asistencia`,
+      direccion: `/dashboard/profesor/asistencia`,
+    },
+  ];
 
   return (
     <aside
@@ -27,34 +54,14 @@ export default function Sidebar() {
       </div>
 
       <nav className={`flex grow flex-col space-y-2`}>
-        <NavLink
-          icon={faHome}
-          label={"Inicio"}
-          classNameLink={``}
-          active={patthename === `/dashboard/profesor`}
-          direcction={"/dashboard/profesor"}
-        />
-        <NavLink
-          icon={faFile}
-          label={"Reportes"}
-          classNameLink={` `}
-          direcction={"/dashboard/profesor/reportes"}
-          active={patthename === `/dashboard/profesor/reportes`}
-        />
-        <NavLink
-          icon={faPenToSquare}
-          label={"Cargar Notas"}
-          classNameLink={``}
-          direcction={"/dashboard/profesor/cargarNotas"}
-          active={patthename === `/dashboard/profesor/cargarNotas`}
-        />
-        <NavLink
-          icon={faCogs}
-          label={"Configuración"}
-          classNameLink={``}
-          direcction={"/setting"}
-          active={patthename === `/setting`}
-        />
+        {linkProfesor.map((link) => (
+          <NavLink
+            label={link.label}
+            icon={link.icon}
+            direcction={link.direccion}
+            active={link.active}
+          />
+        ))}
       </nav>
 
       {/* Cerrar sesion */}

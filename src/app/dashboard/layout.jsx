@@ -1,3 +1,4 @@
+"use client";
 import Sidebar from "@/components/organism/Sidebar";
 import "@/globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -5,11 +6,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Toaster } from "react-hot-toast";
 
 config.autoAddCss = false;
-
-export const metadata = {
-  title: "Sigace | Gestión Escolar",
-  description: "Sistema de Control de Estudios para Liceos",
-};
 
 export default function DashboardLayuot({ children }) {
   return (
@@ -20,8 +16,6 @@ export default function DashboardLayuot({ children }) {
           {children}
         </main>
       </div>
-
-      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }

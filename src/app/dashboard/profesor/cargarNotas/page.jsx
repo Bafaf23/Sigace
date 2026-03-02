@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/atom/Button";
+import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import FormCargaNotas from "@/components/molecules/FromCargaNotas";
 import Modal from "@/components/organism/Modal";
 import TablaNotas from "@/components/organism/TablaNotas";
@@ -182,7 +183,7 @@ export default function cargarNotas() {
 
   return (
     <>
-      <div className="flex items-center justify-between rounded-xl p-3">
+      <div className="mb-4 flex items-center justify-between gap-3 rounded-xl p-3">
         <h1 className="text-3xl font-bold text-slate-500 uppercase">
           Cargar Notas
         </h1>
@@ -214,7 +215,7 @@ export default function cargarNotas() {
           </Modal>
         </div>
       </div>
-
+      <AccionesRapidas />
       <div className="text-orange mt-6 flex flex-col gap-5 font-bold text-gray-500/60">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl">Notas cargadas por lapso</h1>
