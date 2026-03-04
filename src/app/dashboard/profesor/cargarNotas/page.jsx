@@ -27,21 +27,21 @@ export default function cargarNotas() {
         estatus: "cerrado",
         alumnos: [
           {
-            id: "28.123.456",
+            id: "V-28.123.456",
             nombre: "Juan Pérez",
             n1: 15.0,
             n2: 12.5,
             n3: 18.0,
           },
           {
-            id: "28.123.476",
+            id: "CI-28.123.476",
             nombre: "Antonio Pérez",
             n1: 10.0,
             n2: 10.0,
             n3: 14.5,
           },
           {
-            id: "29.999.888",
+            id: "V-29.999.888",
             nombre: "María García",
             n1: 20.0,
             n2: 19.0,
@@ -55,14 +55,14 @@ export default function cargarNotas() {
         estatus: "cerrado",
         alumnos: [
           {
-            id: "28.123.456",
+            id: "V-28.123.456",
             nombre: "Juan Pérez",
             n1: 14.0,
             n2: 16.0,
             n3: 15.0,
           },
           {
-            id: "28.123.476",
+            id: "V-28.123.476",
             nombre: "Antonio Pérez",
             n1: 0.0,
             n2: 0.0,
@@ -76,14 +76,14 @@ export default function cargarNotas() {
         estatus: "abierto",
         alumnos: [
           {
-            id: "28.123.456",
+            id: "V-28.123.456",
             nombre: "Juan Pérez",
             n1: 14.0,
             n2: 16.0,
             n3: 15.0,
           },
           {
-            id: "28.123.476",
+            id: "V-28.123.476",
             nombre: "Antonio Pérez",
             n1: 0.0,
             n2: 0.0,
@@ -139,31 +139,31 @@ export default function cargarNotas() {
 
   const alumnosDisponibles = [
     {
-      id: "30123456",
+      id: "V-30123456",
       nombre: "Adriana Villalobos",
       seccion: "A",
       anio: "5to",
     },
     {
-      id: "31987654",
+      id: "V-31987654",
       nombre: "Brayan Martínez",
       seccion: "A",
       anio: "5to",
     },
     {
-      id: "29555444",
+      id: "CE-29555444",
       nombre: "Carlos Rodríguez",
       seccion: "A",
       anio: "5to",
     },
     {
-      id: "32111222",
+      id: "V-32111222",
       nombre: "Daniela Sosa",
       seccion: "A",
       anio: "5to",
     },
     {
-      id: "30888999",
+      id: "V-30888999",
       nombre: "Esteban Quito",
       seccion: "A",
       anio: "5to",

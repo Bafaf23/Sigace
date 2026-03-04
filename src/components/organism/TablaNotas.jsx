@@ -101,7 +101,7 @@ export default function TablaNotas({ data }) {
                           {alumno.nombre}
                         </span>
                         <span className="text-xs text-slate-400">
-                          C.I{alumno.id}
+                          {alumno.id}
                         </span>
                       </div>
                     </td>
