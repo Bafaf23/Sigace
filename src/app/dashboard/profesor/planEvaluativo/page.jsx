@@ -44,7 +44,7 @@ export default function PlanEvaluativo() {
 
   return (
     <>
-      <div className="flex items-center justify-between pr-4">
+      <div className="flex flex-col justify-between md:flex-row md:items-center">
         <HeaderDashbord titelPage={"Plan Evaluativo"} />
         <div className="p-3">
           <Button

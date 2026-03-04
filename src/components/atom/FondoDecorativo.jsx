@@ -1,11 +1,7 @@
 export default function FondoDecurativo() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* Círculos de luz */}
-
       <div className="absolute top-1/2 right-0 h-96 w-96 rounded-full bg-orange-500/5 blur-3xl" />
-
-      {/* Línea curva fina */}
       <svg
         className="absolute top-0 h-full w-full opacity-[0.05]"
         xmlns="http://www.w3.org"
@@ -19,7 +15,6 @@ export default function FondoDecurativo() {
         />
       </svg>
 
-      {/* Patrón de asteriscos dispersos */}
       <div className="absolute top-1/4 left-[10%] rotate-45 text-4xl font-black text-indigo-200/30">
         *
       </div>

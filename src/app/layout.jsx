@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           <main className="flex flex-col">{children}</main>
         </div>
         <Toaster
-          position="top-right"
+          position="top-center"
           reverseOrder={false}
           toastOptions={{
             className:
