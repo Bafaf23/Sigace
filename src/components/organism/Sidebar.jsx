@@ -2,6 +2,7 @@
 
 import Button from "../atom/Button";
 import SigaceLogo from "../atom/SigaceLogo";
+import VersionTag from "../atom/VersionTag";
 import NavLink from "../molecules/NavLink";
 import {
   faHome,
@@ -66,6 +67,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Cerrar sesion */}
+      <VersionTag />
       <div className="mt-auto border-t border-slate-400/30 pt-4">
         <Button
           icon={faSignOutAlt}
