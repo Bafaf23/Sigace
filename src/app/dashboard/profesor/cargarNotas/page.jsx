@@ -2,6 +2,7 @@
 import Button from "@/components/atom/Button";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import FormCargaNotas from "@/components/molecules/FromCargaNotas";
+import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import Modal from "@/components/organism/Modal";
 import TablaNotas from "@/components/organism/TablaNotas";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -183,11 +184,9 @@ export default function cargarNotas() {
 
   return (
     <>
-      <div className="mb-4 flex items-center justify-between gap-3 rounded-xl p-3">
-        <h1 className="text-3xl font-bold text-slate-500 uppercase">
-          Cargar Notas
-        </h1>
-        <div className="flex items-center">
+      <div className="flex flex-col justify-between md:flex-row">
+        <HeaderDashbord titelPage={"Cargar notas"} />
+        <div className="p-3">
           <Button
             classNameBtn={
               "bg-indigo-500 p-2 rounded-md text-slate-50 font-bold cursor-pointer flex items-center gap-1"
@@ -215,9 +214,10 @@ export default function cargarNotas() {
           </Modal>
         </div>
       </div>
+
       <AccionesRapidas />
-      <div className="text-orange mt-6 flex flex-col gap-5 font-bold text-gray-500/60">
-        <div className="flex items-center justify-between">
+      <div className="mt-6 flex flex-col gap-5 p-3 font-bold text-gray-500/60">
+        <div className="flex flex-col justify-between md:flex-row md:items-center lg:flex-row">
           <h1 className="text-2xl">Notas cargadas por lapso</h1>
           <p>Materia</p>
         </div>

@@ -5,9 +5,7 @@ import Etiqueta from "../atom/Etiqueta";
 import {
   faUserPlus,
   faFileInvoice,
-  faArrowRight,
   faStore,
-  faTimes,
   faTable,
 } from "@fortawesome/free-solid-svg-icons";
 

@@ -1,17 +1,22 @@
 "use client";
-export default function Selector({ id, name, label, onChange, options = [] }) {
+export default function Selector({
+  id,
+  name,
+  label,
+  onChange,
+  options = [],
+  className = "text-slate-600",
+}) {
   return (
-    <div className="flex flex-col gap-1 w-1/7">
-      <label className="text-sm font-semibold text-slate-600 ml-1">
+    <div className="flex w-full flex-col gap-1">
+      <label className={`ml-1 text-sm font-semibold ${className}`}>
         {label}
       </label>
       <select
         name={name}
         id={id}
         onChange={onChange}
-        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 
-               focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 
-               transition-all placeholder:text-slate-400"
+        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
         required
       >
         <option value="">Seleccione una opción</option>

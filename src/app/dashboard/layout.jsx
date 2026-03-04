@@ -12,7 +12,7 @@ export default function DashboardLayuot({ children }) {
     <>
       <div className="flex flex-1 gap-2">
         <Sidebar />
-        <main className="flex h-screen flex-1 flex-col overflow-hidden overflow-y-auto scroll-smooth p-3">
+        <main className="flex h-screen flex-1 flex-col overflow-hidden overflow-y-auto scroll-smooth">
           {children}
         </main>
       </div>

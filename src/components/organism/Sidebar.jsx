@@ -6,8 +6,7 @@ import NavLink from "../molecules/NavLink";
 import {
   faHome,
   faSignOutAlt,
-  faFile,
-  faCogs,
+  faChartLine,
   faPenToSquare,
   faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
@@ -24,10 +23,10 @@ export default function Sidebar() {
       direccion: `/dashboard/profesor`,
     },
     {
-      icon: faFile,
-      label: "Reportes",
-      active: patthename === `/dashboard/profesor/reportes`,
-      direccion: `/dashboard/profesor/reportes`,
+      icon: faChartLine,
+      label: "Plan Evaluativo",
+      active: patthename === `/dashboard/profesor/planEvaluativo`,
+      direccion: `/dashboard/profesor/planEvaluativo`,
     },
     {
       icon: faPenToSquare,
@@ -45,7 +44,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`hidden p-3 transition-all duration-300 md:flex md:flex-col`}
+      className={`hidden p-3 transition-all duration-300 md:hidden md:flex-col lg:flex`}
     >
       <div className={`mb-8 flex items-center border-b border-gray-200 pb-3`}>
         <div className="truncate">
@@ -54,12 +53,14 @@ export default function Sidebar() {
       </div>
 
       <nav className={`flex grow flex-col space-y-2`}>
-        {linkProfesor.map((link) => (
+        {linkProfesor.map((link, index) => (
           <NavLink
+            key={index}
             label={link.label}
             icon={link.icon}
             direcction={link.direccion}
             active={link.active}
+            classNameIcon={link.active ? "text-orange-500" : ""}
           />
         ))}
       </nav>
