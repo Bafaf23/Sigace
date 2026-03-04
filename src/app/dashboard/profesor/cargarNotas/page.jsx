@@ -1,4 +1,5 @@
 "use client";
+import { inscripcion } from "@/app/services/inscripcion";
 import Button from "@/components/atom/Button";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import FormCargaNotas from "@/components/molecules/FromCargaNotas";
@@ -225,6 +226,9 @@ export default function cargarNotas() {
           <TablaNotas data={lapso} key={lapso.id_lapso} />
         ))}
       </div>
+      <Button icon={faPlus} onClick={() => inscripcion()}>
+        {"inscripicin"}
+      </Button>
     </>
   );
 }
