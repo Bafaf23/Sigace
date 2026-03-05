@@ -10,10 +10,15 @@ export const inscripcion = () => {
       fechaNacimiento: "23/09/2023",
       edad: "23",
       correo: "bryantffacen@gmail.com",
+      paisNacimiento: "Espana",
+      estadoNacimiento: "Malaga",
+      phone: "04241736193",
       domicilio: {
+        estado: "Miranda",
         municipio: "El Hatillo",
         parroquia: "El Hatillo",
         calle: "El arroyo",
+        direccion: "Bulervad el arroyo, casa milgros del carmen",
         viviendaCondicion: "Familiar", // Propia, Alquilada, etc.
       },
       datosMedicos: {
@@ -41,23 +46,39 @@ export const inscripcion = () => {
       materiaPendiente: "0",
     },
   };
+
   const doc = new jsPDF("p", "mm", "a4");
-  let y = 15;
+  let y = 25;
   const margin = 15;
   const lineWidth = 180;
 
   // --- ENCABEZADO ---
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
-  doc.text("PLANILLA DE INSCRIPCIÓN Y ACTUALIZACIÓN DE DATOS", 105, y, {
+  doc.text("Republica Bolivariana de Venezuela", 105, 10, {
+    align: "center",
+  });
+  doc.text("Ministerio del poder popoluar para la Educacion", 105, 15, {
+    align: "center",
+  });
+  doc.text("U.E.N Juan de Escalona", 105, 20, {
+    align: "center",
+  });
+  doc.setFontSize(10);
+  doc.setTextColor(222, 222, 222);
+  doc.text("J-XXXXXX-X", 105, 24, {
+    align: "center",
+  });
+  doc.setTextColor(0, 0, 0);
+  doc.text("PLANILLA DE INSCRIPCIÓN Y ACTUALIZACIÓN DE DATOS", 105, 30, {
     align: "center",
   });
 
   // --- DATOS DEL ESTUDIANTE ---
   y += 10;
   doc.setFontSize(10);
-  doc.setFillColor(230, 230, 230); // Fondo gris claro para subtítulos
-  doc.rect(margin, y, lineWidth, 6, "F");
+  doc.setFillColor(7, 138, 237); // Fondo gris claro para subtítulos
+  doc.rect(margin, 35, lineWidth, 6, "F");
   doc.text("1. DATOS DEL ESTUDIANTE", margin + 2, y + 4.5);
 
   y += 10;
@@ -67,51 +88,89 @@ export const inscripcion = () => {
     margin,
     y,
   );
-  doc.text(`SEXO: F [ ] M [ ]`, 100, y);
-  doc.text(`Edad al 30/09: ____`, 150, y);
+  doc.text(`SEXO: F [    ] M [    ]`, 75, y);
+  doc.text(
+    `Fecha de Nacimiento: ${datos.estudiante.fechaNacimiento || " ____/___/____"}`,
+    151 - margin,
+    y,
+  );
 
   y += 7;
   doc.text(
-    `Nombres y Apellidos: ${datos.estudiante.nombre || "______________________________________________________"}`,
+    `Nombres y Apellidos: ${datos.estudiante.nombreCompleto || "__________________________________________________________________________"}`,
     margin,
     y,
   );
 
   y += 7;
-  doc.text(`Nacionalidad: ___________`, margin, y);
-  doc.text(`País Nac: ___________`, 70, y);
-  doc.text(`Edo. Nac: ___________`, 130, y);
+  doc.text(
+    `Nacionalidad: ${datos.estudiante.nacionalidad || "___________________"}`,
+    margin,
+    y,
+  );
+  doc.text(
+    `País Nac: ${datos.estudiante.paisNacimiento || "_____________________"}`,
+    75,
+    y,
+  );
+  doc.text(
+    `Edo. Nac: ${datos.estudiante.estadoNacimiento || "_________________"}`,
+    151 - margin,
+    y,
+  );
 
   y += 7;
-  doc.text(`Fecha Nac: __/__/____`, margin, y);
   doc.text(
     `Correo: ${datos.estudiante.correo || "_______________________________________"}`,
-    70,
+    margin,
+    y,
+  );
+  doc.text(
+    `Número de telefono: ${datos.estudiante.phone || " _________________________"}`,
+    75,
     y,
   );
 
   // --- DATOS DE DOMICILIO ---
   y += 10;
   doc.setFont("helvetica", "bold");
+  doc.setFillColor(21, 132, 23); // Fondo
   doc.rect(margin, y, lineWidth, 6, "F");
   doc.text("2. DATOS DE DOMICILIO", margin + 2, y + 4.5);
 
   y += 10;
   doc.setFont("helvetica", "normal");
-  doc.text(`Municipio: _______________`, margin, y);
-  doc.text(`Parroquia: _______________`, 80, y);
-  doc.text(`Calle/Vía: _______________`, 140, y);
-
-  y += 7;
   doc.text(
-    `Dirección: __________________________________________________________________`,
+    `Estado: ${datos.estudiante.domicilio.estado || `_____________`}`,
     margin,
+    y,
+  );
+  doc.text(
+    `Municipio: ${datos.estudiante.domicilio.municipio || "________________________________"}`,
+    55,
+    y,
+  );
+  doc.text(
+    `Parroquia: ${datos.estudiante.domicilio.parroquia || "___________________"}`,
+    140,
     y,
   );
 
   y += 7;
   doc.text(
-    `Condición Vivienda: Propia [ ] Alquilada [ ] Familiar [ ]  Teléf: _______________`,
+    `Calle/Vía: ${datos.estudiante.domicilio.calle || "_______________"}`,
+    margin,
+    y,
+  );
+  doc.text(
+    `Dirección: ${datos.estudiante.domicilio.direccion || "__________________________________________________________"}`,
+    65,
+    y,
+  );
+
+  y += 7;
+  doc.text(
+    `Condición Vivienda: Propia [     ] Alquilada [     ] Familiar [    ]`,
     margin,
     y,
   );
@@ -119,13 +178,19 @@ export const inscripcion = () => {
   // --- DATOS MÉDICOS ---
   y += 10;
   doc.setFont("helvetica", "bold");
+  doc.setFillColor(21, 132, 123); // Fondo
   doc.rect(margin, y, lineWidth, 6, "F");
+
   doc.text("3. DATOS MÉDICOS Y ANTROPOMÉTRICOS", margin + 2, y + 4.5);
 
   y += 10;
   doc.setFont("helvetica", "normal");
-  doc.text(`¿Enfermedad?: ____________________`, margin, y);
-  doc.text(`Alergia: SI [ ] NO [ ] Explique: _______________`, 90, y);
+  doc.text(
+    `¿Enfermedad?: ${datos.estudiante.datosMedicos.enfermedad || "__________________________________"}`,
+    margin,
+    y,
+  );
+  doc.text(`Alergia: SI [    ] NO [    ] Explique: _______________`, 113, y);
 
   y += 7;
   doc.text(`Tipo Sangre: _______`, margin, y);
@@ -143,6 +208,7 @@ export const inscripcion = () => {
   personas.forEach((p) => {
     y += 10;
     doc.setFont("helvetica", "bold");
+    doc.setFillColor(21, 132, 123); // Fondo
     doc.rect(margin, y, lineWidth, 6, "F");
     doc.text(p.label, margin + 2, y + 4.5);
 

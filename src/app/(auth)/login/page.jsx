@@ -1,18 +1,12 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation"; // Para redireccionar
-import { signIn } from "next-auth/react"; // El motor de NextAuth
-import { toast } from "react-hot-toast";
-import Input from "@/components/atom/Input";
 import Button from "@/components/atom/Button";
 import Icon from "@/components/atom/Icon";
-
-import {
-  faKey,
-  faEnvelope,
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import Input from "@/components/atom/Input";
+import { faKey, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -43,26 +37,26 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
+    <div className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-md">
         {/* Botón para volver */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600 mb-8 transition-colors group"
+          className="group mb-8 inline-flex items-center gap-2 text-slate-500 transition-colors hover:text-indigo-600"
         >
           <Icon
             icon={faArrowLeft}
-            className="group-hover:-translate-x-1 transition-transform"
+            className="transition-transform group-hover:-translate-x-1"
           />
           <span>Volver al inicio</span>
         </Link>
 
-        <div className="bg-white rounded-3xl shadow-2xl shadow-indigo-200/50 p-8 border border-gray-200">
-          <div className="text-center mb-10">
-            <h1 className="text-3xl font-black text-indigo-900 mb-2">
+        <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl shadow-indigo-200/50">
+          <div className="mb-10 text-center">
+            <h1 className="mb-2 text-3xl font-black text-indigo-900">
               SIGACE<span className="text-cyan-500">.</span>
             </h1>
-            <p className="text-slate-500 font-medium">
+            <p className="font-medium text-slate-500">
               Control de Estudios Inteligente
             </p>
           </div>
@@ -110,9 +104,9 @@ export default function LoginPage() {
             ></Button>
           </form>
 
-          <p className="text-center mt-8 text-slate-500 text-sm">
+          <p className="mt-8 text-center text-sm text-slate-500">
             ¿No tienes acceso?,
-            <span className="text-indigo-600 font-bold cursor-pointer">
+            <span className="cursor-pointer font-bold text-indigo-600">
               Contacta al administrador
             </span>
           </p>
