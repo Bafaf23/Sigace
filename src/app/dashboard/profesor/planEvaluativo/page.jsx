@@ -67,7 +67,9 @@ export default function PlanEvaluativo() {
       </div>
       <AccionesRapidas />
       <section className="p-3">
-        <h1 className="text-2xl font-bold text-gray-500/60">Plan Evaluativo</h1>
+        <h1 className="text-2xl font-bold text-gray-500/60">
+          Plan de Evaluación por Materia
+        </h1>
 
         <div className="mt-3 mb-6 flex items-center justify-between">
           <div className="max-w-xs">

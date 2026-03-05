@@ -7,15 +7,72 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
-  id              Int      @id @default(autoincrement())
-  dniUsuario      String   @unique
-  nombre          String
-  apellido        String
-  correo          String   @unique
-  telefono        String
-  fechaNacimiento DateTime
+model Users {
+  id              Int       @id @default(autoincrement())
+  dni             String    @unique
+  name            String
+  lastName        String
+  email           String    @unique
+  phone           String
+  birthdate       DateTime
   password        String
-  rol             String   @default("ESTUDIANTE")
-  createdAt       DateTime @default(now())
+  role            String    @default("Estudiante")
+  createdAt       DateTime  @default(now())
+
+  teachers        Teachers? @relation("TeachersUsers")
+  students        Students? @relation("StudentsUsers")
+}
+
+model Teachers {
+  id             Int              @id @default(autoincrement())
+  userID         Int              @unique
+  user           Users            @relation("TeachersUsers", fields: [userID], references: [id])
+  subjects       Subjects[]       @relation("SubjectsTeachers")
+  evaluationPlan EvaluationPlan[] @relation("TeachersEvaluationPlan")
+}
+
+model Students {
+  id             Int              @id @default(autoincrement())
+  userID         Int              @unique
+  user           Users            @relation("StudentsUsers", fields: [userID], references: [id])
+  year           String
+  section        String
+  qualifications Qualifications[] @relation("QualificationsStudents")
+}
+
+model Subjects {
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  createdAt      DateTime         @default(now())
+
+  teachers       Teachers[]       @relation("SubjectsTeachers")
+  evaluationPlan EvaluationPlan[] @relation("EvaluationPlanSubjects")
+}
+
+model Qualifications {
+  id               Int            @id @default(autoincrement())
+  studentID        Int
+  student          Students       @relation("QualificationsStudents", fields: [studentID], references: [id])
+  
+  evaluationPlanID Int
+  evaluationPlan   EvaluationPlan @relation("QualificationsPlan", fields: [evaluationPlanID], references: [id])
+
+  qualification    Int           
+  createdAt        DateTime       @default(now())
+}
+
+model EvaluationPlan {
+  id             Int              @id @default(autoincrement())
+  teacherID      Int
+  teacher        Teachers         @relation("TeachersEvaluationPlan", fields: [teacherID], references: [id])
+  
+  subjectID      Int
+  subject        Subjects         @relation("EvaluationPlanSubjects", fields: [subjectID], references: [id])
+  
+  lapse          Int              // Cambiado a Int para facilitar cálculos
+  period         String
+  content        Json             // Aquí guardas tu tabla de PV
+  createdAt      DateTime         @default(now())
+
+  qualifications Qualifications[] @relation("QualificationsPlan")
 }

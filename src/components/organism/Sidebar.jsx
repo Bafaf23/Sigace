@@ -7,7 +7,7 @@ import NavLink from "../molecules/NavLink";
 import {
   faHome,
   faSignOutAlt,
-  faChartLine,
+  faListCheck,
   faPenToSquare,
   faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
@@ -24,7 +24,7 @@ export default function Sidebar() {
       direccion: `/dashboard/profesor`,
     },
     {
-      icon: faChartLine,
+      icon: faListCheck,
       label: "Plan Evaluativo",
       active: patthename === `/dashboard/profesor/planEvaluativo`,
       direccion: `/dashboard/profesor/planEvaluativo`,
