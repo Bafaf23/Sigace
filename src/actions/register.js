@@ -5,17 +5,26 @@ import bcrypt from "bcryptjs";
 export async function register(datos) {
   try {
     const hashedPassword = await bcrypt.hash(datos.password, 10);
+    const userRole = "teacher";
 
-    const nuevo = await prisma.usuario.create({
+    const nuevo = await prisma.Users.create({
       data: {
-        dniUsuario: datos.dniUsuario,
-        nombre: datos.name,
-        apellido: datos.lastName,
-        correo: datos.email,
-        telefono: datos.phone,
+        dni: datos.dni,
+        name: datos.name,
+        lastName: datos.lastName,
+        email: datos.email,
+        phone: datos.phone,
         password: hashedPassword,
-        rol: "Estudiante",
-        fechaNacimiento: new Date(datos.birthdate),
+        role: userRole,
+        birthdate: new Date(datos.birthdate),
+        createdAt: new Date(),
+
+        teachers:
+          userRole === "teacher"
+            ? {
+                create: {},
+              }
+            : undefined,
       },
     });
 
@@ -29,7 +38,7 @@ export async function register(datos) {
       console.error("DETALLE DEL ERROR EN SIGACE:", error);
       return {
         success: false,
-        error: "La Cédula o el Correo ya están registrados.",
+        error: "El Usuario ya esta registrado.",
       };
     }
     return { success: false, error: "al procesar el registro." };

@@ -1,17 +1,17 @@
 "use client";
-import { useRouter } from "next/navigation"; // 1. Importación necesaria
-import { useState } from "react"; // ✅ ¡No olvides esta línea!
-import NavLink from "@/components/molecules/NavLink";
-import { faArrowLeft, faEye, faUser } from "@fortawesome/free-solid-svg-icons";
-import Selector from "@/components/molecules/SelectorInput";
+import { register } from "@/actions/register";
+import Button from "@/components/atom/Button";
 import Input from "@/components/atom/Input";
 import InputPass from "@/components/atom/InputPass";
-import Button from "@/components/atom/Button";
-import { register } from "@/actions/register";
+import Links from "@/components/atom/Links";
+import Selector from "@/components/molecules/SelectorInput";
+import { faArrowLeft, faEye, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 export default function RegisterPage() {
-  const router = useRouter(); // 2. Inicialización del hook
+  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
 
@@ -21,11 +21,9 @@ export default function RegisterPage() {
     const formData = new FormData(e.currentTarget);
     const rawDatos = Object.fromEntries(formData);
 
-    // 3. Unir el tipo de identidad con el número
-    // Ejemplo: "V-" + "12345678" => "V-12345678"
     const datosFinales = {
       ...rawDatos,
-      dniUsuario: `${rawDatos.typeDni}${rawDatos.dniUsuario}`,
+      dni: `${rawDatos.typeDni}${rawDatos.dniUsuario}`,
     };
 
     const respuesta = await register(datosFinales);
@@ -35,7 +33,7 @@ export default function RegisterPage() {
       router.push("/login");
     } else {
       toast.error(
-        `Hubo un error ${respuesta.error}` || "Hubo un error al registrar"
+        `Hubo un error ${respuesta.error}` || "Hubo un error al registrar",
       );
       setLoading(false);
     }
@@ -55,24 +53,24 @@ export default function RegisterPage() {
     },
   ];
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-6">
+    <div className="flex min-h-screen flex-col items-center justify-center p-6">
       <div className="w-full max-w-md">
-        <NavLink
-          direcction={"/login"}
+        <Links
+          direction={"/login"}
           icon={faArrowLeft}
-          classNameLink={
-            "hover:text-indigo-600 group inline-flex gap-2 items-center mb-8 text-slate-500"
+          className={
+            "group mb-8 inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600"
           }
           classNameIcon={"group-hover:-translate-x-1 transition-transform"}
           label={"Volver"}
         />
-        <div className="bg-white rounded-2xl shadow border border-gray-100 p-5 ">
+        <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow">
           {/* encabezado del formulario */}
-          <div className="text-center mb-10">
-            <h1 className="text-3xl font-black text-indigo-900 mb-2">
+          <div className="mb-10 text-center">
+            <h1 className="mb-2 text-3xl font-black text-indigo-900">
               SIGACE<span className="text-cyan-500">.</span>
             </h1>
-            <p className="text-slate-500 font-medium">
+            <p className="font-medium text-slate-500">
               Control de Estudios Inteligente
             </p>
           </div>

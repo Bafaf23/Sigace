@@ -2,10 +2,15 @@
 import Button from "@/components/atom/Button";
 import Icon from "@/components/atom/Icon";
 import Input from "@/components/atom/Input";
-import { faKey, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Links from "@/components/atom/Links";
+import {
+  faKey,
+  faArrowLeft,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 export default function LoginPage() {
@@ -40,16 +45,13 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-md">
         {/* Botón para volver */}
-        <Link
-          href="/"
+        <Links
+          direction="/"
           className="group mb-8 inline-flex items-center gap-2 text-slate-500 transition-colors hover:text-indigo-600"
-        >
-          <Icon
-            icon={faArrowLeft}
-            className="transition-transform group-hover:-translate-x-1"
-          />
-          <span>Volver al inicio</span>
-        </Link>
+          label={"Volver al inicio"}
+          classNameIcon={"transition-transform group-hover:-translate-x-1"}
+          icon={faArrowLeft}
+        ></Links>
 
         <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl shadow-indigo-200/50">
           <div className="mb-10 text-center">
@@ -81,18 +83,19 @@ export default function LoginPage() {
             />
 
             <div className="flex justify-between">
-              <Link
-                href="/register"
-                className="text-sm font-semibold text-cyan-600 hover:text-cyan-700"
+              <Links
+                direction="/register"
+                icon={faUserPlus}
+                className="flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700"
+                label={"Registrate"}
               >
                 Registrate
-              </Link>
-              <a
-                href="#"
+              </Links>
+              <Links
+                direction="#"
                 className="text-sm font-semibold text-cyan-600 hover:text-cyan-700"
-              >
-                ¿Olvidaste tu contraseña?
-              </a>
+                label={"¿Olvidaste tu contraseña?"}
+              ></Links>
             </div>
 
             <Button
@@ -105,7 +108,7 @@ export default function LoginPage() {
           </form>
 
           <p className="mt-8 text-center text-sm text-slate-500">
-            ¿No tienes acceso?,
+            ¿No tienes acceso?,{" "}
             <span className="cursor-pointer font-bold text-indigo-600">
               Contacta al administrador
             </span>
