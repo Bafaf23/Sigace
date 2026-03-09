@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 export async function register(datos) {
   try {
     const hashedPassword = await bcrypt.hash(datos.password, 10);
-    const userRole = "teacher";
+    const userRole = "TEACHER";
 
     const nuevo = await prisma.Users.create({
       data: {
@@ -20,7 +20,7 @@ export async function register(datos) {
         createdAt: new Date(),
 
         teachers:
-          userRole === "teacher"
+          userRole === "TEACHER"
             ? {
                 create: {},
               }

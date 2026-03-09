@@ -16,11 +16,17 @@ model Users {
   phone           String
   birthdate       DateTime
   password        String
-  role            String    @default("Estudiante")
+  role            Role   
   createdAt       DateTime  @default(now())
-
+   
   teachers        Teachers? @relation("TeachersUsers")
   students        Students? @relation("StudentsUsers")
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
 }
 
 model Teachers {
@@ -32,12 +38,52 @@ model Teachers {
 }
 
 model Students {
-  id             Int              @id @default(autoincrement())
-  userID         Int              @unique
-  user           Users            @relation("StudentsUsers", fields: [userID], references: [id])
-  year           String
-  section        String
+  id               Int              @id @default(autoincrement())
+  userID           Int              @unique
+  user             Users            @relation("StudentsUsers", fields: [userID], references: [id])
+
+  // --- Paso 3: Salud ---
+  birthCountry      String
+  birthState        String
+  bloodType         String
+  allergies         String
+  weight            String
+  height            String
+  shirtSize         String
+  shoeSize          String
+  pantSize          String
+  medicalCondition  String
+
+ 
+
+// --- Paso 5: Representante ---
+  repDni             String
+  representativeName String
+  repLastName        String     
+  repPhone           String
+  relationship       String
+  repEmail           String
+
+  //Ubication
+  state             String
+  municipality      String
+  parish            String
+  addressDetail     String
+  housingCondition  String
+
+
+  // Académico
+  previousSchool   String?
+  previousSchoolCode String?
+  canaimaSerial    String?
+  previousYear String?
+  previousSection String?
+
+
+  year           String?
+  section        String?
   qualifications Qualifications[] @relation("QualificationsStudents")
+  parents        Parents?
 }
 
 model Subjects {
@@ -75,4 +121,21 @@ model EvaluationPlan {
   createdAt      DateTime         @default(now())
 
   qualifications Qualifications[] @relation("QualificationsPlan")
+}
+
+model Parents{
+  id                 Int   @id @default(autoincrement())
+  studentId          Int      @unique
+  motherName         String
+  motherDni          String
+  motherEmail        String
+  motherPhone        String
+
+  fatherName         String
+  fatherDni          String
+  fatherEmail        String
+  fatherPhone        String
+
+  student         Students @relation(fields: [studentId], references: [id])
+
 }

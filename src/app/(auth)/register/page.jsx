@@ -4,7 +4,7 @@ import Button from "@/components/atom/Button";
 import Input from "@/components/atom/Input";
 import InputPass from "@/components/atom/InputPass";
 import Links from "@/components/atom/Links";
-import Selector from "@/components/molecules/SelectorInput";
+import SelectorInput from "@/components/molecules/SelectorInput";
 import { faArrowLeft, faEye, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -75,7 +75,7 @@ export default function RegisterPage() {
             </p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <Selector
+            <SelectorInput
               label={"Tipo de Identidad"}
               options={options}
               name={"typeDni"}

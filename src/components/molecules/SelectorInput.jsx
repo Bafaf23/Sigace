@@ -7,6 +7,8 @@ export default function SelectorInput({
   nameInput,
   id,
   placeholder,
+  valueSel,
+  valueInput,
   onChange,
 }) {
   return (
@@ -17,6 +19,7 @@ export default function SelectorInput({
       <div className="flex gap-2">
         <select
           name={name}
+          value={valueSel || ""}
           id={id}
           onChange={onChange}
           className="w-1/3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
@@ -28,7 +31,12 @@ export default function SelectorInput({
             </option>
           ))}
         </select>
-        <Input placeholder={placeholder} name={nameInput} />
+        <Input
+          placeholder={placeholder}
+          name={nameInput}
+          value={valueInput || ""}
+          onChange={onChange}
+        />
       </div>
     </div>
   );
