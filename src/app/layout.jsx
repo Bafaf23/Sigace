@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         </Providers>
 
         <Toaster
-          position="top-center"
+          position="top-right"
           reverseOrder={false}
           toastOptions={{
             className:
