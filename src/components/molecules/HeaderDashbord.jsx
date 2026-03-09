@@ -1,6 +1,6 @@
 import Selector from "../atom/Selector";
 
-export default function HeaderDashbord({ user, titelPage }) {
+export default function HeaderDashbord({ user, titelPage, panel }) {
   const hora = new Date().toLocaleString();
 
   return (
@@ -9,8 +9,8 @@ export default function HeaderDashbord({ user, titelPage }) {
         <div className="mb-2 flex items-center gap-2">
           {user ? (
             <>
-              <h1 className="text-2xl font-bold md:text-3xl md:text-slate-500">
-                Bienvenido,
+              <h1 className="text-2xl font-bold md:text-3xl md:text-indigo-900">
+                Hola,
               </h1>
               <span className="text-2xl font-bold text-slate-50 normal-case md:text-3xl md:text-indigo-500">
                 {user.name} {user.lastName}
@@ -22,6 +22,7 @@ export default function HeaderDashbord({ user, titelPage }) {
             </h1>
           )}
         </div>
+        <p className="text-slate-500">Bienvenido a tu panel de control.</p>
         <div className="flex items-center justify-between rounded-xl bg-indigo-600 p-1 md:bg-transparent">
           {/* ultima conexcion */}
           <div>

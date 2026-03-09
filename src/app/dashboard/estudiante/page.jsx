@@ -1,8 +1,10 @@
 "use client";
+import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import { useSession } from "next-auth/react";
 
 export default function dashboardStudiantPage() {
   const { data: session, status } = useSession();
+  const user = session?.user;
 
   if (status === "loading") {
     return (
@@ -15,12 +17,5 @@ export default function dashboardStudiantPage() {
     );
   }
 
-  return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold text-indigo-900">
-        Hola, <span className="text-cyan-600">{session?.user?.name}</span>👋
-      </h1>
-      <p className="text-slate-500">Bienvenido a tu panel de estudiante.</p>
-    </div>
-  );
+  return <HeaderDashbord user={user} />;
 }
