@@ -1,9 +1,9 @@
 "use client";
 import Sidebar from "@/components/organism/Sidebar";
+import { Providers } from "@/context/Providers";
 import "@/globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { Toaster } from "react-hot-toast";
 
 config.autoAddCss = false;
 
@@ -12,9 +12,11 @@ export default function DashboardLayuot({ children }) {
     <>
       <div className="flex flex-1 gap-2">
         <Sidebar />
-        <main className="flex h-screen flex-1 flex-col overflow-hidden overflow-y-auto scroll-smooth">
-          {children}
-        </main>
+        <Providers>
+          <main className="flex h-screen flex-1 flex-col overflow-hidden overflow-y-auto scroll-smooth">
+            {children}
+          </main>
+        </Providers>
       </div>
     </>
   );

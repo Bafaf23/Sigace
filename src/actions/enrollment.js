@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { School } from "lucide-react";
 
 export async function enrollment(formData) {
   try {
@@ -54,9 +55,9 @@ export async function enrollment(formData) {
 
             // --- SECCIÓN: REPRESENTANTE ---
             representativeName: formData.repName || "",
-            repLastName: formData.repLastName || "", // <--- CAMBIADO: Antes decía 'representativeLastName'
+            repLastName: formData.repLastName || "",
             repDni: formData.repdni || "",
-            repPhone: formData.repPhone || "", // Asegúrate de que este nombre sea el del esquema
+            repPhone: formData.repPhone || "",
             repEmail: formData.repEmail || "",
             relationship: formData.relationship || "",
 
@@ -87,6 +88,16 @@ export async function enrollment(formData) {
                 fatherDni: formData.fatherDni || "",
                 fatherEmail: formData.fatherEmail || "",
                 fatherPhone: formData.fatherPhone || "",
+              },
+            },
+
+            school: {
+              create: {
+                codeShool: formData.codeShool || "OD19641509",
+                nameSchool: formData.nameSchool || "U.E.N Juan de Escalona",
+                addressSchool:
+                  formData.addressSchool ||
+                  "Avenida El Arroyo, El Hatillo, Miranda, Venezuela",
               },
             },
           },

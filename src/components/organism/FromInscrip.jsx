@@ -1,5 +1,6 @@
 "use client";
 import Button from "../atom/Button";
+import InputPass from "../atom/InputPass";
 import AcademicFields from "../molecules/AcademicBackgroundFields";
 import HealthPhysicalFields from "../molecules/HealthPhysicalFields";
 import LegalRepresentativeFields from "../molecules/LegalRepresentativeFields";
@@ -21,6 +22,8 @@ export default function FormInscrip() {
   const router = useRouter();
 
   const [passed, setPassed] = useState(1);
+  const [confirmPass, setConfirmPass] = useState("");
+  const [accepted, setAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState({
@@ -39,6 +42,7 @@ export default function FormInscrip() {
     previousSchoolCode: "",
     previousYear: "",
     previousSection: "",
+    canaimaSerial: "",
 
     year: "",
     section: "",
@@ -97,6 +101,12 @@ export default function FormInscrip() {
       );
     }
 
+    if (data.pass !== confirmPass) {
+      return toast.error(
+        "Las contraseñas no coinciden. Por favor, verifícalas.",
+      );
+    }
+
     setLoading(true);
 
     const datosFinales = {
@@ -123,14 +133,12 @@ export default function FormInscrip() {
     }
   };
 
-  console.log("Estado actual de SIGACE:", data);
-
   return (
     <form
       onSubmit={handleSubmit}
       className="w-full max-w-2xl rounded-2xl border border-slate-100 bg-white p-8 shadow-lg"
     >
-      <StepIndicator currentStep={passed} totalSteps={5} />
+      <StepIndicator currentStep={passed} totalSteps={6} />
 
       <div className="mt-6 min-h-[400px]">
         {passed === 1 && (
@@ -158,6 +166,48 @@ export default function FormInscrip() {
             manejarCambio={handleChange}
           />
         )}
+        {passed === 6 && (
+          <>
+            <div className="grid grid-cols-2 gap-3">
+              <InputPass
+                label={"Ingresa una comtrasena para entrar al sistema"}
+                placeholder={"*********"}
+                value={data.pass}
+                name={"pass"}
+                onChange={handleChange}
+              />
+              <InputPass
+                label={"Repite la contrasena anterior"}
+                placeholder={"*********"}
+                value={confirmPass}
+                name={"confirmPass"}
+                onChange={(e) => setConfirmPass(e.target.value)}
+              />
+            </div>
+
+            {data.pass && confirmPass && data.pass !== confirmPass && (
+              <p className="mt-3 animate-pulse text-xs font-medium text-red-500">
+                ⚠️ Las contraseñas no coinciden.
+              </p>
+            )}
+            <div className="mt-4 flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="terms"
+                onChange={(e) => setAccepted(e.target.checked)}
+                required
+                className="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label htmlFor="terms" className="text-sm text-gray-600">
+                Acepto los{" "}
+                <button type="button" className="text-indigo-600 underline">
+                  Términos y Condiciones
+                </button>{" "}
+                y la Política de Privacidad de SIGACE.
+              </label>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="mt-8 flex justify-between border-t border-gray-100 pt-6">
@@ -169,24 +219,26 @@ export default function FormInscrip() {
           Anterior
         </Button>
 
-        {passed < 5 ? (
+        {passed < 6 ? (
           <Button
             icon={faRightLong}
-            onClick={() => setPassed((p) => Math.min(5, p + 1))}
+            onClick={() => setPassed((p) => Math.min(6, p + 1))}
             classNameBtn="rounded-lg bg-indigo-600 px-8 py-2 font-bold text-white transition-all hover:bg-indigo-700 active:scale-95 group flex items-center gap-3"
             classNameIcon="group-hover:translate-x-1 transition-transform duration-300"
           >
             Siguiente
           </Button>
         ) : (
-          <Button
-            icon={faUserPlus}
-            type="submit"
-            disabled={loading}
-            classNameBtn="rounded-lg bg-green-600 px-8 py-2 font-bold text-white transition-all hover:bg-green-700 disabled:bg-slate-300 flex items-center gap-2 shadow-lg shadow-green-100"
-          >
-            {loading ? "Procesando..." : "Finalizar Inscripción"}
-          </Button>
+          <>
+            <Button
+              icon={faUserPlus}
+              type="submit"
+              disabled={loading || !accepted}
+              classNameBtn="rounded-lg bg-green-600 px-8 py-2 font-bold text-white transition-all hover:bg-green-700 disabled:bg-slate-300 flex items-center gap-2 shadow-lg shadow-green-100"
+            >
+              {loading ? "Procesando..." : "Finalizar Inscripción"}
+            </Button>
+          </>
         )}
       </div>
     </form>

@@ -27,7 +27,7 @@ const AcademicFields = ({ datos, manejarCambio }) => {
               onChange={manejarCambio}
             />
             <Input
-              name="schoolCode"
+              name="previousSchoolCode"
               label="Código DEA del Plantel"
               placeholder="Ej: OD123456"
               value={datos.previousSchoolCode}
@@ -37,14 +37,14 @@ const AcademicFields = ({ datos, manejarCambio }) => {
 
           <div className="grid grid-cols-1 items-end gap-4 md:grid-cols-3">
             <Selector
-              name="year"
+              name="previousYear"
               label="Año cursado"
               options={yearOptions}
               value={datos.previousYear}
               onChange={manejarCambio}
             />
             <Input
-              name="section"
+              name="previousSection"
               label="Sección (Si aplica)"
               placeholder="Ej: A"
               value={datos.previousSection}

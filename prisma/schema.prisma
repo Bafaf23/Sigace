@@ -79,11 +79,15 @@ model Students {
   previousYear String?
   previousSection String?
 
-
+ //Escuela
+  schoolId       Int?
+  school         Schools?  @relation(fields: [schoolId], references: [id])
   year           String?
   section        String?
-  qualifications Qualifications[] @relation("QualificationsStudents")
-  parents        Parents?
+
+  qualifications  Qualifications[] @relation("QualificationsStudents")
+  parents         Parents?
+ 
 }
 
 model Subjects {
@@ -139,3 +143,13 @@ model Parents{
   student         Students @relation(fields: [studentId], references: [id])
 
 }
+
+model Schools {
+  id            Int @id @default(autoincrement())
+  codeShool     String @unique
+  nameSchool    String
+  addressSchool String
+
+  student      Students[]
+}
+

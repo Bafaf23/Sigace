@@ -91,13 +91,6 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
           onChange={manejarCambio}
           value={datos.phone}
         />
-        <Input
-          name={"pass"}
-          label={"Ingrasa una contrasena para entar el sistema"}
-          placeholder={"*******"}
-          onChange={manejarCambio}
-          value={datos.pass}
-        />
       </div>
     </div>
   );

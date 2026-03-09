@@ -1,15 +1,23 @@
 "use client";
 import Button from "./Button";
-import { useState } from "react";
 import Input from "./Input";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-export default function InputPass({ label, placeholder, name, onChange }) {
+import { useState } from "react";
+
+export default function InputPass({
+  label,
+  placeholder,
+  name,
+  onChange,
+  value,
+}) {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="flex flex-col gap-2 w-full relative">
+    <div className="relative flex w-full flex-col gap-2">
       <Input
         label={label}
         placeholder={placeholder}
+        value={value}
         type={showPassword ? "text" : "password"}
         name={name}
         onChange={onChange}

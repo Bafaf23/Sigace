@@ -1,14 +1,14 @@
 "use client";
 import Button from "@/components/atom/Button";
-import Icon from "@/components/atom/Icon";
 import Input from "@/components/atom/Input";
+import InputPass from "@/components/atom/InputPass";
 import Links from "@/components/atom/Links";
 import {
   faKey,
   faArrowLeft,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -29,15 +29,26 @@ export default function LoginPage() {
     const result = await signIn("credentials", {
       email: formData.email,
       password: formData.password,
-      redirect: false, // Evita que la página recargue bruscamente
+      redirect: false,
     });
 
     if (result?.error) {
       toast.error("Correo o contraseña incorrectos");
       setLoading(false);
     } else {
-      router.push("/dashboard"); // O la ruta principal de SIGACE
-      router.refresh(); // Refresca para que el layout reconozca la sesión
+      const session = await getSession();
+      const role = session?.user?.role;
+
+      console.log("Rol detectado en la sesión:", role); // Esto te dirá la verdad
+
+      if (role === "TEACHER") {
+        router.push("/dashboard/profesor");
+      } else if (role === "STUDENT") {
+        router.push("/dashboard/estudiante");
+      } else {
+        console.warn("El rol no coincide con TEACHER ni STUDENT:", role);
+      }
+      router.refresh();
     }
   };
 
@@ -73,7 +84,7 @@ export default function LoginPage() {
               onChange={handleChange}
             />
 
-            <Input
+            <InputPass
               label="Contraseña"
               name="password"
               type="password"
