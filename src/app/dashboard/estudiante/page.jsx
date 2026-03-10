@@ -1,5 +1,8 @@
 "use client";
+import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
+import Resumenes from "@/components/molecules/Resumenes";
+import { faWater } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 
 export default function dashboardStudiantPage() {
@@ -17,5 +20,11 @@ export default function dashboardStudiantPage() {
     );
   }
 
-  return <HeaderDashbord user={user} />;
+  return (
+    <>
+      <HeaderDashbord user={user} />
+      <Resumenes />
+      <AccionesRapidas />
+    </>
+  );
 }

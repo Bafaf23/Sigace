@@ -1,32 +1,58 @@
 "use client";
 import Icon from "../atom/Icon";
 import { faEdit, faChartLine, faHome } from "@fortawesome/free-solid-svg-icons";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function AccionesRapidas() {
   const pathname = usePathname();
 
-  const acciones = [
-    {
-      name: "Inicio",
-      src: "/dashboard/profesor",
-      icon: faHome,
-      active: pathname === "/dashboard/profesor" ? "hidden" : "",
-    },
-    {
-      name: "Cargar Notas",
-      src: "/dashboard/profesor/cargarNotas",
-      icon: faEdit,
-      active: pathname === "/dashboard/profesor/cargarNotas" ? "hidden" : "",
-    },
-    {
-      name: "Plan Evaluativo",
-      src: "/dashboard/profesor/planEvaluativo",
-      icon: faChartLine,
-      active: pathname === "/dashboard/profesor/planEvaluativo" ? "hidden" : "",
-    },
-  ];
+  const { data: session } = useSession();
+  const userRole = session?.user?.role;
+  console.log(userRole);
+
+  const menuConfig = {
+    TEACHERS: [
+      {
+        name: "Inicio",
+        src: "/dashboard/profesor",
+        icon: faHome,
+        active: pathname === "/dashboard/profesor" ? "hidden" : "",
+      },
+      {
+        name: "Cargar Notas",
+        src: "/dashboard/profesor/cargarNotas",
+        icon: faEdit,
+        active: pathname === "/dashboard/profesor/cargarNotas" ? "hidden" : "",
+      },
+      {
+        name: "Plan Evaluativo",
+        src: "/dashboard/profesor/planEvaluativo",
+        icon: faChartLine,
+        active:
+          pathname === "/dashboard/profesor/planEvaluativo" ? "hidden" : "",
+      },
+    ],
+    STUDENT: [
+      {
+        name: "Inicio",
+        src: "/dashboard/estudiante",
+        icon: faHome,
+        active: pathname === "/dashboard/estudiante" ? "hidden" : "",
+      },
+      {
+        name: "Notas",
+        src: "/dashboard/estudiante/notas",
+        icon: faEdit,
+        active: pathname === "/dashboard/estudiante/asistencia" ? "hidden" : "",
+      },
+    ],
+  };
+
+  const acciones = menuConfig[userRole] || [];
+
+  cons;
 
   return (
     <section className="p-3 lg:hidden">
