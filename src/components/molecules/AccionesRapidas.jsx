@@ -52,8 +52,6 @@ export default function AccionesRapidas() {
 
   const acciones = menuConfig[userRole] || [];
 
-  cons;
-
   return (
     <section className="p-3 lg:hidden">
       <h1 className="font-bold text-gray-400 uppercase">Acciones</h1>
