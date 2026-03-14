@@ -15,6 +15,18 @@ export default function FormRegister() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+  const [dniUser, setDniUser] = useState({
+    type: "",
+    number: "",
+  });
+
+  const cambio = (e) => {
+    const { name, value } = e.target;
+    setDniUser((prev) => ({
+      ...prev,
+      [name === "optionId" ? "type" : "number"]: value,
+    }));
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -78,11 +90,14 @@ export default function FormRegister() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <SelectorInput
               label={"Tipo de Identidad"}
+              name={"optionId"}
               options={options}
-              name={"typeDni"}
-              nameInput={"dniUsuario"}
               id={"optionId"}
+              nameInput={"dniUsuario"}
+              valueSel={dniUser.type}
+              valueInput={dniUser.number}
               placeholder={"3242343"}
+              onChange={cambio}
             />
             <div className="flex gap-2">
               <Input

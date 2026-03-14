@@ -186,7 +186,13 @@ const datos = {
     cedula: "V-17222510",
     telefono: "213213213",
   },
-  representante: { nombre: "", cedula: "", parentesco: "" },
+  representante: {
+    nombre: "Darling Flores",
+    cedula: "V-18587434",
+    parentesco: "Madre",
+    phone: "04241736183",
+    dercction: "Calle el cabiar",
+  },
   academico: {
     anioSeccion: "C",
     repite: false,
@@ -208,7 +214,9 @@ const MyDocument = ({ data }) => (
           <Text style={{ fontSize: 9, color: "#64748B" }}>
             República Bolivariana de Venezuela
           </Text>
-          <Text style={styles.mainTitle}>E.U.N Juan de Escalona</Text>
+          <Text style={styles.mainTitle}>
+            {"Escuale selecionada en la inscripcion"}
+          </Text>
           <View style={styles.badge}>
             <Text>SISTEMA SIGACE • ID: {data?.id || "2026-X"}</Text>
           </View>
@@ -219,9 +227,6 @@ const MyDocument = ({ data }) => (
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "bold", color: "#3B82F6" }}>
             INSCRIPCIÓN
-          </Text>
-          <Text style={{ fontSize: 10, fontWeight: "bold", color: "#94A3B8" }}>
-            IN-XXXX
           </Text>
         </View>
       </View>
@@ -268,6 +273,12 @@ const MyDocument = ({ data }) => (
             </Text>
           </View>
           <View style={[styles.inputGroup, { width: "30%" }]}>
+            <Text style={styles.label}>Parroquia</Text>
+            <Text style={styles.valueBox}>
+              {datos?.estudiante.domicilio.parroquia}
+            </Text>
+          </View>
+          <View style={[styles.inputGroup, { width: "30%" }]}>
             <Text style={styles.label}>Fecha de Nacimiento</Text>
             <Text style={styles.valueBox}>
               {datos?.estudiante.fechaNacimiento}
@@ -280,9 +291,9 @@ const MyDocument = ({ data }) => (
             </Text>
           </View>
           <View style={[styles.inputGroup, { width: "30%" }]}>
-            <Text style={styles.label}>Alergia</Text>
+            <Text style={styles.label}>Correo</Text>
             <Text style={styles.valueBox}>
-              {datos?.estudiante.datosMedicos.alergia}
+              {datos?.estudiante.correo.toUpperCase()}
             </Text>
           </View>
         </View>
@@ -298,19 +309,31 @@ const MyDocument = ({ data }) => (
         </View>
 
         <View style={styles.grid}>
-          <View style={[styles.inputGroup, { width: "100%" }]}>
+          <View style={[styles.inputGroup, { width: "60%" }]}>
             <Text style={styles.label}>Nombre del Responsable</Text>
             <Text style={styles.valueBox}>
-              ________________________________________________
+              {datos.representante.nombre.toUpperCase()}
             </Text>
           </View>
-          <View style={[styles.inputGroup, { width: "45%" }]}>
-            <Text style={styles.label}>Parentesco</Text>
-            <Text style={styles.valueBox}>____________________</Text>
+          <View style={[styles.inputGroup, { width: "30%" }]}>
+            <Text style={styles.label}>Identificacion</Text>
+            <Text style={styles.valueBox}>{datos.representante.cedula}</Text>
           </View>
-          <View style={[styles.inputGroup, { width: "45%" }]}>
+          <View style={[styles.inputGroup, { width: "20%" }]}>
+            <Text style={styles.label}>Parentesco</Text>
+            <Text style={styles.valueBox}>
+              {datos.representante.parentesco.toUpperCase()}
+            </Text>
+          </View>
+          <View style={[styles.inputGroup, { width: "30%" }]}>
             <Text style={styles.label}>Teléfono</Text>
-            <Text style={styles.valueBox}>+58 4__ ________</Text>
+            <Text style={styles.valueBox}>{datos.representante.phone}</Text>
+          </View>
+          <View style={[styles.inputGroup, { width: "36%" }]}>
+            <Text style={styles.label}>Direccion de Domicilio</Text>
+            <Text style={styles.valueBox}>
+              {datos.representante.dercction.toUpperCase()}
+            </Text>
           </View>
         </View>
       </View>
@@ -324,7 +347,16 @@ const MyDocument = ({ data }) => (
           <Text style={styles.signatureText}>Firma Autorizada SIGACE</Text>
         </View>
       </View>
-
+      <Text
+        style={{
+          fontSize: 7,
+          color: "#94A3B8",
+          textAlign: "center",
+          marginTop: 20,
+        }}
+      >
+        Fecha de Inscripcion: {"12/01/2030"}
+      </Text>
       <Text
         style={{
           fontSize: 7,

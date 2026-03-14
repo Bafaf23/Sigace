@@ -1,5 +1,6 @@
 "use client";
 import MyDocument from "@/app/services/MyDocuemt";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import dynamic from "next/dynamic";
 
 // Importa el que creamos arriba

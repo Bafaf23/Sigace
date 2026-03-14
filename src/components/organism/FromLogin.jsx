@@ -103,6 +103,7 @@ export default function FromLogin() {
                 Registrate
               </Links>
               <Links
+                icon={faKey}
                 direction="#"
                 className="text-sm font-semibold text-cyan-600 hover:text-cyan-700"
                 label={"¿Olvidaste tu contraseña?"}
