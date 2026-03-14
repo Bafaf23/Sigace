@@ -60,10 +60,6 @@ export default function FormRegister() {
       label: "Extranjero",
       value: "E-",
     },
-    {
-      label: "Cedula Escolar",
-      value: "ID-",
-    },
   ];
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-6">
