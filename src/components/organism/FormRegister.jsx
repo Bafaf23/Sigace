@@ -13,30 +13,30 @@ import { toast } from "react-hot-toast";
 
 export default function FormRegister() {
   const router = useRouter();
-
   const [loading, setLoading] = useState(false);
-  const [dniUser, setDniUser] = useState({
-    type: "",
+  const [typeDni, seytTypeDni] = useState({
+    type: "V-",
     number: "",
   });
 
-  const cambio = (e) => {
+  const change = (e) => {
     const { name, value } = e.target;
-    setDniUser((prev) => ({
+
+    seytTypeDni((prev) => ({
       ...prev,
-      [name === "optionId" ? "type" : "number"]: value,
+      [name === "option" ? "type" : "number"]: value,
     }));
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
+
     const formData = new FormData(e.currentTarget);
     const rawDatos = Object.fromEntries(formData);
-
     const datosFinales = {
       ...rawDatos,
-      dni: `${rawDatos.typeDni}${rawDatos.dniUsuario}`,
+      dni: `${rawDatos.option}${rawDatos.number}`,
     };
 
     const respuesta = await register(datosFinales);
@@ -45,9 +45,7 @@ export default function FormRegister() {
       toast.success("¡Registro completado en SIGACE!");
       router.push("/login");
     } else {
-      toast.error(
-        `Hubo un error ${respuesta.error}` || "Hubo un error al registrar",
-      );
+      toast.error(respuesta.error || "Error al registrar");
       setLoading(false);
     }
   }
@@ -86,14 +84,14 @@ export default function FormRegister() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <SelectorInput
               label={"Tipo de Identidad"}
-              name={"optionId"}
+              name={"option"}
+              nameInput={"number"}
               options={options}
               id={"optionId"}
-              nameInput={"dniUsuario"}
-              valueSel={dniUser.type}
-              valueInput={dniUser.number}
               placeholder={"3242343"}
-              onChange={cambio}
+              valueSel={typeDni.type}
+              valueInput={typeDni.number}
+              onChange={change}
             />
             <div className="flex gap-2">
               <Input
