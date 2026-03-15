@@ -1,11 +1,9 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { School } from "lucide-react";
 
 export async function enrollment(formData) {
   try {
-    // 1. Corregimos el problema de la fecha (buscamos ambas posibilidades)
     const fechaRaw = formData.birthDate || formData.birthdate;
 
     if (!fechaRaw) {
@@ -17,8 +15,6 @@ export async function enrollment(formData) {
       return { success: false, error: "Formato de fecha inválido." };
     }
 
-    // 2. Corregimos el DNI para que no sea "undefinedundefined"
-    // Si ya viene unido del cliente, lo usamos. Si no, lo unimos aquí.
     const finalDni =
       formData.dni && !formData.dni.includes("undefined")
         ? formData.dni

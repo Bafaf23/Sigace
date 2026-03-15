@@ -24,6 +24,9 @@ export default function FromLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.password)
+      return toast.error("Por favor, introduce tu correo y contraseña");
+
     setLoading(true);
 
     const result = await signIn("credentials", {
@@ -79,7 +82,7 @@ export default function FromLogin() {
               label="Correo Electrónico"
               name="email"
               type="email"
-              placeholder="ejemplo@institucion.com"
+              placeholder="ejemplo@correo.com"
               value={formData.email}
               onChange={handleChange}
             />
