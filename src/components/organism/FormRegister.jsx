@@ -107,18 +107,7 @@ export default function FormRegister() {
                 name={"lastName"}
               />
             </div>
-            <Input
-              label={"Correo Electronico"}
-              type={"email"}
-              placeholder={"usuario@ejemplo.com"}
-              name={"email"}
-            />
-            <Input
-              label={"Telefono"}
-              type={"text"}
-              placeholder={"0424..."}
-              name={"phone"}
-            />
+
             <Input
               label={"Fecha de Nacimiento"}
               type={"date"}
@@ -126,6 +115,20 @@ export default function FormRegister() {
               name={"birthdate"}
             />
 
+            <div className="grid grid-cols-2 gap-2">
+              <Input
+                label={"Correo Electronico"}
+                type={"email"}
+                placeholder={"usuario@ejemplo.com"}
+                name={"email"}
+              />
+              <Input
+                label={"Telefono"}
+                type={"text"}
+                placeholder={"0424..."}
+                name={"phone"}
+              />
+            </div>
             <InputPass
               label={"Contrasena"}
               placeholder={"******"}

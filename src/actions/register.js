@@ -22,7 +22,11 @@ export async function register(datos) {
         teachers:
           userRole === "TEACHER"
             ? {
-                create: {},
+                create: {
+                  school: {
+                    connect: { id: datos.idSchool || 1 },
+                  },
+                },
               }
             : undefined,
       },

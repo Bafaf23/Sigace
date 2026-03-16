@@ -143,10 +143,19 @@ model Parents {
 
 model Schools {
   id            Int    @id @default(autoincrement())
+  rifSchool     String? @unique
+  typeSchool    SchoolsType @default(PUBLIC)
   codeShool     String @unique
   nameSchool    String
+  emailSchool   String @unique
   addressSchool String
 
   student  Students[]
   teachers Teachers[] @relation("TeachersSchools")
+}
+
+enum SchoolsType{
+  PUBLIC
+  PRIVATE
+  SUBSIDIZED
 }

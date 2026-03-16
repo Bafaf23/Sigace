@@ -7,6 +7,7 @@ import {
   faKey,
   faArrowLeft,
   faUserPlus,
+  faSchool,
 } from "@fortawesome/free-solid-svg-icons";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -96,7 +97,7 @@ export default function FromLogin() {
               onChange={handleChange}
             />
 
-            <div className="flex justify-between">
+            <div className="grid grid-cols-3 place-content-between gap-2">
               <Links
                 direction="/register"
                 icon={faUserPlus}
@@ -108,8 +109,14 @@ export default function FromLogin() {
               <Links
                 icon={faKey}
                 direction="#"
-                className="text-sm font-semibold text-cyan-600 hover:text-cyan-700"
+                className="col-span-2 col-start-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700"
                 label={"¿Olvidaste tu contraseña?"}
+              ></Links>
+              <Links
+                icon={faSchool}
+                direction="#"
+                className="col-span-3 col-start-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700"
+                label={"¿Registar escuela?"}
               ></Links>
             </div>
 
