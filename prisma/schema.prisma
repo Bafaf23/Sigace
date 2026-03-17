@@ -46,6 +46,7 @@ model Students {
 
   // --- Paso 3: Salud ---
   birthCountry     String
+  gender           String?
   birthState       String
   bloodType        String
   allergies        String

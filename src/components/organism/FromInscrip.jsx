@@ -9,26 +9,27 @@ import ParentsFields from "../molecules/ParentsFields";
 import PersonalDataFields from "../molecules/PersonalDataFields";
 import { StepIndicator } from "../molecules/StepIndicator";
 import { enrollment } from "@/actions/enrollment";
+import EnrollmentSuccessPage from "@/app/(auth)/enrollment/success/page";
 import {
   faLeftLong,
   faRightLong,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function FormInscrip() {
-  const router = useRouter();
-
   const [passed, setPassed] = useState(1);
   const [confirmPass, setConfirmPass] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [success, setSuccess] = useState(false);
+  const [resulData, setResulData] = useState(null);
+
   const [data, setData] = useState({
     // Paso 1: Personales + Académicos
-    dniType: "",
+    dniType: "V-",
     dni: "",
     name: "",
     lastName: "",
@@ -118,10 +119,8 @@ export default function FormInscrip() {
       const result = await enrollment(datosFinales);
       if (result.success) {
         toast.success("¡Inscripción procesada con éxito!");
-
-        setTimeout(() => {
-          router.push("/enrollment/success");
-        }, 1500);
+        setResulData(result);
+        setSuccess(true);
       } else {
         toast.error(result.error || "Hubo un error al registrar.");
         setLoading(false);
@@ -132,6 +131,8 @@ export default function FormInscrip() {
       setLoading(false);
     }
   };
+
+  if (success && resulData) return <EnrollmentSuccessPage data={resulData} />;
 
   return (
     <form

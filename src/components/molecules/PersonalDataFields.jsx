@@ -59,21 +59,21 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
           label={"Nombre"}
           placeholder={"Juan"}
           onChange={manejarCambio}
-          value={datos.name}
+          value={datos?.name}
         />
         <Input
           name={"lastName"}
           label={"Apellido"}
           placeholder={"Fernandez"}
           onChange={manejarCambio}
-          value={datos.lastName}
+          value={datos?.lastName}
         />
         <Selector
           name={"gender"}
           label={"Género / Sexo"}
           options={genderSel}
           onChange={manejarCambio}
-          value={datos.gender}
+          value={datos?.gender}
         />
       </div>
       <div className="grid grid-cols-2 place-items-end gap-2">
@@ -82,14 +82,14 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
           label={"Correo"}
           placeholder={"ejemplo@correo.com"}
           onChange={manejarCambio}
-          value={datos.email}
+          value={datos?.email}
         />
         <Input
           name={"phone"}
           label={"Numero de telefono"}
           placeholder={"0424XXXX"}
           onChange={manejarCambio}
-          value={datos.phone}
+          value={datos?.phone}
         />
       </div>
     </div>

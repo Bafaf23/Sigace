@@ -20,7 +20,7 @@ export async function enrollment(formData) {
         ? formData.dni
         : `${formData.dniType || ""}${formData.dniNumber || ""}`;
 
-    const passwordToHash = formData.pass || formData.password || finalDni;
+    const passwordToHash = formData.pass || formData.password;
     const hashedPassword = await bcrypt.hash(passwordToHash, 10);
 
     const newEnrollment = await prisma.Users.create({
@@ -38,9 +38,8 @@ export async function enrollment(formData) {
         students: {
           create: {
             // --- SECCIÓN: SALUD Y TALLAS ---
-            birthCountry: formData.birthCountry || "Venezuela",
-            birthState: formData.birthState || "Miranda",
-            bloodType: formData.bloodType || "Desconocido",
+            gender: formData.gender,
+            bloodType: formData.bloodType || null,
             allergies: formData.allergies || "Ninguna",
             weight: formData.weight || "0",
             height: formData.height || "0",
@@ -50,6 +49,8 @@ export async function enrollment(formData) {
             medicalCondition: formData.medicalCondition || "N/A",
 
             // --- SECCIÓN: REPRESENTANTE ---
+            birthCountry: formData.birthCountry || "Venezuela",
+            birthState: formData.birthState || "Sin espesificar",
             representativeName: formData.repName || "",
             repLastName: formData.repLastName || "",
             repDni: formData.repdni || "",
@@ -88,13 +89,7 @@ export async function enrollment(formData) {
             },
 
             school: {
-              create: {
-                codeShool: formData.codeShool || "OD19641509",
-                nameSchool: formData.nameSchool || "U.E.N Juan de Escalona",
-                addressSchool:
-                  formData.addressSchool ||
-                  "Avenida El Arroyo, El Hatillo, Miranda, Venezuela",
-              },
+              connect: { id: formData.idSchool || 1 },
             },
           },
         },
