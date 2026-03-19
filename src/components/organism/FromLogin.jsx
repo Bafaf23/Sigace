@@ -43,12 +43,14 @@ export default function FromLogin() {
       const session = await getSession();
       const role = session?.user?.role;
 
-      console.log("Rol detectado en la sesión:", role); // Esto te dirá la verdad
+      console.log("Rol detectado en la sesión:", role);
 
       if (role === "TEACHER") {
         router.push("/dashboard/profesor");
       } else if (role === "STUDENT") {
         router.push("/dashboard/estudiante");
+      } else if (role === "ADMIN") {
+        router.push("/dashboard/administradores");
       } else {
         console.warn("El rol no coincide con TEACHER ni STUDENT:", role);
       }

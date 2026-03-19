@@ -15,17 +15,16 @@ export default function Profesor() {
 
   useEffect(() => {
     if (status === "loading") return;
-
-    if (status === "unauthenticated") {
-      const timeout = setTimeout(() => {
-        router.push("/login");
-      }, 500);
-      return () => clearTimeout(timeout);
-    }
-
-    if (status === "authenticated" && user?.role !== "TEACHER") {
-      console.log("Acceso denegado: Rol incorrecto");
-      router.push("/");
+    const role = user.role;
+    console.log(role);
+    if (!user || user.role !== "TEACHER") {
+      return (
+        <div className="flex min-h-screen items-center justify-center">
+          <p className="animate-pulse text-lg font-semibold text-red-600">
+            Redireccionando... No tienes permiso para estar aquí.
+          </p>
+        </div>
+      );
     }
   }, [status, user, router]);
 
@@ -36,16 +35,6 @@ export default function Profesor() {
           <div className="h-10 w-10 animate-spin rounded-full border-4 border-indigo-600 border-t-transparent"></div>
           <p className="font-medium text-slate-600">Verificando acceso...</p>
         </div>
-      </div>
-    );
-  }
-
-  if (!user || user.role !== "TEACHER") {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="animate-pulse text-lg font-semibold text-red-600">
-          Redireccionando... No tienes permiso para estar aquí.
-        </p>
       </div>
     );
   }

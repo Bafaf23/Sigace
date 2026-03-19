@@ -1,4 +1,3 @@
-"use client";
 import Sidebar from "@/components/organism/Sidebar";
 import { Providers } from "@/context/Providers";
 import "@/globals.css";
@@ -6,6 +5,14 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 config.autoAddCss = false;
+
+export const metadata = {
+  title: {
+    template: "Sigace | %s",
+    default: "Sigace - Gestión Académica",
+  },
+  description: "Sistema de Control de Estudios para Liceos",
+};
 
 export default function DashboardLayuot({ children }) {
   return (

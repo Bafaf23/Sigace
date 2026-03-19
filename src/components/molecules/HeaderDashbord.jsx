@@ -1,6 +1,6 @@
 import Selector from "../atom/Selector";
 
-export default function HeaderDashbord({ user, titelPage, panel }) {
+export default function HeaderDashbord({ user, titelPage }) {
   const hora = new Date().toLocaleString();
 
   return (

@@ -10,6 +10,11 @@ import {
   faListCheck,
   faPenToSquare,
   faUserCheck,
+  faBook,
+  faUserMinus,
+  faSitemap,
+  faChalkboardTeacher,
+  faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
@@ -69,6 +74,50 @@ export default function Sidebar() {
         label: "Mi Asistencia",
         active: patthename === `/dashboard/estudiante/asistencia`,
         direccion: "/dashboard/estudiante/asistencia",
+      },
+    ],
+    ADMIN: [
+      {
+        icon: faHome,
+        label: "Mi Inicio",
+        direccion: "/dashboard/administradores",
+        active: patthename === `/dashboard/administradores`,
+      },
+      {
+        icon: faSitemap,
+        label: "Control de Secciones",
+        active: patthename === `/dashboard/administradores/controlSecciones`,
+        direccion: "/dashboard/administradores/controlSecciones",
+      },
+      {
+        icon: faUserCheck,
+        label: "Inscripciones",
+        active: patthename === `/dashboard/administradores/inscripciones`,
+        direccion: "/dashboard/administradores/inscripciones",
+      },
+      {
+        icon: faUserMinus,
+        label: "Retiros y Traslados",
+        active: patthename === `/dashboard/administradores/retierosTraslados`,
+        direccion: "/dashboard/administradores/retierosTraslados",
+      },
+      {
+        icon: faChalkboardTeacher,
+        label: "Carga Académica",
+        active: patthename === `/dashboard/administradores/cargaAcademica`,
+        direccion: "/dashboard/administradores/cargaAcademica",
+      },
+      {
+        icon: faBook,
+        label: "Gestión de Materias",
+        active: patthename === `/dashboard/administradores/gestionMateria`,
+        direccion: "/dashboard/administradores/gestionMateria",
+      },
+      {
+        icon: faCalendarCheck,
+        label: "Configuración de Lapsos",
+        active: patthename === `/dashboard/administradores/settingLapso`,
+        direccion: "/dashboard/administradores/settingLapso",
       },
     ],
   };

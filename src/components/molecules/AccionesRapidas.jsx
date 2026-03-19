@@ -1,6 +1,16 @@
 "use client";
 import Icon from "../atom/Icon";
-import { faEdit, faChartLine, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faChartLine,
+  faHome,
+  faBook,
+  faChalkboardTeacher,
+  faUserMinus,
+  faUserCheck,
+  faSitemap,
+  faCalendarCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,8 +20,6 @@ export default function AccionesRapidas() {
 
   const { data: session } = useSession();
   const userRole = session?.user?.role;
-  console.log(userRole);
-
   const menuConfig = {
     TEACHERS: [
       {
@@ -46,6 +54,50 @@ export default function AccionesRapidas() {
         src: "/dashboard/estudiante/notas",
         icon: faEdit,
         active: pathname === "/dashboard/estudiante/asistencia" ? "hidden" : "",
+      },
+    ],
+    ADMIN: [
+      {
+        icon: faHome,
+        name: "Mi Inicio",
+        src: "/dashboard/administradores",
+        active: pathname === `/dashboard/administradores` ? "hidden" : "",
+      },
+      {
+        icon: faSitemap,
+        name: "Control de Secciones",
+        active: pathname === `/dashboard/administradores/materias`,
+        src: "/dashboard/administradores/materias",
+      },
+      {
+        icon: faUserCheck,
+        name: "Inscripciones",
+        active: pathname === `/dashboard/administradores/materias`,
+        src: "/dashboard/administradores/materias",
+      },
+      {
+        icon: faUserMinus,
+        name: "Retiros y Traslados",
+        active: pathname === `/dashboard/administradores/materias`,
+        src: "/dashboard/administradores/materias",
+      },
+      {
+        icon: faChalkboardTeacher,
+        name: "Carga Académica",
+        active: pathname === `/dashboard/administradores/materias`,
+        src: "/dashboard/administradores/materias",
+      },
+      {
+        icon: faBook,
+        name: "Gestión de Materias",
+        active: pathname === `/dashboard/administradores/materias`,
+        src: "/dashboard/administradores/materias",
+      },
+      {
+        icon: faCalendarCheck,
+        name: "Configuración de Lapsos",
+        active: pathname === `/dashboard/administradores/materias`,
+        src: "/dashboard/administradores/materias",
       },
     ],
   };
