@@ -37,6 +37,8 @@ model Teachers {
   evaluationPlan EvaluationPlan[] @relation("TeachersEvaluationPlan")
   schoolId       Int
   school         Schools          @relation("TeachersSchools", fields: [schoolId], references: [id])
+  loads          AcademicLoad[]
+  section        Section?
 }
 
 model Students {
@@ -80,10 +82,11 @@ model Students {
   previousSection    String?
 
   //Escuela
-  schoolId Int?
-  school   Schools? @relation(fields: [schoolId], references: [id])
-  year     String?
-  section  String?
+  schoolId  Int?
+  school    Schools? @relation(fields: [schoolId], references: [id])
+  year      String?
+  sectionId Int?
+  section   Section? @relation(fields: [sectionId], references: [id])
 
   qualifications Qualifications[] @relation("QualificationsStudents")
   parents        Parents?
@@ -96,6 +99,7 @@ model Subjects {
 
   teachers       Teachers[]       @relation("SubjectsTeachers")
   evaluationPlan EvaluationPlan[] @relation("EvaluationPlanSubjects")
+  loads          AcademicLoad[]
 }
 
 model Qualifications {
@@ -106,8 +110,10 @@ model Qualifications {
   evaluationPlanID Int
   evaluationPlan   EvaluationPlan @relation("QualificationsPlan", fields: [evaluationPlanID], references: [id])
 
-  qualification Int
-  createdAt     DateTime @default(now())
+  qualification  Int
+  createdAt      DateTime      @default(now())
+  academicLoad   AcademicLoad? @relation(fields: [academicLoadId], references: [id])
+  academicLoadId String?
 }
 
 model EvaluationPlan {
@@ -143,20 +149,53 @@ model Parents {
 }
 
 model Schools {
-  id            Int    @id @default(autoincrement())
-  rifSchool     String? @unique
+  id            Int         @id @default(autoincrement())
+  rifSchool     String?     @unique
   typeSchool    SchoolsType @default(PUBLIC)
-  codeShool     String @unique
+  codeShool     String      @unique
   nameSchool    String
-  emailSchool   String @unique
+  emailSchool   String      @unique
   addressSchool String
 
   student  Students[]
   teachers Teachers[] @relation("TeachersSchools")
 }
 
-enum SchoolsType{
+enum SchoolsType {
   PUBLIC
   PRIVATE
   SUBSIDIZED
+}
+
+model Section {
+  id         Int            @id @default(autoincrement())
+  grade      String
+  identifier String // "A", "B", "U"
+  capacity   Int            @default(35) // Cupo máximo
+  shift      String?        @default("Mañana") // Mañana o Tarde
+  teacherId  Int?           @unique
+  teacher    Teachers?      @relation(fields: [teacherId], references: [id])
+  students   Students[]
+  loads      AcademicLoad[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([grade, identifier])
+}
+
+model AcademicLoad {
+  id     String @id @default(cuid())
+  period String
+
+  // Relaciones
+  teacherId      Int
+  teacher        Teachers         @relation(fields: [teacherId], references: [id])
+  subjectId      Int
+  subject        Subjects         @relation(fields: [subjectId], references: [id])
+  sectionId      Int
+  section        Section          @relation(fields: [sectionId], references: [id])
+  qualifications Qualifications[]
+
+  @@unique([subjectId, sectionId, period])
 }

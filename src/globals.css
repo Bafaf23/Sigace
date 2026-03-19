@@ -25,3 +25,14 @@
     scrollbar-color: #cbd5e1 transparent;
   }
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Quitar flechas en Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

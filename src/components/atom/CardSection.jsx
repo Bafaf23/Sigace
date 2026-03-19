@@ -61,22 +61,22 @@ export default function CardSecction({
       </div>
 
       {/* Acciones Rápidas (Footer) */}
-      <div className="flex justify-around border-t border-slate-100 bg-slate-50 p-3">
+      <div className="flex gap-2 border-t border-slate-100 bg-slate-50 p-3 md:justify-around">
         <Button
           icon={faFilePdf}
-          classNameBtn="text-slate-500 transition-colors hover:text-indigo-600"
+          classNameBtn="text-slate-500 transition-colors hover:text-indigo-600 truncate"
         >
           {"Ver lista de alumnos"}
         </Button>
         <Button
           icon={faUserPlus}
-          classNameBtn="text-slate-500 transition-colors hover:text-green-600"
+          classNameBtn="text-slate-500 transition-colors hover:text-green-600 truncate"
         >
           {"Inscribir en esta sección"}
         </Button>
         <Button
           icon={faPenToSquare}
-          classNameBtn="text-slate-500 transition-colors hover:text-orange-500"
+          classNameBtn="text-slate-500 transition-colors hover:text-orange-500 truncate"
         >
           {"Editar sección"}
         </Button>
