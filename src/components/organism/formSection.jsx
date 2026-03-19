@@ -1,9 +1,24 @@
 import Button from "../atom/Button";
 import Input from "../atom/Input";
 import Selector from "../atom/Selector";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { registerSection } from "@/actions/rigisterSection";
+import { faCheck, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function FormSection() {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    grade: "",
+    identifier: "",
+    teacherId: "",
+    capacity: 35,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
   const gradeOptions = [
     { value: "1ero", label: "1er Año" },
     { value: "2do", label: "2do Año" },
@@ -18,21 +33,38 @@ export default function FormSection() {
     { value: "U", label: "Sección Única (U)" },
   ];
   const teacherOptions = [
-    { value: "1", label: "Carlos Uzcátegui" },
+    { value: "1", label: "Bryant Facenda" },
     { value: "2", label: "Elena Blanco" },
   ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const result = await registerSection(formData);
+
+    if (result.success) {
+      toast.success("¡Sección creada con éxito!");
+    }
+    setLoading(false);
+  };
+
   return (
-    <form action="#" className="space-y-6 p-2">
+    <form onSubmit={handleSubmit} className="space-y-6 p-2">
       <div className="grid grid-cols-2 gap-2">
         <Selector
           options={gradeOptions}
           name={"grade"}
           label={"Seleciona un año"}
+          onChange={handleChange}
+          value={formData.grade}
         />
         <Selector
           options={identifierOptions}
           name={"identifier"}
           label={"Selecciona la sección"}
+          onChange={handleChange}
+          value={formData.identifier}
         />
         {/* Fila 2: Docente Guía (Ocupa todo el ancho) */}
         <div className="col-span-2">
@@ -40,6 +72,8 @@ export default function FormSection() {
             options={teacherOptions}
             name="teacherId"
             label="Asignar Docente Guía"
+            onChange={handleChange}
+            value={formData.teacherId}
           />
         </div>
         <div className="col-span-2">
@@ -48,16 +82,21 @@ export default function FormSection() {
             name="capacity"
             label="Capacidad Máxima (Cupos)"
             placeholder="Ej: 35"
+            value={formData.capacity}
+            onChange={handleChange}
           />
         </div>
       </div>
 
       <div className="flex justify-end pt-4">
         <Button
-          icon={faCheck}
-          classNameBtn="rounded-lg bg-indigo-600 px-8 py-2 font-bold text-white transition-all hover:shadow-lg"
+          type="submit"
+          disabled={loading}
+          icon={loading ? faSpinner : faCheck} // Cambia el icono si está cargando
+          classNameBtn={`rounded-lg px-8 py-2 font-bold text-white transition-all 
+            ${loading ? "bg-slate-400 cursor-not-allowed" : "bg-indigo-600 hover:shadow-lg active:scale-95"}`}
         >
-          {"Crear Sección"}
+          {loading ? "Cargando..." : "Crear Sección"}
         </Button>
       </div>
     </form>
