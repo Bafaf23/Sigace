@@ -9,7 +9,7 @@ export default function HeaderDashbord({ user, titelPage }) {
         <div className="mb-2 flex items-center gap-2">
           {user ? (
             <>
-              <h1 className="text-2xl font-bold md:text-3xl md:text-indigo-900">
+              <h1 className="text-2xl font-bold md:text-3xl md:text-indigo-300">
                 Hola,
               </h1>
               <span className="text-2xl font-bold text-slate-50 normal-case md:text-3xl md:text-indigo-500">
@@ -17,7 +17,7 @@ export default function HeaderDashbord({ user, titelPage }) {
               </span>
             </>
           ) : (
-            <h1 className="text-3xl font-bold text-slate-100 uppercase md:text-slate-500 lg:text-slate-500">
+            <h1 className="text-3xl font-bold text-slate-100 uppercase md:text-slate-500 lg:text-slate-500 dark:md:text-slate-400">
               {titelPage}
             </h1>
           )}

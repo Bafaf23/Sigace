@@ -10,7 +10,7 @@ import {
 export default function Resumenes() {
   return (
     <section className="mt-5 p-3">
-      <h2 className="mb-3 text-xl font-bold text-gray-500/70 uppercase">
+      <h2 className="mb-3 text-xl font-bold text-gray-500/70 uppercase dark:text-slate-400">
         Resumen
       </h2>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">

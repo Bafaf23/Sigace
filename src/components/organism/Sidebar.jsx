@@ -2,6 +2,7 @@
 
 import Button from "../atom/Button";
 import SigaceLogo from "../atom/SigaceLogo";
+import ThemeToggle from "../atom/ThemeToggle";
 import VersionTag from "../atom/VersionTag";
 import NavLink from "../molecules/NavLink";
 import {
@@ -128,7 +129,9 @@ export default function Sidebar() {
     <aside
       className={`hidden p-3 transition-all duration-300 md:hidden md:flex-col lg:flex`}
     >
-      <div className={`mb-8 flex items-center border-b border-gray-200 pb-3`}>
+      <div
+        className={`mb-8 flex items-center border-b border-gray-200 pb-3 dark:border-slate-700`}
+      >
         <div className="truncate">
           <SigaceLogo className={"text-indigo-500"} />
         </div>
@@ -148,12 +151,15 @@ export default function Sidebar() {
       </nav>
 
       {/* Cerrar sesion */}
-      <VersionTag />
-      <div className="mt-auto border-t border-slate-400/30 pt-4">
+      <div className="flex items-center justify-between">
+        <ThemeToggle />
+        <VersionTag />
+      </div>
+      <div className="mt-auto border-t border-slate-400/30 pt-4 dark:border-slate-700">
         <Button
           icon={faSignOutAlt}
           onClick={handleLogout}
-          classNameBtn={`flex items-center gap-3 w-full text-gray-600/70 p-2 hover:bg-red-500/50 hover:text-red-900 rounded-lg transition-all text-md`}
+          classNameBtn={`flex items-center gap-3 w-full text-gray-600/70 p-2 hover:bg-red-500/50 hover:text-red-900 rounded-lg transition-all text-md dark:text-slate-500 dark:hover:bg-red-300/50 dark:hover:text-red-600`}
           children={"Cerrar Sesion"}
         ></Button>
       </div>

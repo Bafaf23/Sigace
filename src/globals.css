@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 @layer base {
   /* Estilos para Chrome, Edge y Safari */
   ::-webkit-scrollbar {
