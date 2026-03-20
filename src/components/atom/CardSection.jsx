@@ -1,5 +1,7 @@
 import Button from "../atom/Button";
 import Icon from "../atom/Icon";
+import FormAssignStudent from "../organism/FormAssignStudent";
+import Modal from "../organism/Modal";
 import {
   faUsers,
   faChalkboardUser,
@@ -7,14 +9,18 @@ import {
   faPenToSquare,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function CardSecction({
+  id,
   grade,
   identifier,
   teacher,
   current,
   max,
+  availableStudents,
 }) {
+  const [isOpen, setIsOpen] = useState(false);
   const isFull = current >= max;
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md transition-shadow hover:shadow-lg">
@@ -69,11 +75,23 @@ export default function CardSecction({
           {"Ver lista de alumnos"}
         </Button>
         <Button
+          onClick={() => setIsOpen(true)}
           icon={faUserPlus}
           classNameBtn="text-slate-500 transition-colors hover:text-green-600 truncate"
         >
           {"Inscribir en esta sección"}
         </Button>
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(!isOpen)}
+          title={"Inscribir Alumno en Sección"}
+        >
+          <FormAssignStudent
+            students={availableStudents}
+            id={id}
+            onSuccess={() => setIsOpen(false)}
+          />
+        </Modal>
         <Button
           icon={faPenToSquare}
           classNameBtn="text-slate-500 transition-colors hover:text-orange-500 truncate"

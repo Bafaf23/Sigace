@@ -17,7 +17,7 @@ export default function Selector({
         name={name}
         value={value || ""}
         id={id}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
         required
       >

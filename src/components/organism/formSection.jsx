@@ -1,13 +1,15 @@
 import Button from "../atom/Button";
 import Input from "../atom/Input";
 import Selector from "../atom/Selector";
+import { getTeachers } from "@/actions/getTeachers";
 import { registerSection } from "@/actions/rigisterSection";
 import { faCheck, faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function FormSection() {
   const [loading, setLoading] = useState(false);
+  const [teachers, setTeachers] = useState([]);
   const [formData, setFormData] = useState({
     grade: "",
     identifier: "",
@@ -15,10 +17,10 @@ export default function FormSection() {
     capacity: 35,
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleUpdate = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
   const gradeOptions = [
     { value: "1ero", label: "1er Año" },
     { value: "2do", label: "2do Año" },
@@ -32,10 +34,23 @@ export default function FormSection() {
     { value: "C", label: "Sección C" },
     { value: "U", label: "Sección Única (U)" },
   ];
-  const teacherOptions = [
-    { value: "1", label: "Bryant Facenda" },
-    { value: "2", label: "Elena Blanco" },
-  ];
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadTeachers = async () => {
+      try {
+        const data = await getTeachers();
+        if (isMounted) setTeachers(data);
+      } catch (error) {
+        toast.error("No se pudieron cargar los docentes");
+      }
+    };
+
+    loadTeachers();
+    return () => {
+      isMounted = false; // Cleanup correcto
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,23 +71,23 @@ export default function FormSection() {
           options={gradeOptions}
           name={"grade"}
           label={"Seleciona un año"}
-          onChange={handleChange}
+          onChange={(val) => handleUpdate("grade", val)}
           value={formData.grade}
         />
         <Selector
           options={identifierOptions}
           name={"identifier"}
           label={"Selecciona la sección"}
-          onChange={handleChange}
+          onChange={(val) => handleUpdate("identifier", val)}
           value={formData.identifier}
         />
         {/* Fila 2: Docente Guía (Ocupa todo el ancho) */}
         <div className="col-span-2">
           <Selector
-            options={teacherOptions}
+            options={teachers}
             name="teacherId"
             label="Asignar Docente Guía"
-            onChange={handleChange}
+            onChange={(val) => handleUpdate("teacherId", val)}
             value={formData.teacherId}
           />
         </div>
@@ -83,7 +98,7 @@ export default function FormSection() {
             label="Capacidad Máxima (Cupos)"
             placeholder="Ej: 35"
             value={formData.capacity}
-            onChange={handleChange}
+            onChange={(e) => handleUpdate("capacity", e.target.value)}
           />
         </div>
       </div>
