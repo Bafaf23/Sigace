@@ -1,4 +1,5 @@
 "use client";
+import AccessDenied from "@/components/atom/AccessDenied";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import { useSession } from "next-auth/react";
@@ -6,6 +7,11 @@ import { useSession } from "next-auth/react";
 export default function AdminPage() {
   const { data: session, status } = useSession();
   const user = session?.user;
+
+  if (!user || user?.role !== "ADMIN") {
+    return <AccessDenied />;
+  }
+
   if (status === "loading") {
     return (
       <div className="flex min-h-screen items-center justify-center">

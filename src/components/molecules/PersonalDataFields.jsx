@@ -18,6 +18,7 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
     const { name, checked } = e.target;
     manejarCambio({ target: { name, value: checked } });
   };
+  console.log("Estado actual del género:", datos?.gender);
   return (
     <div className="space-y-4">
       <h4 className="border-b pb-2 font-bold text-blue-700">
@@ -33,7 +34,7 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
       </div>
       <div className="grid grid-cols-2 items-end gap-4">
         <SelectorInput
-          id={"dniTepy"}
+          id={"dniType"}
           name={"dniType"}
           nameInput={"dni"}
           placeholder={"323233"}

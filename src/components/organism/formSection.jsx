@@ -71,14 +71,14 @@ export default function FormSection() {
           options={gradeOptions}
           name={"grade"}
           label={"Seleciona un año"}
-          onChange={(val) => handleUpdate("grade", val)}
-          value={formData.grade}
+          onChange={(e) => handleUpdate("grade", e.target.value)}
+          value={formData.grade || ""}
         />
         <Selector
           options={identifierOptions}
           name={"identifier"}
           label={"Selecciona la sección"}
-          onChange={(val) => handleUpdate("identifier", val)}
+          onChange={(e) => handleUpdate("identifier", e.target.value)}
           value={formData.identifier}
         />
         {/* Fila 2: Docente Guía (Ocupa todo el ancho) */}
@@ -87,7 +87,7 @@ export default function FormSection() {
             options={teachers}
             name="teacherId"
             label="Asignar Docente Guía"
-            onChange={(val) => handleUpdate("teacherId", val)}
+            onChange={(e) => handleUpdate("teacherId", e.target.value)}
             value={formData.teacherId}
           />
         </div>

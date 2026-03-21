@@ -41,7 +41,7 @@ export default function FormAssignStudent({ students, id }) {
           label: s.user ? `${s.user.name} ${s.user.lastName}` : `sin datos`,
         }))}
         value={String(selectedStudent)}
-        onChange={(val) => setSelectedStudent(val)}
+        onChange={(e) => setSelectedStudent(e.target.value)}
       />
 
       <div className="rounded-lg bg-blue-50 p-3 text-xs text-blue-600">

@@ -1,4 +1,5 @@
 "use client";
+import AccessDenied from "@/components/atom/AccessDenied";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import Resumenes from "@/components/molecules/Resumenes";
@@ -8,6 +9,10 @@ import { useSession } from "next-auth/react";
 export default function dashboardStudiantPage() {
   const { data: session, status } = useSession();
   const user = session?.user;
+
+  if (user?.role !== "STUDENT") {
+    return <AccessDenied />;
+  }
 
   if (status === "loading") {
     return (

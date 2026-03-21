@@ -71,8 +71,6 @@ export async function enrollment(formData) {
             canaimaSerial: formData.canaimaSerial || null,
             previousYear: formData.previousYear || null,
             previousSection: formData.previousSection || null,
-            year: formData.year,
-            section: formData.section,
 
             parents: {
               create: {
