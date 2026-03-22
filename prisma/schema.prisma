@@ -94,12 +94,17 @@ model Students {
 
 model Subjects {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
+  name      String  
+  code      String   @unique
+  grade     String
+  area      String?
   createdAt DateTime @default(now())
 
   teachers       Teachers[]       @relation("SubjectsTeachers")
   evaluationPlan EvaluationPlan[] @relation("EvaluationPlanSubjects")
   loads          AcademicLoad[]
+
+  @@unique([name, grade])
 }
 
 model Qualifications {

@@ -7,7 +7,21 @@ import {
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Resumenes() {
+export default function Resumenes({ data }) {
+  if (!data || data == []) {
+    return (
+      <div className="flex items-center justify-center p-3">
+        <div className="w-full rounded-2xl border border-slate-200 bg-slate-200 p-5 text-center text-slate-400">
+          <h3 className="text-lg font-semibold text-slate-500">
+            No hay informacion que mostrar
+          </h3>
+          <p className="text-sm text-slate-400">
+            Parece que aún no se han creado informacion en este año escolar.
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <section className="mt-5 p-3">
       <h2 className="mb-3 text-xl font-bold text-gray-500/70 uppercase dark:text-slate-400">
@@ -16,7 +30,7 @@ export default function Resumenes() {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
         <InfoCard
           label={"Secciones"}
-          value={"1"}
+          value={""}
           icon={faUser}
           colorClass={"bg-orange-500/40 text-orange-500"}
           description={"Secciones asignadas al profesor"}

@@ -102,12 +102,7 @@ export default function Sidebar() {
         active: patthename === `/dashboard/administradores/retierosTraslados`,
         direccion: "/dashboard/administradores/retierosTraslados",
       },
-      {
-        icon: faChalkboardTeacher,
-        label: "Carga Académica",
-        active: patthename === `/dashboard/administradores/cargaAcademica`,
-        direccion: "/dashboard/administradores/cargaAcademica",
-      },
+
       {
         icon: faBook,
         label: "Gestión de Materias",
