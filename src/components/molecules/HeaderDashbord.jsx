@@ -1,7 +1,19 @@
 import Selector from "../atom/Selector";
 
 export default function HeaderDashbord({ user, titelPage }) {
-  const hora = new Date().toLocaleString();
+  const formatLastLogin = (date) => {
+    if (!date) return "Primera conexión";
+
+    return new Intl.DateTimeFormat("es-VE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "America/Caracas", // Forzamos la hora de Venezuela
+    }).format(new Date(date));
+  };
 
   return (
     <section className="flex w-full flex-col md:flex-row md:justify-between">
@@ -29,7 +41,9 @@ export default function HeaderDashbord({ user, titelPage }) {
             <p className="text-xs italic md:text-gray-400/40">
               Tu ultima coneccion
             </p>
-            <span className="text-xs italic md:text-gray-400/40">{hora}</span>
+            <span className="text-xs italic md:text-gray-400/40">
+              {formatLastLogin(user?.lastLogin)}
+            </span>
           </div>
           {/* selector de materias */}
           {user?.materias && (

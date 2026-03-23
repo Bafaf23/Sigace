@@ -9,6 +9,6 @@ export async function getSubject() {
     return Array.isArray(subjects) ? subjects : [];
   } catch (error) {
     console.error("--- ERROR AL OBTENER SECCIONES ---", error);
-    return { success: false, error: "No se pudieron cargar las secciones." };
+    return [];
   }
 }

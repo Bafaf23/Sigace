@@ -20,14 +20,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           credentials.password,
           user.password,
         );
-
         if (!isMatch) return null;
+
+        await prisma.Users.update({
+          where: { id: user.id },
+          data: { lastLogin: new Date() },
+        });
 
         return {
           id: user.id.toString(),
           name: `${user.name} ${user.lastName}`,
           email: user.email,
           role: user.role,
+          lastLogin: user.lastLogin,
         };
       },
     }),
@@ -37,6 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.role = user.role;
         token.id = user.id;
+        token.lastLogin = user.lastLogin;
       }
       return token;
     },
@@ -45,6 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token) {
         session.user.role = token.role;
         session.user.id = token.id;
+        session.user.lastLogin = token.lastLogin;
       }
       console.log("SESSION FINAL:", session);
       return session;

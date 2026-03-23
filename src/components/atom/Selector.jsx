@@ -18,7 +18,7 @@ export default function Selector({
         value={value || ""}
         id={id}
         onChange={onChange}
-        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
+        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none dark:border-slate-400 dark:bg-slate-300"
         required
       >
         <option value="">Seleccione una opción</option>

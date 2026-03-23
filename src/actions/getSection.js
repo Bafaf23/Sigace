@@ -12,7 +12,7 @@ export async function getSection() {
         },
         _count: {
           select: {
-            students: true, // Asegúrate de que en tu schema sea 'students' (en plural)
+            students: true,
           },
         },
       },

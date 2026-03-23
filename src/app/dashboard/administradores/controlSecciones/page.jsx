@@ -3,8 +3,8 @@ import { getSection, getStudentsWithoutSection } from "@/actions/getSection";
 import Button from "@/components/atom/Button";
 import CardSecction from "@/components/molecules/CardGridSetion.jsx";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
+import FormSection from "@/components/organism/FormSection";
 import Modal from "@/components/organism/Modal";
-import FormSection from "@/components/organism/formSection";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 

@@ -18,6 +18,7 @@ model Users {
   password  String
   role      Role
   createdAt DateTime @default(now())
+  lastLogin DateTime? 
 
   teachers Teachers? @relation("TeachersUsers")
   students Students? @relation("StudentsUsers")

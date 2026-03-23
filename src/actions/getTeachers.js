@@ -14,5 +14,6 @@ export async function getTeachers() {
     }));
   } catch (error) {
     console.error("--- ERROR AL TRAER DOCENTES ---", error);
+    return [];
   }
 }

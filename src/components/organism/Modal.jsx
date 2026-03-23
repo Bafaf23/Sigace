@@ -6,7 +6,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 
 export default function Modal({ isOpen, onClose, title, children }) {
-  // Bloquear el scroll del cuerpo cuando la modal está abierta
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -26,9 +25,11 @@ export default function Modal({ isOpen, onClose, title, children }) {
       />
 
       {/* Contenido de la Modal */}
-      <div className="animate-in fade-in zoom-in relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl duration-300">
-        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-          <h3 className="text-xl font-bold text-slate-800">{title}</h3>
+      <div className="animate-in fade-in zoom-in relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl duration-300 dark:bg-slate-900">
+        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4 dark:border-slate-800 dark:bg-slate-700">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-300">
+            {title}
+          </h3>
           <Button
             icon={faTimes}
             classNameBtn="text-slate-400 hover:text-slate-600 p-1"
