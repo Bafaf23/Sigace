@@ -23,22 +23,24 @@ export default function TablaNotas({ data }) {
   const alumnos = data.alumnos || [];
   const estatus = data.estatus;
   return (
-    <div className="overflow-hidden rounded-xl bg-white shadow">
-      <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50/50 px-6 py-4">
+    <div className="overflow-hidden rounded-xl bg-white shadow dark:bg-slate-900">
+      <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50/50 px-6 py-4 dark:border-slate-800 dark:bg-slate-800/50">
         <div>
-          <h2 className="text-lg font-bold text-slate-800">{nombreLapso}</h2>
-          <p className="text-sm text-slate-500">
+          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-300">
+            {nombreLapso}
+          </h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Ciclo Escolar primer trimestre
           </p>
         </div>
         <div className="flex items-center gap-5">
           <div
-            className={`uppercase ${estatus == "cerrado" ? "text-orange-300/60" : "text-green-500"}`}
+            className={`uppercase ${estatus == "cerrado" ? "text-orange-300/70" : "text-green-500"}`}
           >
             {estatus}
           </div>
           <Button
-            classNameBtn={`hover:bg-gray-200 text-slate-600/40 p-2 rounded-md transition-transform duration-300 ${isOpen ? "" : "rotate-180"}`}
+            classNameBtn={`hover:bg-gray-200 text-slate-600/40 p-2 rounded-md transition-transform duration-300 ${isOpen ? "" : "rotate-180"} dark:hover:bg-slate-600 dark:text-slate-500`}
             icon={faAngleDown}
             onClick={() => setIsOpen(!isOpen)}
           />
@@ -49,24 +51,24 @@ export default function TablaNotas({ data }) {
       >
         <table className={`w-full border-collapse text-left`}>
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50">
-              <th className="px-6 py-4 text-sm font-semibold text-slate-600">
+            <tr className="border-b border-slate-200 bg-slate-50 dark:border-slate-600 dark:bg-slate-800">
+              <th className="px-6 py-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
                 <Icon icon={faUser} />
                 Estudiante
               </th>
-              <th className="px-4 py-4 text-center text-sm font-semibold text-slate-600">
+              <th className="px-4 py-4 text-center text-sm font-semibold text-slate-600 dark:text-slate-400">
                 Actividad 1 (25%)
               </th>
-              <th className="px-4 py-4 text-center text-sm font-semibold text-slate-600">
+              <th className="px-4 py-4 text-center text-sm font-semibold text-slate-600 dark:text-slate-400">
                 Actividad 2 (25%)
               </th>
-              <th className="px-4 py-4 text-center text-sm font-semibold text-slate-600">
+              <th className="px-4 py-4 text-center text-sm font-semibold text-slate-600 dark:text-slate-400">
                 Examen (50%)
               </th>
-              <th className="px-6 py-4 text-center text-sm font-semibold text-slate-600">
+              <th className="px-6 py-4 text-center text-sm font-semibold text-slate-600 dark:text-slate-400">
                 Definitiva
               </th>
-              <th className="px-6 py-4 text-center text-sm font-semibold text-slate-600">
+              <th className="px-6 py-4 text-center text-sm font-semibold text-slate-600 dark:text-slate-400">
                 Estatus
               </th>
             </tr>

@@ -52,7 +52,7 @@ export default function Profesor() {
   return (
     <>
       <HeaderDashbord user={user} />
-      <Resumenes />
+      <Resumenes teachersId={user.id} />
       {/* movil */}
       <AccionesRapidas />
       <Reportes></Reportes>

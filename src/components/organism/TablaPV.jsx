@@ -1,9 +1,9 @@
 export default function TablaPV({ evaluaciones }) {
   return (
-    <section className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md">
+    <section className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md dark:border-slate-700 dark:bg-slate-900">
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-left text-sm">
-          <thead className="bg-slate-50 text-xs font-semibold text-slate-600 uppercase">
+          <thead className="bg-slate-50 text-xs font-semibold text-slate-600 uppercase dark:border-slate-700 dark:bg-cyan-800 dark:text-slate-100">
             <tr>
               <th className="border-b px-4 py-3">Semana</th>
               <th className="border-b px-4 py-3">Referente Teórico-Práctico</th>
@@ -14,10 +14,13 @@ export default function TablaPV({ evaluaciones }) {
               <th className="border-b px-4 py-3 text-center">Ptos</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-slate-700">
+          <tbody className="divide-y divide-slate-100 text-slate-700 dark:divide-slate-700 dark:text-slate-300">
             {evaluaciones?.length > 0 ? (
               evaluaciones.map((eva, index) => (
-                <tr key={index} className="transition-colors hover:bg-slate-50">
+                <tr
+                  key={index}
+                  className="transition-colors hover:bg-slate-50 dark:hover:bg-slate-800"
+                >
                   <td className="px-4 py-4 text-center font-medium">
                     {eva.semana}
                   </td>
@@ -32,11 +35,11 @@ export default function TablaPV({ evaluaciones }) {
                   </td>
                   <td className="px-4 py-4">{eva.instrumento}</td>
                   <td className="px-4 py-4 text-center">
-                    <span className="rounded bg-indigo-100 px-2 py-1 text-[10px] font-bold text-indigo-700">
+                    <span className="rounded bg-indigo-100 px-2 py-1 text-[10px] font-bold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">
                       {eva.tipoForma}
                     </span>
                   </td>
-                  <td className="px-4 py-4 text-center font-bold text-indigo-600">
+                  <td className="px-4 py-4 text-center font-bold text-indigo-600 dark:text-indigo-500">
                     {eva.porcentaje}%
                   </td>
                   <td className="px-4 py-4 text-center font-semibold">
@@ -55,13 +58,20 @@ export default function TablaPV({ evaluaciones }) {
               </tr>
             )}
           </tbody>
-          <tfoot className="bg-slate-50 font-bold">
+          <tfoot className="bg-slate-50 font-bold dark:bg-cyan-700">
             <tr>
-              <td colSpan="5" className="px-4 py-3 text-right">
+              <td
+                colSpan="5"
+                className="px-4 py-3 text-right dark:text-slate-800"
+              >
                 Total Acumulado:
               </td>
-              <td className="px-4 py-3 text-center text-indigo-600">100%</td>
-              <td className="px-4 py-3 text-center">20 pts</td>
+              <td className="px-4 py-3 text-center text-indigo-600 dark:text-slate-100">
+                100%
+              </td>
+              <td className="px-4 py-3 text-center dark:text-slate-100">
+                20 pts
+              </td>
             </tr>
           </tfoot>
         </table>

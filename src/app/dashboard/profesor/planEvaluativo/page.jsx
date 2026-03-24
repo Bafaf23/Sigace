@@ -22,7 +22,7 @@ export default function PlanEvaluativo() {
   };
 
   const evaluacionesEjemplo = [
-    {
+    /* {
       semana: "02",
       contenido: "Ecuaciones de 2do Grado",
       actividad: "Taller Práctico",
@@ -39,7 +39,7 @@ export default function PlanEvaluativo() {
       instrumento: "Cuestionario",
       tipoForma: "S/H",
       porcentaje: 25,
-    },
+    }, */
   ];
 
   return (
@@ -67,7 +67,7 @@ export default function PlanEvaluativo() {
       </div>
       <AccionesRapidas />
       <section className="p-3">
-        <h1 className="text-2xl font-bold text-gray-500/60">
+        <h1 className="text-2xl font-bold text-gray-500/60 dark:text-slate-500">
           Plan de Evaluación por Materia
         </h1>
 
