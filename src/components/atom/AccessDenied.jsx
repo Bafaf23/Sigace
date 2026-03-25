@@ -1,6 +1,13 @@
 import Icon from "./Icon";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Pantalla de visualización para accesos denegados.
+ * Se muestra cuando un usuario intenta acceder a una ruta que no corresponde a su rol.
+ * Generalmente se activa mediante un middleware o un guard de rutas.
+ * @component
+ * @returns {JSX.Element}
+ */
 const AccessDenied = () => {
   return (
     <div className="fixed inset-0 z-50 flex min-h-screen w-full flex-col items-center justify-center overflow-y-auto backdrop-blur-sm dark:bg-slate-900/60">

@@ -2,6 +2,13 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+/**
+ * Crea una carga académica asociando un profesor, una materia y una sección.
+ *
+ * @param {FromData} fromData
+ * @returns {Promise<{success:boolean, error?: string}>}
+ */
+
 export async function assingAcademicLoand(fromData) {
   try {
     const teacherId = fromData.get("teacherId");

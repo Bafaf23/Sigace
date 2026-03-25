@@ -1,6 +1,13 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 
+/**
+ * Registra una nueva sección en el plantel escolar.
+ * Permite asignar opcionalmente un profesor guía y definir el turno.
+ * @param {object} formData - Objeto con datos de la sección (grade, identifier, capacity, shift, teacherId).
+ * @returns {Promise<{success: boolean, section?: Object, error?: string}>} Retorna la sección creada o un mensaje de error detallado (duplicados o docente inválido).
+ */
+
 export async function registerSection(formData) {
   try {
     const teacherId = formData.teacherId ? Number(formData.teacherId) : null;

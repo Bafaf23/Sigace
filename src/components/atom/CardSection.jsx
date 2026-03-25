@@ -5,12 +5,26 @@ import Modal from "../organism/Modal";
 import {
   faUsers,
   faChalkboardUser,
-  faFilePdf,
   faPenToSquare,
   faUserPlus,
   faPrint,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+
+/**
+ * Tarjeta de gestión de sección con indicadores de capacidad y acciones administrativas.
+ * Incluye un modal integrado para la inscripción rápida de alumnos.
+ *  @component
+ * @param {Object} props
+ * @param {string} props.id - ID único de la sección.
+ * @param {string} props.grade - Año o grado (ej: "5to Año").
+ * @param {string} props.identifier - Letra o nombre de la sección (ej: "A").
+ * @param {string} [props.teacher] - Nombre del docente guía asignado.
+ * @param {number} props.current - Cantidad actual de alumnos inscritos.
+ * @param {number} props.max - Capacidad máxima de la sección.
+ * @param {Array} props.availableStudents - Lista de alumnos sin sección para el formulario de inscripción.
+ * @returns {JSX.Element}
+ */
 
 export default function CardSecction({
   id,

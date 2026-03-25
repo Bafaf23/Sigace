@@ -1,3 +1,11 @@
+/**
+ * Fondo decorativo animado para módulos en fase de desarrollo o construcción.
+ * Utiliza SVGs livianos y elementos CSS posicionados absolutamente para crear
+ * una estética de "plano técnico" o taller.
+ * @component
+ * @returns {JSX.Element} Un contenedor absoluto que ocupa todo el espacio del padre con opacidad reducida.
+ */
+
 export default function FondoDecurativo() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">

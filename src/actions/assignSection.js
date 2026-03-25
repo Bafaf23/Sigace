@@ -1,6 +1,13 @@
 "use server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Asigna una sección a un estudiante verificando la disponibilidad de cupos.
+ *
+ * @param {string} sectionId
+ * @param {string} studentId
+ * @returns {Promise<{success: boolean, error?: string}>}
+ */
 export async function assignSection(studentId, sectionId) {
   try {
     const section = await prisma.section.findUnique({

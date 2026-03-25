@@ -8,6 +8,15 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Tarjeta informativa para visualizar una carga académica individual.
+ * Muestra la relación entre materia, profesor guía y sección asignada.
+ *
+ * @component
+ * @param {object} props
+ * @param {object} props.load - Objeto de carga académica con relaciones 'subject', 'teacher' (con 'user') y 'section'.
+ * @returns {JSX.Element} Una tarjeta con cabecera de materia, detalles de asignación y botones de acción.
+ */
 export default function CardLoand({ load }) {
   return (
     <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-slate-800 dark:bg-slate-900">

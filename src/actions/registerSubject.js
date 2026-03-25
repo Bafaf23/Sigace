@@ -2,6 +2,14 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+/**
+ * Registra una nueva materia en la base de datos y revalida la vista administrativa.
+ *
+ * @param {object} dataForm - Objeto con los campos 'name', 'code', 'grade' y 'area'.
+ * @returns {Promise<{success: boolean, user?: object, error?: string}>}
+ * Retorna el objeto de la materia creada en 'user' o un mensaje de error detallado.
+ */
+
 export async function registerSubject(dataForm) {
   try {
     const newSubject = await prisma.Subjects.create({

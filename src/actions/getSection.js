@@ -1,6 +1,12 @@
 "use server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Obtiene todas las secciones con su profesor guía (y sus datos de usuario)
+ * y el conteo total de estudiantes inscritos.
+ *
+ * @returns {Promise<{success: boolean, data?: Array<object>, error?: string}>}
+ */
 export async function getSection() {
   try {
     const sections = await prisma.section.findMany({
@@ -28,6 +34,11 @@ export async function getSection() {
   }
 }
 
+/**
+ * Obtiene el listado de estudiantes que aún no han sido asignados a ninguna sección.
+ * Útil para procesos de inscripción y reubicación.
+ * * @returns {Promise<{success: boolean, data?: Array<object>, error?: string}>}
+ */
 export async function getStudentsWithoutSection() {
   try {
     const students = await prisma.students.findMany({

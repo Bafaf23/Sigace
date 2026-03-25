@@ -2,6 +2,14 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
+/**
+ * Realiza la inscripcion integral de un estudiante
+ *
+ * @param {object} formData - Objeto con los datos del formulario (Nombre, DNI, Salud, Representante, etc.)
+ * @returns {Promise<{success: boolean, user?: object, error?: string}>}
+ * Retorna success:true y el objeto 'user' creado, o success:false con el mensaje de error.
+ */
+
 export async function enrollment(formData) {
   try {
     const fechaRaw = formData.birthDate || formData.birthdate;

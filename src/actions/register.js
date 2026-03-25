@@ -2,6 +2,13 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
+/**
+ * Hacer el registro integral de los profesores y personal administrativo.
+ * Crea el perfil de usuario con contraseña hasheada y vincula el perfil docente si aplica.
+ *
+ * @param {object} datos - Objeto con datos personales (dni, email, password, birthdate, etc.)
+ * @returns {Promise<{success: boolean, user?: object, error?: string}>}
+ */
 export async function register(datos) {
   try {
     const hashedPassword = await bcrypt.hash(datos.password, 10);

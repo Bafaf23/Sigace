@@ -1,6 +1,18 @@
 "use server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Calcula y devuelve las estadísticas de carga académica y rendimiento de un profesor.
+ * Procesa secciones únicas, conteo de estudiantes y planes de evaluación pendientes.
+ *
+ * @param {string} teachersId - El ID del profesor a consultar.
+ * @returns {Promise<{totalSecciones: number,
+ * totalEstudiantes: number,
+ * pendientes: number,
+ * promedio: number,
+ * notasCargadas: number} | null >} Objeto con las métricas calculadas o null si hay un error o no existe el profesor.
+ */
+
 export async function getTeachersStats(teachersId) {
   const idNumerico = Number(teachersId);
   if (isNaN(idNumerico)) return null;
