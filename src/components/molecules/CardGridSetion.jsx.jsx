@@ -1,5 +1,16 @@
 import CardSecction from "../atom/CardSection";
 
+/**
+ * Grilla de secciones cargadas en el sistema.
+ *
+ * @componet
+ *
+ * @param {object} props
+ * @param {object} props.dataSet - Objeto de la seccion
+ * @param {Array} props.availableStudents
+ * @returns {JSX.Element}
+ */
+
 export default function CardGridSetion({ dataSet, availableStudents }) {
   if (!dataSet || dataSet == 0)
     return (

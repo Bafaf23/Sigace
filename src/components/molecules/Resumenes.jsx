@@ -9,6 +9,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
+/**
+ * Tarjetas de informacion del profesor para el profesor.
+ * Esta tarjetas mustras data relavante para el profesor, como cantidad de secciones, total de estudiantes,etc
+ *
+ * @componet
+ * @param {string} teachersId
+ * @returns {JSX.Element}
+ */
+
 export default function Resumenes({ teachersId }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);

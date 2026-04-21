@@ -1,5 +1,19 @@
 import Icon from "./Icon";
 
+/**
+ * Tarjeta de estado (KPI) adaptable para visualización de métricas.
+ * Soporta integración con el componente Icon y estilos personalizados. (Dashbord)
+ *
+ * @component
+ * @param {Object} props
+ * @param {string} props.label - Titulo de la tarjeta.
+ * @param {string} props.value - Valor de la relevante de la tarjeta.
+ * @param {object} props.icon - Componente Icon.
+ * @param {string} props.colorClass - Clases de talwindCss para personalisar.
+ * @param {string} props.description - Una descripcion breve de alusiva a ka informacion que se esta mostrando.
+ * @returns {JSX.Element}
+ */
+
 export default function InfoCard({
   label,
   value,

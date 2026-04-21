@@ -1,7 +1,17 @@
 "use client";
 import Button from "../atom/Button";
-// Ajusta la ruta si es necesario
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+/**
+ * Grupo de acciones rápidas (Editar/Eliminar) para la entidad Materia.
+ * Encapsula la lógica de cliente para interactuar con registros individuales.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.subject - Objeto de la materia (debe contener id y name).
+ *
+ * @returns {JSX.Element} Un contenedor flex con botones iconográficos estilizados.
+ */
 
 export default function SubjectActions({ subject }) {
   return (

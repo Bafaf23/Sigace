@@ -15,12 +15,19 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+/**
+ * Aciones rapidas para el usuario, en vista moviles, con soprte al component Icon
+ * Con opciones dependiendo al rol del Usuario [TEACHER, STUDENT, ADMIN]
+ *
+ * @returns {JSX.Element}
+ */
+
 export default function AccionesRapidas() {
   const pathname = usePathname();
 
   const { data: session } = useSession();
   const userRole = session?.user?.role;
-  console.log(userRole);
+
   const menuConfig = {
     TEACHER: [
       {

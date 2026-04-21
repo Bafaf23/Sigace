@@ -1,6 +1,17 @@
 import Input from "../atom/Input";
 import Selector from "../atom/Selector";
 
+/**
+ * Page de fromulario de inscripcion de estudiantes.
+ * Furmulario de dereciones
+ *
+ * @componet
+ * @param {object} props
+ * @param {object} props.datos - Objeto de datos para la inscripcion de estudiante.
+ * @param {Event} props.manejarCambio - Guarda los datos recopilados desde los formularios.
+ * @returns {JSX.Element}
+ */
+
 const LocationFields = ({ datos, manejarCambio }) => {
   const StatesSel = [
     { value: "amazonas", label: "Amazonas" },

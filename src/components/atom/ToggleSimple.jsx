@@ -1,3 +1,14 @@
+/**
+ *
+ *
+ * @componet
+ * @param {object} props
+ * @param {string} props.label - Titulo del taggle
+ * @param {string} props.value
+ * @param {Event} props.onChange
+ * @param {string} props.name
+ * @returns {JSX.Element}
+ */
 export default function ToggleSimple({ label, value, onChange, name }) {
   return (
     <label className="flex cursor-pointer items-center justify-between rounded-xl border border-slate-200 bg-white p-4 transition-all hover:bg-slate-50">

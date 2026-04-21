@@ -1,5 +1,19 @@
 "use client";
 
+/**
+ * Input estilado y adaptable con tipo, para el menejo de datos, tambien recibe onChange.
+ *
+ * @component
+ * @param {Object} props
+ * @param {string} props.label - Titulo del input (ej: nombre)
+ * @param {string} props.type - El tipo de input (ej: text, number, data, etc)
+ * @param {string} props.placeholder - Texte de ayuda para el usuario (ej: user@ejemplo.com)
+ * @param {string} props.name
+ * @param {string} props.valeu
+ * @param {string} props.onChange
+ * @returns {JSX.Element}
+ */
+
 export default function Input({
   label,
   type = "text",

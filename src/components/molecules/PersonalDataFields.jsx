@@ -3,6 +3,17 @@ import Selector from "../atom/Selector";
 import ToggleSimple from "../atom/ToggleSimple";
 import SelectorInput from "./SelectorInput";
 
+/**
+ * Page de fromulario de inscripcion de estudiantes.
+ * Furmulario de del estudiante (ej: nombre, sexo, fecha de nacimineto).
+ *
+ * @componet
+ * @param {object} props
+ * @param {object} props.datos - Objeto de datos para la inscripcion de estudiante.
+ * @param {Event} props.manejarCambio - Guarda los datos recopilados desde los formularios.
+ * @returns {JSX.Element}
+ */
+
 const PersonalDataFields = ({ datos, manejarCambio }) => {
   const dniType = [
     { value: "V-", label: "V" },

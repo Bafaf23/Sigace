@@ -2,8 +2,18 @@ import Input from "../atom/Input";
 import Selector from "../atom/Selector";
 import SelectorInput from "./SelectorInput";
 
+/**
+ * Page de fromulario de inscripcion de estudiantes.
+ * Furmulario de datos de los representantes del estudiante.
+ *
+ * @componet
+ * @param {object} props
+ * @param {object} props.datos - Objeto de datos para la inscripcion de estudiante.
+ * @param {Event} props.manejarCambio - Guarda los datos recopilados desde los formularios.
+ * @returns {JSX.Element}
+ */
+
 const LegalRepresentativeFields = ({ datos, manejarCambio }) => {
-  // Opciones de parentesco (Vital para la planilla)
   const relationshipOptions = [
     { value: "madre", label: "Madre" },
     { value: "padre", label: "Padre" },

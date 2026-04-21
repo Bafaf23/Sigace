@@ -1,5 +1,16 @@
 import Input from "../atom/Input";
 
+/**
+ * Page de fromulario de inscripcion de estudiantes.
+ * Furmulario de datos del los padres del estudiante.
+ *
+ * @componet
+ * @param {object} props
+ * @param {object} props.datos - Objeto de datos para la inscripcion de estudiante.
+ * @param {Event} props.manejarCambio - Guarda los datos recopilados desde los formularios.
+ * @returns {JSX.Element}
+ */
+
 const ParentsFields = ({ datos, manejarCambio }) => {
   return (
     <div className="space-y-6">

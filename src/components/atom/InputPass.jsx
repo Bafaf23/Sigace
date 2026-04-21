@@ -4,6 +4,20 @@ import Input from "./Input";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
+/**
+ * Input adaptado para prosesar pass del usurio haciendo la comparacion de iguales
+ * para indicarle al usuario si escribio la pas incoretamente
+ *
+ * @componet
+ * @param {Object} props
+ * @param {string} props.label - Titulo del input (ej: Ingresa tu contrasena)
+ * @param {string} props.placeholder - text de ayudo para el usuria (ej: *******)
+ * @param {string} props.name
+ * @param {event} props.onChange
+ * @param {string} props.value
+ * @returns {JSX.Element}
+ */
+
 export default function InputPass({
   label,
   placeholder,

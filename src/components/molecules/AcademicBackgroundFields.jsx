@@ -1,6 +1,15 @@
 import Input from "../atom/Input";
 import Selector from "../atom/Selector";
 
+/**
+ * Parte obcional del from de enrolment que pregunta si viene de otra intitucion
+ *
+ * @param {object} props
+ * @param {object} props.datos
+ * @param {Event} props.manejarCambio
+ * @returns {JSX.Element}
+ */
+
 const AcademicFields = ({ datos, manejarCambio }) => {
   const yearOptions = [
     { value: "1", label: "1er Año" },

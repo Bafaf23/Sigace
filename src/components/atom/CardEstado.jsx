@@ -2,7 +2,7 @@ import Icon from "./Icon";
 
 /**
  * Tarjeta de estado (KPI) adaptable para visualización de métricas.
- * Soporta integración con el componente Icon y estilos personalizados.
+ * Soporta integración con el componente Icon y estilos personalizados. (Pagina Web)
  * * @component
  * @param {object} props
  * @param {string} props.titel - El título o etiqueta de la métrica (ej: "Total Estudiantes").

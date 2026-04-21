@@ -2,6 +2,12 @@ import Button from "./Button";
 import { useTheme } from "@/context/ThemeProvider";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Toggle que cambia el tema al gusto del usuario. (Claro, Oscuro)
+ *
+ * @returns {JSX.Element}
+ */
+
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   return (

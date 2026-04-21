@@ -7,6 +7,18 @@ import Modal from "../organism/Modal";
 import { faLongArrowDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
+/**
+ * Renderizado de carga academica del liceo, con formulario para crear carga academica.
+ *
+ * @componet
+ * @param {object} props
+ * @param {Array} props.subjects - Lista de mateiras.
+ * @param {Array} props.teachers - Lista de profesores.
+ * @param {Array} props.section - Lista de secciones.
+ * @param {Array} props.academicLoads - Lista de de toda la carga academica.
+ * @returns {JSX.Element}
+ */
+
 export default function ListAcademicLoand({
   subjects,
   teachers,

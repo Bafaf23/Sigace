@@ -1,4 +1,19 @@
 "use client";
+
+/**
+ * Selector que muestra distintas opciones a elejir al usurio
+ *
+ * @componet
+ * @param {Object} props
+ * @param {string} props.id - Identificador unico del elemento
+ * @param {string} props.name
+ * @param {string} props.label - Tilulo del componente
+ * @param {Event} props.onChange
+ * @param {Array} props.options
+ * @param {string} props.className - Class para personalisar el componente
+ * @param {string} props.value
+ * @returns {JSX.Element}
+ */
 export default function Selector({
   id,
   name,

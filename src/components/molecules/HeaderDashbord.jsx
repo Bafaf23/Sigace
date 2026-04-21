@@ -1,5 +1,15 @@
 import Selector from "../atom/Selector";
 
+/**
+ * Titulos de las paginas que suporta el saludo al usuario o el titulo de la pagian.
+ *
+ * @componet
+ * @param {object} props
+ * @param {object} props.user - Objeto con los datos del Usuario
+ * @param {string} props.titelPage - Titulo de la pagina
+ * @returns {JSX.Element}
+ */
+
 export default function HeaderDashbord({ user, titelPage }) {
   const formatLastLogin = (date) => {
     if (!date) return "Primera conexión";

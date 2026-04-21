@@ -3,6 +3,14 @@ import SubjectActions from "./SubjectActions";
 import { getSubject } from "@/actions/getSubject";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Lista de materias del plantel.
+ * Este componente llama a la tabla Subject de la BD
+ *
+ * @componet
+ * @returns {JSX.Element}
+ */
+
 export default async function ListSubjects() {
   const subjects = await getSubject();
 

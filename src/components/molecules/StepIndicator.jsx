@@ -1,6 +1,19 @@
 "use client";
 import { Check } from "lucide-react";
 
+/**
+ * Indicador de pasos progresivo para formularios multi-etapa.
+ * Gestiona estados visuales de completado, activo y pendiente con animaciones suaves.
+ *
+ * @component
+ *
+ * @param {Object} props
+ * @param {number} props.currentStep - El índice del paso actual (1 a 6).
+ * @param {number} [props.totalSteps=6] - Cantidad total de etapas en el proceso.
+ *
+ * @returns {JSX.Element} Una barra de progreso horizontal con nodos numerados y etiquetas.
+ */
+
 export const StepIndicator = ({ currentStep, totalSteps = 6 }) => {
   const steps = [
     { id: 1, label: "Personal" },

@@ -1,6 +1,14 @@
+import Button from "../atom/Button";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
-export default function FormularioPV({ onAgregar }) {
+/**
+ * Formulario para crear el plan Evaluativo del la materia asignada el profesor
+ *
+ * @returns {JSX.Element}
+ */
+
+export default function FormularioPV() {
   const [formData, setFormData] = useState({
     semana: "",
     contenido: "",
@@ -18,7 +26,6 @@ export default function FormularioPV({ onAgregar }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Evaluación creada:", formData);
-    // Aquí llamarías a tu función para guardar en la DB o actualizar el estado global
     if (onAgregar) onAgregar(formData);
   };
 
@@ -138,12 +145,13 @@ export default function FormularioPV({ onAgregar }) {
 
       {/* Botón de envío */}
       <div className="flex items-end">
-        <button
+        <Button
+          icon={faPlus}
           type="submit"
-          className="w-full rounded-lg bg-indigo-500 px-4 py-2 text-sm font-bold text-white shadow-md shadow-indigo-200 transition-all hover:bg-indigo-600 active:scale-95"
+          classNameBtn="w-full rounded-lg bg-indigo-500 px-4 py-2 text-sm font-bold text-white shadow-md shadow-indigo-200 transition-all hover:bg-indigo-600 active:scale-95"
         >
-          Añadir al Plan
-        </button>
+          {"Añadir al Plan"}
+        </Button>
       </div>
     </form>
   );

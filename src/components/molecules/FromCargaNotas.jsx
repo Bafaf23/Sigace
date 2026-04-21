@@ -4,6 +4,18 @@ import Icon from "../atom/Icon";
 import { faSearch, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
+/**
+ * Formulario de carga de notas
+ *
+ * @componet
+ * @param {object} props
+ * @param {Array} props.listaAlumnosSinNota
+ * @param {Event} props.onSave
+ * @param {Event} props.onCancel
+ *
+ * @returns {JSX.Element}
+ */
+
 export default function FormCargaNotas({
   listaAlumnosSinNotas,
   onSave,

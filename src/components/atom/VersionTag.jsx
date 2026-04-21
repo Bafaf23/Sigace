@@ -1,7 +1,12 @@
 import packageInfo from "../../../package.json";
 
+/**
+ * Visualizador de versiones del sistema, la version la recibe del package.json
+ *
+ * @returns {JSX.Element}
+ */
 export default function VersionTag() {
-  const version = packageInfo.version; // Esto luego lo puedes traer de un config o package.json
+  const version = packageInfo.version;
 
   return (
     <div className="flex items-center justify-end p-1 opacity-50 select-none">
