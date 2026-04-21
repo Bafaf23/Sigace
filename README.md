@@ -33,4 +33,4 @@ pronto...
 
 ## 📋 Licencia
 
-Este proyecto es propiedad privada. Desarrollado por _Bryant_.
+Desarrollado por *Bryant*, todos los dereches reservados
