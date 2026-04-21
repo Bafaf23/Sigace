@@ -4,9 +4,5 @@ export const metadata = {
 };
 
 export default function PublicLayout({ children }) {
-  return (
-    <>
-      <main className="flex flex-col">{children}</main>
-    </>
-  );
+  return <div className="flex flex-col">{children}</div>;
 }
