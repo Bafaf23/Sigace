@@ -1,7 +1,7 @@
 "use client";
 import { getSection, getStudentsWithoutSection } from "@/actions/getSection";
 import Button from "@/components/atom/Button";
-import CardSecction from "@/components/molecules/CardGridSetion";
+import CardGridSetion from "@/components/molecules/CardGridSetion";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import FormSection from "@/components/organism/FormSection";
 import Modal from "@/components/organism/Modal";
@@ -58,7 +58,7 @@ export default function controlSecciones() {
           </Modal>
         </div>
       </div>
-      <CardSecction dataSet={secciones} availableStudents={availableStudents} />
+      <CardGridSetion dataSet={secciones} availableStudents={availableStudents} />
     </>
   );
 }
