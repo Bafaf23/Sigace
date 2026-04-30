@@ -1,13 +1,18 @@
 "use client";
-import AccessDenied from "@/components/atom/AccessDenied";
+import AccessDenied from "@/components/molecules/AccessDenied";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
+<<<<<<< Updated upstream
 import { useSession } from "next-auth/react";
 
 export default function AdminPage() {
   const { data: session, status } = useSession();
   const user = session?.user;
 
+=======
+
+export default function AdminPage() {
+>>>>>>> Stashed changes
   if (!user || user?.role !== "ADMIN") {
     return <AccessDenied />;
   }

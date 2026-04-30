@@ -1,4 +1,4 @@
-import Icon from "./Icon";
+import Icon from "../atom/Icon";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
 /**
