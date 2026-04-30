@@ -17,18 +17,12 @@ import {
   faChalkboardTeacher,
   faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
   const patthename = usePathname();
 
-  const { data: session } = useSession();
-  const userRole = session?.user?.role;
-
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: "/login" });
-  };
+  const handleLogout = async () => {};
 
   const menuLink = {
     TEACHER: [

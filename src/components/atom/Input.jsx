@@ -9,7 +9,7 @@
  * @param {string} props.type - El tipo de input (ej: text, number, data, etc)
  * @param {string} props.placeholder - Texte de ayuda para el usuario (ej: user@ejemplo.com)
  * @param {string} props.name
- * @param {string} props.valeu
+ * @param {string} props.value
  * @param {string} props.onChange
  * @returns {JSX.Element}
  */

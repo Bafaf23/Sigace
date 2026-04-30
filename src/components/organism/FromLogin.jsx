@@ -7,9 +7,7 @@ import {
   faKey,
   faArrowLeft,
   faUserPlus,
-  faSchool,
 } from "@fortawesome/free-solid-svg-icons";
-import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -25,37 +23,6 @@ export default function FromLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password)
-      return toast.error("Por favor, introduce tu correo y contraseña");
-
-    setLoading(true);
-
-    const result = await signIn("credentials", {
-      email: formData.email,
-      password: formData.password,
-      redirect: false,
-    });
-
-    if (result?.error) {
-      toast.error("Correo o contraseña incorrectos");
-      setLoading(false);
-    } else {
-      const session = await getSession();
-      const role = session?.user?.role;
-
-      console.log("Rol detectado en la sesión:", role);
-
-      if (role === "TEACHER") {
-        router.push("/dashboard/profesor");
-      } else if (role === "STUDENT") {
-        router.push("/dashboard/estudiante");
-      } else if (role === "ADMIN") {
-        router.push("/dashboard/administradores");
-      } else {
-        console.warn("El rol no coincide con TEACHER ni STUDENT:", role);
-      }
-      router.refresh();
-    }
   };
 
   return (

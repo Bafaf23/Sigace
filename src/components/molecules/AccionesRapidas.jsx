@@ -25,8 +25,6 @@ import { usePathname } from "next/navigation";
 export default function AccionesRapidas() {
   const pathname = usePathname();
 
-  const { data: session } = useSession();
-  const userRole = session?.user?.role;
 
   const menuConfig = {
     TEACHER: [

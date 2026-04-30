@@ -1,4 +1,3 @@
-import { Providers } from "@/context/Providers";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import "@/globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -17,11 +16,11 @@ export default function RootLayout({ children }) {
     <html lang="es" className="scroll-smooth">
       <body className="bg-gray-100 transition dark:bg-slate-800">
         <ThemeProvider>
-          <Providers>
+          
             <div className="flex min-h-screen flex-col">
               <main className="flex flex-col">{children}</main>
             </div>
-          </Providers>
+          
         </ThemeProvider>
 
         <Toaster

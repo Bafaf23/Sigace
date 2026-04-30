@@ -32,8 +32,8 @@ export default function SelectorInput({
   onChange,
 }) {
   return (
-    <div>
-      <label className="ml-1 text-sm font-semibold text-slate-600">
+    <div className="flex flex-col gap-1">
+      <label className="mb-1 text-sm font-semibold text-slate-600">
         {label}
       </label>
       <div className="flex gap-2">
@@ -42,7 +42,7 @@ export default function SelectorInput({
           value={valueSel || ""}
           id={id}
           onChange={onChange}
-          className="w-1/3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
+          className="w-fit rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
           required
         >
           {options.map((option, index) => (

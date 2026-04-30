@@ -4,13 +4,12 @@ import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import Reportes from "@/components/molecules/Reportes";
 import Resumenes from "@/components/molecules/Resumenes";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
 export default function Profesor() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+ 
 
   const user = useMemo(() => session?.user, [session]);
   const role = session?.user?.role;
