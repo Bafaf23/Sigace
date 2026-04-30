@@ -1,4 +1,4 @@
-import { getTeachersStats } from "@/actions/getTeacherStats";
+"use client";
 import InfoCard from "@/components/atom/InfoCard";
 import {
   faExclamationTriangle,
@@ -21,28 +21,6 @@ import { useEffect, useState } from "react";
 export default function Resumenes({ teachersId }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getTeachersStats(teachersId);
-      setData(result);
-      setLoading(false);
-    };
-    if (teachersId) fetchData();
-  }, [teachersId]);
-
-  if (loading) {
-    return (
-      <div className="grid animate-pulse grid-cols-2 gap-4 p-3 md:grid-cols-3 lg:grid-cols-5">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="h-24 rounded-2xl bg-slate-100 dark:bg-slate-700"
-          />
-        ))}
-      </div>
-    );
-  }
 
   if (!data || Object.keys(data).length === 0) {
     return (

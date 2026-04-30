@@ -8,7 +8,6 @@ import LocationFields from "../molecules/LocationFields";
 import ParentsFields from "../molecules/ParentsFields";
 import PersonalDataFields from "../molecules/PersonalDataFields";
 import { StepIndicator } from "../molecules/StepIndicator";
-import { enrollment } from "@/actions/enrollment";
 import EnrollmentSuccessPage from "@/app/(auth)/enrollment/success/page";
 import {
   faLeftLong,

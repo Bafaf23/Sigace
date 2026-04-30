@@ -2,7 +2,6 @@
 
 import Button from "../atom/Button";
 import SigaceLogo from "../atom/SigaceLogo";
-import ThemeToggle from "../atom/ThemeToggle";
 import VersionTag from "../atom/VersionTag";
 import NavLink from "../molecules/NavLink";
 import {
@@ -14,111 +13,111 @@ import {
   faBook,
   faUserMinus,
   faSitemap,
-  faChalkboardTeacher,
   faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { signOut, useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-export default function Sidebar() {
+export default function NavbarSidebar() {
   const patthename = usePathname();
+  const router = useRouter();
 
-  const { data: session } = useSession();
-  const userRole = session?.user?.role;
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: "/login" });
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    router.push("/");
   };
 
   const menuLink = {
-    TEACHER: [
+    teacher: [
       {
         icon: faHome,
         label: "Inicio",
-        active: patthename === `/dashboard/profesor`,
-        direccion: `/dashboard/profesor`,
+        active: patthename === `/dashboard/teachers`,
+        direccion: `/dashboard/teachers`,
       },
       {
         icon: faListCheck,
         label: "Plan Evaluativo",
-        active: patthename === `/dashboard/profesor/planEvaluativo`,
-        direccion: `/dashboard/profesor/planEvaluativo`,
+        active: patthename === `/dashboard/teachers/planEvaluativo`,
+        direccion: `/dashboard/teachers/planEvaluativo`,
       },
       {
         icon: faPenToSquare,
         label: "Cargas de Notas",
-        active: patthename === `/dashboard/profesor/cargarNotas`,
-        direccion: `/dashboard/profesor/cargarNotas`,
+        active: patthename === `/dashboard/teachers/cargarNotas`,
+        direccion: `/dashboard/teachers/cargarNotas`,
       },
       {
         icon: faUserCheck,
         label: "Asistencias",
-        active: patthename === `/dashboard/profesor/asistencia`,
-        direccion: `/dashboard/profesor/asistencia`,
+        active: patthename === `/dashboard/teachers/asistencia`,
+        direccion: `/dashboard/teachers/asistencia`,
       },
     ],
-    STUDENT: [
+    student: [
       {
         icon: faHome,
         label: "Mi Inicio",
-        direccion: "/dashboard/estudiante",
-        active: patthename === `/dashboard/estudiante`,
+        direccion: "/dashboard/students",
+        active: patthename === `/dashboard/students`,
       },
       {
         icon: faListCheck,
         label: "Mis Notas",
-        active: patthename === `/dashboard/estudiante/notas`,
-        direccion: "/dashboard/estudiante/notas",
+        active: patthename === `/dashboard/students/notas`,
+        direccion: "/dashboard/students/notas",
       },
       {
         icon: faUserCheck,
         label: "Mi Asistencia",
-        active: patthename === `/dashboard/estudiante/asistencia`,
-        direccion: "/dashboard/estudiante/asistencia",
+        active: patthename === `/dashboard/students/asistencia`,
+        direccion: "/dashboard/students/asistencia",
       },
     ],
-    ADMIN: [
+    administrator: [
       {
         icon: faHome,
         label: "Mi Inicio",
-        direccion: "/dashboard/administradores",
-        active: patthename === `/dashboard/administradores`,
+        direccion: "/dashboard/administrators",
+        active: patthename === `/dashboard/administrators`,
       },
       {
         icon: faSitemap,
         label: "Control de Secciones",
-        active: patthename === `/dashboard/administradores/controlSecciones`,
-        direccion: "/dashboard/administradores/controlSecciones",
+        active: patthename === `/dashboard/administrators/materias`,
+        direccion: "/dashboard/administrators/materias",
       },
       {
         icon: faUserCheck,
         label: "Inscripciones",
-        active: patthename === `/dashboard/administradores/inscripciones`,
-        direccion: "/dashboard/administradores/inscripciones",
+        active: patthename === `/dashboard/administrators/materias`,
+        direccion: "/dashboard/administrators/materias",
       },
       {
         icon: faUserMinus,
         label: "Retiros y Traslados",
-        active: patthename === `/dashboard/administradores/retierosTraslados`,
-        direccion: "/dashboard/administradores/retierosTraslados",
+        active: patthename === `/dashboard/administrators/materias`,
+        direccion: "/dashboard/administrators/materias",
       },
 
       {
         icon: faBook,
         label: "Gestión de Materias",
-        active: patthename === `/dashboard/administradores/gestionMateria`,
-        direccion: "/dashboard/administradores/gestionMateria",
+        active: patthename === `/dashboard/administrators/materias`,
+        direccion: "/dashboard/administrators/materias",
       },
       {
         icon: faCalendarCheck,
         label: "Configuración de Lapsos",
-        active: patthename === `/dashboard/administradores/settingLapso`,
-        direccion: "/dashboard/administradores/settingLapso",
+        active: patthename === `/dashboard/administrators/lapsos`,
+        direccion: "/dashboard/administrators/lapsos",
       },
     ],
   };
 
-  const currentLinks = menuLink[userRole] || [];
+  const currentLinks = menuLink[user.role] || [];
 
   return (
     <aside
@@ -140,14 +139,13 @@ export default function Sidebar() {
             icon={link.icon}
             direcction={link.direccion}
             active={link.active}
-            classNameIcon={link.active ? "text-orange-500" : ""}
+            classNameIcon={link.active ? "text-cyan-600" : ""}
           />
         ))}
       </nav>
 
       {/* Cerrar sesion */}
       <div className="flex items-center justify-between">
-        <ThemeToggle />
         <VersionTag />
       </div>
       <div className="mt-auto border-t border-slate-400/30 pt-4 dark:border-slate-700">

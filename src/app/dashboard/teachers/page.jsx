@@ -1,34 +1,22 @@
 "use client";
-
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import Reportes from "@/components/molecules/Reportes";
 import Resumenes from "@/components/molecules/Resumenes";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useEffect, useState } from "react";
 
-export default function Profesor() {
+export default function TeachersPage() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(true);
 
-  const user = useMemo(() => session?.user, [session]);
-  const role = session?.user?.role;
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (status === "loading") return;
+    setLoading(false);
+  }, [user]);
 
-    if (status === "unauthenticated") {
-      /*   router.push("/login"); */
-      return;
-    }
-    if (role !== "TEACHER") {
-      console.log("Rol incorrecto detectado:", role);
-      /*   router.push(""); */
-    }
-  }, [status, user]);
-
-  if (status === "loading") {
+  if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50">
         <div className="flex flex-col items-center gap-2">
@@ -39,7 +27,7 @@ export default function Profesor() {
     );
   }
 
-  if (!user || user.role !== "TEACHER") {
+  if (!user || user.role !== "teacher") {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p className="animate-pulse text-lg font-semibold text-red-600">
@@ -50,12 +38,12 @@ export default function Profesor() {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <HeaderDashbord user={user} />
       <Resumenes teachersId={user.id} />
       {/* movil */}
       <AccionesRapidas />
-      <Reportes></Reportes>
-    </>
+      <Reportes />
+    </div>
   );
 }

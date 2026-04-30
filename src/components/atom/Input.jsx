@@ -19,19 +19,24 @@ export default function Input({
   type = "text",
   placeholder,
   name,
+  id,
   value,
   onChange,
 }) {
   return (
     <div className="flex w-full flex-col gap-2">
       {label && (
-        <label className="ml-1 text-sm font-semibold text-slate-600 dark:text-slate-300">
+        <label
+          htmlFor={id}
+          className="ml-1 text-sm font-semibold text-slate-600 dark:text-slate-300"
+        >
           {label}
         </label>
       )}
       <input
         type={type}
         name={name}
+        id={id}
         value={value}
         onWheel={(e) => e.target.blur()}
         onChange={onChange}

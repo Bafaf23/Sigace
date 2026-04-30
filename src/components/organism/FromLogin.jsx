@@ -7,9 +7,7 @@ import {
   faKey,
   faArrowLeft,
   faUserPlus,
-  faSchool,
 } from "@fortawesome/free-solid-svg-icons";
-import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -25,39 +23,45 @@ export default function FromLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password)
-      return toast.error("Por favor, introduce tu correo y contraseña");
-
     setLoading(true);
-
-    const result = await signIn("credentials", {
-      email: formData.email,
-      password: formData.password,
-      redirect: false,
-    });
-
-    if (result?.error) {
-      toast.error("Correo o contraseña incorrectos");
+    if (!formData.email || !formData.password) {
+      toast.error("Los campos no pueden estar vacios");
       setLoading(false);
-    } else {
-      const session = await getSession();
-      const role = session?.user?.role;
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:8000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-      console.log("Rol detectado en la sesión:", role);
-
-      if (role === "TEACHER") {
-        router.push("/dashboard/profesor");
-      } else if (role === "STUDENT") {
-        router.push("/dashboard/estudiante");
-      } else if (role === "ADMIN") {
-        router.push("/dashboard/administradores");
-      } else {
-        console.warn("El rol no coincide con TEACHER ni STUDENT:", role);
+      if (!response.ok) {
+        throw new Error("Error al iniciar sesión");
       }
-      router.refresh();
+
+      const data = await response.json();
+      toast.success("Inicio de sesión exitoso");
+      localStorage.setItem("user", JSON.stringify(data.user));
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+      if (data.user.role === "teacher") {
+        router.push("/dashboard/teachers");
+      } else if (data.user.role === "student") {
+        router.push("/dashboard/students");
+      } else if (data.user.role === "administrator") {
+        router.push("/dashboard/administrators");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Error al iniciar sesión: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
-
   return (
     <div className="w-full max-w-md">
       {/* Botón para volver */}

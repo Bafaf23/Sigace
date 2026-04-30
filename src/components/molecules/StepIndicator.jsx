@@ -14,8 +14,8 @@ import { Check } from "lucide-react";
  * @returns {JSX.Element} Una barra de progreso horizontal con nodos numerados y etiquetas.
  */
 
-export const StepIndicator = ({ currentStep, totalSteps = 6 }) => {
-  const steps = [
+export const StepIndicator = ({ currentStep, totalSteps = 6, mode }) => {
+  const stepsStudent = [
     { id: 1, label: "Personal" },
     { id: 2, label: "Ubicación" },
     { id: 3, label: "Salud" },
@@ -24,6 +24,12 @@ export const StepIndicator = ({ currentStep, totalSteps = 6 }) => {
     { id: 6, label: "Inicio de sesión" },
   ];
 
+  const stepsUsers = [
+    { id: 1, label: "Personal" },
+    { id: 2, label: "Vinculación Institucional" },
+  ];
+
+  const modeMap = mode == "user" ? stepsUsers : stepsStudent;
   return (
     <div className="mb-10 w-full py-4">
       {/* Contenedor principal con padding para que las etiquetas no se corten */}
@@ -39,7 +45,7 @@ export const StepIndicator = ({ currentStep, totalSteps = 6 }) => {
           />
         </div>
 
-        {steps.map((step) => {
+        {modeMap.map((step) => {
           const isCompleted = currentStep > step.id;
           const isActive = currentStep === step.id;
 

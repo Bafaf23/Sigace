@@ -21,9 +21,9 @@ El proyecto está construido con las herramientas más modernas del ecosistema W
 - **Framework:** [Next.js](https://nextjs.org/) (App Router)
 - **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
 - **Base de Datos:** [MySQL](https://www.mysql.com/)
-- **ORM:** [Prisma](https://www.prisma.io/)
+- **ORM:** No aplica (backend API externo)
 - **Lenguaje:** [JavaScript](https://www.typescriptlang.org/)
-- **Autenticación:** [NextAuth.js](https://next-auth.js.org/)
+- **Autenticación:** JWT / sesión manejada por backend API
 
 ## 📂 Estructura del Proyecto
 

@@ -1,5 +1,5 @@
 "use client";
-import { inscripcion } from "@/app/services/inscripcion";
+
 import Button from "@/components/atom/Button";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import FormCargaNotas from "@/components/molecules/FromCargaNotas";
@@ -95,49 +95,6 @@ export default function cargarNotas() {
     ],
   };
 
-  const user = {
-    name: "Bryant",
-    lastName: "Facenda",
-    rol: "profesor",
-    materias: [
-      {
-        id: "8901",
-        value: "castellano",
-        label: "Castellano",
-        year: ["1ero"],
-        section: ["A", "D"],
-      },
-      {
-        id: "8902",
-        value: "matematica",
-        label: "Matematica",
-        year: ["5to", "2to", "1ero"],
-        section: ["A"],
-      },
-      {
-        id: "8903",
-        value: "fisica",
-        label: "Fisica",
-        year: ["5to", "2to", "1ero"],
-        section: ["A", "C", "D"],
-      },
-      {
-        id: "8904",
-        value: "historia",
-        label: "Historia",
-        year: ["1ero"],
-        section: ["A", "C", "D"],
-      },
-      {
-        id: "8905",
-        value: "programcion",
-        label: "Programacion",
-        year: ["5to", "2to", "1ero"],
-        section: ["A", "C", "D"],
-      },
-    ],
-  };
-
   const alumnosDisponibles = [
     {
       id: "V-30123456",
@@ -185,7 +142,7 @@ export default function cargarNotas() {
 
   return (
     <>
-      <div className="flex flex-col justify-between md:flex-row">
+      <div className="flex flex-col items-start justify-between md:flex-row">
         <HeaderDashbord titelPage={"Cargar notas"} />
         <div className="p-3">
           <Button
@@ -226,9 +183,6 @@ export default function cargarNotas() {
           <TablaNotas data={lapso} key={lapso.id_lapso} />
         ))}
       </div>
-      <Button icon={faPlus} onClick={() => inscripcion()}>
-        {"inscripicin"}
-      </Button>
     </>
   );
 }

@@ -11,7 +11,6 @@ import {
   faSitemap,
   faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -25,8 +24,7 @@ import { usePathname } from "next/navigation";
 export default function AccionesRapidas() {
   const pathname = usePathname();
 
-  const { data: session } = useSession();
-  const userRole = session?.user?.role;
+  const userRole = "ADMI";
 
   const menuConfig = {
     TEACHER: [

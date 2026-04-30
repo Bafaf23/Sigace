@@ -31,27 +31,37 @@ export default function SelectorInput({
   valueInput,
   onChange,
 }) {
+  const selectId = id || name;
+  const inputId = `${selectId || "selector"}-input`;
+
   return (
     <div>
-      <label className="ml-1 text-sm font-semibold text-slate-600">
+      <label
+        htmlFor={selectId}
+        className="ml-1 text-sm font-semibold text-slate-600"
+      >
         {label}
       </label>
       <div className="flex gap-2">
         <select
           name={name}
           value={valueSel || ""}
-          id={id}
+          id={selectId}
           onChange={onChange}
-          className="w-1/3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
+          className="w-fit rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition-all placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
           required
         >
-          {options.map((option, index) => (
-            <option key={index} value={option.value}>
+          <option value="" disabled>
+            Selecciona...
+          </option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
         </select>
         <Input
+          id={inputId}
           placeholder={placeholder}
           name={nameInput}
           value={valueInput || ""}
