@@ -30,30 +30,31 @@ export default function FromLogin() {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const data = await fetch("http://127.0.0.1:5000/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      });
+      }).then((res) => res.json());
 
-      if (!response.ok) {
-        throw new Error("Error al iniciar sesión");
+      if (data.error) {
+        toast.error(data.error);
+        return;
       }
 
-      const data = await response.json();
-      toast.success("Inicio de sesión exitoso");
-      localStorage.setItem("user", JSON.stringify(data.user));
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-      }
-      if (data.user.role === "teacher") {
-        router.push("/dashboard/teachers");
-      } else if (data.user.role === "student") {
-        router.push("/dashboard/students");
-      } else if (data.user.role === "administrator") {
-        router.push("/dashboard/administrators");
+      if (data.success) {
+        toast.success("Inicio de sesión exitoso");
+
+        localStorage.setItem("user", JSON.stringify(data.user));
+        /* rediccionar a la dashboard correspondiente */
+        if (data.user.role === "teacher") {
+          router.push("/dashboard/teachers");
+        } else if (data.user.role === "student") {
+          router.push("/dashboard/students");
+        } else if (data.user.role === "administrator") {
+          router.push("/dashboard/administrators");
+        }
       }
     } catch (error) {
       console.error("Error:", error);

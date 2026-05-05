@@ -2,6 +2,7 @@
 import DataSchoolRegister from "../molecules/DataSchoolRegister";
 import DataUserRegister from "../molecules/DataUserRegister";
 import { StepIndicator } from "../molecules/StepIndicator";
+import { patterns, validate } from "@/app/utils/regex/regex";
 import Button from "@/components/atom/Button";
 import {
   faRightLong,
@@ -18,8 +19,24 @@ export default function FormRegister() {
   const [passed, setPassed] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Objeto data de usuarios par el registro de usuarios para el sistema con rol por defecto teacher.
+   *
+   * @typedef {Object} dataUser
+   * @property {string} typeDocuement
+   * @property {string} document
+   * @property {string} name
+   * @property {string} lastName
+   * @property {string} birthdate
+   * @property {string} email
+   * @property {string} phone
+   * @property {string} password
+   * @property {string} passwordConfir
+   * @property {string} sig - Codigo unico dado por el sistema que identifica a la institucion.
+   * @property {string} role - Rol del usuario (teacher, student, administrator). por defecto es teacher. En este registro solo se puede registrar un usuario de tipo teacher.
+   */
   const [data, setData] = useState({
-    tyeDocuement: "",
+    typeDocuement: "",
     document: "",
     name: "",
     lastName: "",
@@ -41,9 +58,48 @@ export default function FormRegister() {
     e.preventDefault();
     setLoading(true);
 
+    /* validar los campos obligatorios */
     if (!data.email || !data.password) {
       setLoading(false);
       toast.error("Los campos no pueden estar vacios");
+      return;
+    }
+
+    /* validar los campos del formulario */
+    if (!validate(patterns.email, data.email)) {
+      setLoading(false);
+      toast.error("El correo electrónico no es válido");
+      return;
+    }
+    if (!validate(patterns.password, data.password)) {
+      setLoading(false);
+      toast.error("La contraseña no es válida");
+      return;
+    }
+    if (!validate(patterns.name, data.name)) {
+      setLoading(false);
+      toast.error("El nombre no es válido");
+      return;
+    }
+    if (!validate(patterns.lastName, data.lastName)) {
+      setLoading(false);
+      toast.error("El apellido no es válido");
+      return;
+    }
+    if (!validate(patterns.dni, data.document)) {
+      setLoading(false);
+      toast.error("El número de documento no es válido");
+      return;
+    }
+    if (!validate(patterns.phone, data.phone)) {
+      setLoading(false);
+      toast.error("El teléfono no es válido");
+      return;
+    }
+
+    if (!validate(patterns.sig, data.sig)) {
+      setLoading(false);
+      toast.error("El código SIG no es válido, debe tener el formato SIG0000");
       return;
     }
 
@@ -52,10 +108,8 @@ export default function FormRegister() {
       return toast.error("Las contrasenas no son iguales");
     }
 
-    console.log(data);
-
     try {
-      const response = await fetch("http://localhost:8000/auth/register", {
+      const response = await fetch("http://127.0.0.1:5000/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,18 +118,17 @@ export default function FormRegister() {
       });
 
       const resData = await response.json();
-
       if (response.ok) {
         toast.success("¡Registro completado en SIGACE!");
         router.push("/");
       } else {
-        console.error("Error del backend:", resData.detail);
-        toast.error(resData.detail?.[0]?.msg || "Error al registrar");
-        setLoading(false);
+        console.log("Error del backend:", resData.error);
+        toast.error(resData.error);
       }
     } catch (error) {
-      console.error("Error de red:", error);
-      toast.error("Error de conexión con el servidor");
+      console.error("Error de red:", error.message);
+      toast.error(error.message);
+    } finally {
       setLoading(false);
     }
   }

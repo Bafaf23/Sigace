@@ -1,5 +1,7 @@
 "use client";
 import Button from "../atom/Button";
+import Icon from "../atom/Icon";
+import Input from "../atom/Input";
 import InputPass from "../atom/InputPass";
 import AcademicFields from "../molecules/AcademicBackgroundFields";
 import HealthPhysicalFields from "../molecules/HealthPhysicalFields";
@@ -7,12 +9,13 @@ import LegalRepresentativeFields from "../molecules/LegalRepresentativeFields";
 import LocationFields from "../molecules/LocationFields";
 import ParentsFields from "../molecules/ParentsFields";
 import PersonalDataFields from "../molecules/PersonalDataFields";
-import { StepIndicator } from "../molecules/StepIndicator";
 import EnrollmentSuccessPage from "@/app/(auth)/enrollment/success/page";
+import { StepIndicator } from "@/components/molecules/StepIndicator";
 import {
   faLeftLong,
   faRightLong,
   faUserPlus,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -82,6 +85,8 @@ export default function FormInscrip() {
     repPhone: "",
     relationship: "",
     repEmail: "",
+
+    sig: "",
   });
 
   const handleChange = (e) => {
@@ -109,14 +114,16 @@ export default function FormInscrip() {
 
     setLoading(true);
 
-    const datosFinales = {
-      ...data,
-      dni: `${data.dniType}${data.dni}`,
-    };
-
     try {
-      const result = await enrollment(datosFinales);
-      if (result.success) {
+      const result = await fetch("http://127.0.0.1:5000/register/", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+
+      if (result.ok) {
         toast.success("¡Inscripción procesada con éxito!");
         setResulData(result);
         setSuccess(true);
@@ -168,16 +175,40 @@ export default function FormInscrip() {
         )}
         {passed === 6 && (
           <>
-            <div className="grid grid-cols-2 gap-3">
+            {/*  <div className="rounded-2xl border border-slate-300 bg-slate-100 p-4">
+              <h2 className="mb-3 font-bold text-indigo-600">
+                Seleciona el liceo en el cual te vas a registar.
+              </h2>
+              <Selector
+                label={"Seleciona un liceo"}
+                options={[
+                  { value: "1", label: "Liceo 1" },
+                  { value: "2", label: "Liceo 2" },
+                  { value: "3", label: "Liceo 3" },
+                ]}
+                onChange={(e) => setSelectedLiceo(e.target.value)}
+              />
+            </div> */}
+
+            <Input
+              label="Tu usuario para ingresar al sistema"
+              placeholder="Ej: juan.fernandez"
+              name="username"
+              onChange={handleChange}
+              value={data.email}
+              readOnly={true}
+            />
+
+            <div className="mt-5 grid grid-cols-2 gap-3">
               <InputPass
-                label={"Ingresa una comtrasena para entrar al sistema"}
+                label={"Ingresa tu contraseña para ingresar al sistema"}
                 placeholder={"*********"}
                 value={data.pass}
                 name={"pass"}
                 onChange={handleChange}
               />
               <InputPass
-                label={"Repite la contrasena anterior"}
+                label={"Confirma tu contraseña"}
                 placeholder={"*********"}
                 value={confirmPass}
                 name={"confirmPass"}

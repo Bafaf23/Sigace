@@ -16,20 +16,21 @@ import SelectorInput from "./SelectorInput";
 
 const PersonalDataFields = ({ datos, manejarCambio }) => {
   const dniType = [
-    { value: "V-", label: "V" },
-    { value: "E-", label: "E" },
-    { value: "CI-", label: "CI" },
+    { value: "V-", label: "Venezolano" },
+    { value: "E-", label: "Extranjero" },
+    { value: "CE-", label: "Cedula Estudiantil" },
   ];
 
   const genderSel = [
-    { label: "Femenino", value: "F" },
-    { label: "Masculino", value: "M" },
+    { label: "Femenino", value: "femenino" },
+    { label: "Masculino", value: "masculino" },
   ];
+
   const handleToggle = (e) => {
     const { name, checked } = e.target;
     manejarCambio({ target: { name, value: checked } });
   };
-  console.log("Estado actual del género:", datos?.gender);
+
   return (
     <div className="space-y-4">
       <h4 className="border-b pb-2 font-bold text-blue-700">
@@ -43,18 +44,21 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
           onChange={handleToggle}
         />
       </div>
-      <div className="grid grid-cols-2 items-end gap-4">
-        <SelectorInput
-          id={"dniType"}
-          name={"dniType"}
-          nameInput={"dni"}
-          placeholder={"323233"}
-          label={"Selecciona tipo de documento"}
-          options={dniType}
-          onChange={manejarCambio}
-          valueSel={datos.dniType}
-          valueInput={datos.dni}
-        />
+      <div className="grid grid-cols-3 items-end gap-4">
+        <div className="col-span-2">
+          <SelectorInput
+            id={"dniType"}
+            name={"dniType"}
+            nameInput={"dni"}
+            placeholder={"323233"}
+            label={"Selecciona tipo de documento"}
+            options={dniType}
+            onChange={manejarCambio}
+            valueSel={datos.dniType}
+            valueInput={datos.dni}
+          />
+        </div>
+
         <Input
           name={"birthDate"}
           label={"Fecha de nacimiento"}

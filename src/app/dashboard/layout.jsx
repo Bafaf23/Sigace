@@ -1,4 +1,4 @@
-import Sidebar from "@/components/organism/NabarSidebar";
+import NavbarSidebar from "@/components/organism/NabarSidebar";
 import "@/globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -13,11 +13,11 @@ export const metadata = {
   description: "Sistema de Control de Estudios para Liceos",
 };
 
-export default function DashboardLayuot({ children }) {
+export default function DashboardLayout({ children }) {
   return (
     <>
       <div className="flex flex-1 gap-2">
-        <Sidebar />
+        <NavbarSidebar />
         <main className="flex h-screen flex-1 flex-col overflow-hidden overflow-y-auto scroll-smooth">
           {children}
         </main>

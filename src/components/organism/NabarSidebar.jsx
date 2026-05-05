@@ -21,12 +21,20 @@ export default function NavbarSidebar() {
   const patthename = usePathname();
   const router = useRouter();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || "";
 
+  /* cerrar sesión */
   const handleLogout = async () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    router.push("/");
+    try {
+      const response = await fetch("http://127.0.0.1:5000/logout/");
+      if (response.ok) {
+        localStorage.removeItem("user");
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error.message);
+      toast.error(error.message);
+    }
   };
 
   const menuLink = {
@@ -121,7 +129,7 @@ export default function NavbarSidebar() {
 
   return (
     <aside
-      className={`hidden p-3 transition-all duration-300 md:hidden md:flex-col lg:flex`}
+      className={`hidden w-70 p-3 transition-all duration-300 md:hidden md:flex-col lg:flex`}
     >
       <div
         className={`mb-8 flex items-center border-b border-gray-200 pb-3 dark:border-slate-700`}

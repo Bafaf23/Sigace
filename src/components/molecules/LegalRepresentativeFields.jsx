@@ -17,15 +17,14 @@ const LegalRepresentativeFields = ({ datos, manejarCambio }) => {
   const relationshipOptions = [
     { value: "madre", label: "Madre" },
     { value: "padre", label: "Padre" },
-    { value: "abuelo", label: "Abuelo/a" },
-    { value: "tio", label: "Tío/a" },
+    { value: "tutor", label: "Tutor" },
+    { value: "proteccionIntegral", label: "Protección Integral" },
     { value: "otro", label: "Otro" },
   ];
 
   const dniType = [
-    { value: "V-", label: "V" },
-    { value: "E-", label: "E" },
-    { value: "CI-", label: "CI" },
+    { value: "V-", label: "Venezolano" },
+    { value: "E-", label: "Extranjero" },
   ];
 
   return (

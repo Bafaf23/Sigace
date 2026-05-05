@@ -24,86 +24,86 @@ import { usePathname } from "next/navigation";
 export default function AccionesRapidas() {
   const pathname = usePathname();
 
-  const userRole = "ADMI";
+  const userRole = JSON.parse(localStorage.getItem("user")).role;
 
   const menuConfig = {
-    TEACHER: [
+    teacher: [
       {
         name: "Inicio",
-        src: "/dashboard/profesor",
+        src: "/dashboard/teachers",
         icon: faHome,
-        active: pathname === "/dashboard/profesor" ? "hidden" : "",
+        active: pathname === "/dashboard/teachers" ? "hidden" : "",
       },
       {
         name: "Cargar Notas",
-        src: "/dashboard/profesor/cargarNotas",
+        src: "/dashboard/teachers/cargarNotas",
         icon: faEdit,
-        active: pathname === "/dashboard/profesor/cargarNotas" ? "hidden" : "",
+        active: pathname === "/dashboard/teachers/cargarNotas" ? "hidden" : "",
       },
       {
         name: "Plan Evaluativo",
-        src: "/dashboard/profesor/planEvaluativo",
+        src: "/dashboard/teachers/planEvaluativo",
         icon: faChartLine,
         active:
-          pathname === "/dashboard/profesor/planEvaluativo" ? "hidden" : "",
+          pathname === "/dashboard/teachers/planEvaluativo" ? "hidden" : "",
       },
     ],
-    STUDENT: [
+    student: [
       {
         name: "Inicio",
-        src: "/dashboard/estudiante",
+        src: "/dashboard/students",
         icon: faHome,
-        active: pathname === "/dashboard/estudiante" ? "hidden" : "",
+        active: pathname === "/dashboard/students" ? "hidden" : "",
       },
       {
         name: "Notas",
-        src: "/dashboard/estudiante/notas",
+        src: "/dashboard/students/notas",
         icon: faEdit,
-        active: pathname === "/dashboard/estudiante/asistencia" ? "hidden" : "",
+        active: pathname === "/dashboard/students/notas" ? "hidden" : "",
       },
     ],
-    ADMIN: [
+    administrator: [
       {
         icon: faHome,
         name: "Mi Inicio",
-        src: "/dashboard/administradores",
-        active: pathname === `/dashboard/administradores` ? "hidden" : "",
+        src: "/dashboard/administrators",
+        active: pathname === `/dashboard/administrators` ? "hidden" : "",
       },
       {
         icon: faSitemap,
         name: "Control de Secciones",
-        active: pathname === `/dashboard/administradores/materias`,
-        src: "/dashboard/administradores/materias",
+        active: pathname === `/dashboard/administrators/materias`,
+        src: "/dashboard/administrators/materias",
       },
       {
         icon: faUserCheck,
         name: "Inscripciones",
-        active: pathname === `/dashboard/administradores/materias`,
-        src: "/dashboard/administradores/materias",
+        active: pathname === `/dashboard/administrators/materias`,
+        src: "/dashboard/administrators/materias",
       },
       {
         icon: faUserMinus,
         name: "Retiros y Traslados",
-        active: pathname === `/dashboard/administradores/materias`,
-        src: "/dashboard/administradores/materias",
+        active: pathname === `/dashboard/administrators/materias`,
+        src: "/dashboard/administrators/materias",
       },
       {
         icon: faChalkboardTeacher,
         name: "Carga Académica",
-        active: pathname === `/dashboard/administradores/materias`,
-        src: "/dashboard/administradores/materias",
+        active: pathname === `/dashboard/administrators/materias`,
+        src: "/dashboard/administrators/materias",
       },
       {
         icon: faBook,
         name: "Gestión de Materias",
-        active: pathname === `/dashboard/administradores/materias`,
-        src: "/dashboard/administradores/materias",
+        active: pathname === `/dashboard/administrators/materias`,
+        src: "/dashboard/administrators/materias",
       },
       {
         icon: faCalendarCheck,
         name: "Configuración de Lapsos",
-        active: pathname === `/dashboard/administradores/materias`,
-        src: "/dashboard/administradores/materias",
+        active: pathname === `/dashboard/administrators/materias`,
+        src: "/dashboard/administrators/materias",
       },
     ],
   };

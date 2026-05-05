@@ -24,18 +24,31 @@ const HealthPhysicalFields = ({ datos, manejarCambio }) => {
     { value: "O-", label: "O-" },
   ];
 
+  const lateralidad = [
+    { value: "diestro", label: "Diestro" },
+    { value: "zurdo", label: "Zurdo" },
+    { value: "ambidiestro", label: "Ambidiestro" },
+  ];
+
   return (
     <div className="space-y-4">
       <h4 className="border-b pb-2 font-bold text-blue-700">
         Información Médica y Tallas
       </h4>
-      <div className="grid grid-cols-2 items-end gap-4">
+      <div className="grid grid-cols-3 items-end gap-4">
         <Selector
           id={"bloodType"}
           name={"bloodType"}
           label={"Selecciona tipo de sangre"}
           options={typeBoodlSel}
           value={datos.bloodType}
+          onChange={manejarCambio}
+        />
+        <Selector
+          id="Lateralidad"
+          label="Lateralidad"
+          options={lateralidad}
+          value={datos.lateralidad}
           onChange={manejarCambio}
         />
         <Input
@@ -45,6 +58,23 @@ const HealthPhysicalFields = ({ datos, manejarCambio }) => {
           onChange={manejarCambio}
           value={datos.allergies}
         />
+        <div className="col-span-3">
+          <Input
+            name="neurodevelopmentConditions"
+            label="Condiciones de Neurodesarrollo"
+            placeholder="Ej: Autismo"
+            onChange={manejarCambio}
+            value={datos.neurodevelopmentConditions}
+          />
+        </div>
+        <div className="col-span-2 flex flex-col gap-2">
+          <Input
+            label="Discapacidad"
+            placeholder="Ej: visual, auditiva, fisica, etc."
+            onChange={manejarCambio}
+            value={datos.discapacidad}
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-2">

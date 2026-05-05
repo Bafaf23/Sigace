@@ -35,16 +35,16 @@ export default function DataUserRegister({ data, manejoCambio }) {
   return (
     <div className="space-y-3">
       <hr className="border border-slate-100" />
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 items-center gap-2">
         <div className="col-span-2">
           <SelectorInput
             label={"Tipo de Identidad"}
-            name={"tyeDocuement"}
+            name={"typeDocuement"}
             nameInput={"document"}
             options={options}
             id={"optionId"}
             placeholder={"3242343"}
-            valueSel={data.tyeDocuement}
+            valueSel={data.typeDocuement}
             valueInput={data.document}
             onChange={manejoCambio}
           />

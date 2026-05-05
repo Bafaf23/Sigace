@@ -4,7 +4,6 @@ import Icon from "@/components/atom/Icon";
 import {
   faCheckCircle,
   faHome,
-  faPrint,
   faFilePdf,
 } from "@fortawesome/free-solid-svg-icons";
 import { PDFDownloadLink } from "@react-pdf/renderer";

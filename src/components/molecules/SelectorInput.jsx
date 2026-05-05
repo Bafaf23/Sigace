@@ -62,6 +62,7 @@ export default function SelectorInput({
         </select>
         <Input
           id={inputId}
+          type={"text"}
           placeholder={placeholder}
           name={nameInput}
           value={valueInput || ""}
