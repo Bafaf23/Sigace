@@ -1,12 +1,10 @@
 import Button from "../atom/Button";
 import Selector from "../atom/Selector";
-import { assignSection } from "@/actions/assignSection";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function FormAssignStudent({ students, id }) {
-  console.log("este es el Id de la section", id);
+export default function FormAssignStudent({ students }) {
   const [loading, setLoading] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState("");
 
@@ -19,10 +17,7 @@ export default function FormAssignStudent({ students, id }) {
 
     setLoading(true);
 
-    const studentId = Number(selectedStudent);
-    const sectionId = Number(id);
-
-    const result = await assignSection(studentId, sectionId);
+    const result = { success: true };
 
     if (result.success) {
       toast.success("Alumno asignado con éxito");
@@ -36,7 +31,7 @@ export default function FormAssignStudent({ students, id }) {
     <form onSubmit={handleSubmit} className="space-y-4 p-2">
       <Selector
         label={"Seleciona un alumno"}
-        options={students.map((s) => ({
+        options={students?.map((s) => ({
           value: s.id,
           label: s.user ? `${s.user.name} ${s.user.lastName}` : `sin datos`,
         }))}

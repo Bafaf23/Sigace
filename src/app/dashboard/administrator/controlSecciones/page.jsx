@@ -1,5 +1,4 @@
 "use client";
-import { getSection, getStudentsWithoutSection } from "@/actions/getSection";
 import Button from "@/components/atom/Button";
 import CardGridSetion from "@/components/molecules/CardGridSetion";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
@@ -17,23 +16,6 @@ export default function controlSecciones() {
   const [availableStudents, setAvailableStudents] = useState([]);
   const [isOpen, setIsopen] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [resSections, resStudents] = await Promise.all([
-          getSection(),
-          getStudentsWithoutSection(),
-        ]);
-
-        if (resSections.success) setSecciones(resSections.data);
-        if (resStudents.success) setAvailableStudents(resStudents.data);
-      } catch (error) {
-        console.error("Error cargando datos:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
   return (
     <>
       <div className="flex flex-col md:flex-row md:justify-between">
@@ -58,7 +40,10 @@ export default function controlSecciones() {
           </Modal>
         </div>
       </div>
-      <CardGridSetion dataSet={secciones} availableStudents={availableStudents} />
+      <CardGridSetion
+        dataSet={secciones}
+        availableStudents={availableStudents}
+      />
     </>
   );
 }

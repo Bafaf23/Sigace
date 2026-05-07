@@ -35,7 +35,7 @@ export default function HeaderDashbord({ user, titelPage }) {
     try {
       const response = await fetch("http://127.0.0.1:5000/logout/");
       if (response.ok) {
-        localStorage.removeItem("user");
+        sessionStorage.clear();
         router.push("/");
       }
     } catch (error) {
@@ -46,15 +46,15 @@ export default function HeaderDashbord({ user, titelPage }) {
 
   return (
     <section className="flex w-full flex-col md:flex-row md:justify-between">
-      <div className="rounded-b-2xl bg-indigo-500 p-3 text-slate-100 shadow-indigo-400 md:bg-transparent lg:bg-transparent dark:bg-indigo-600 dark:shadow-indigo-400">
-        <div className="mb-2 flex items-center justify-between gap-2">
+      <div className="w-full rounded-b-2xl bg-indigo-500 p-3 text-slate-100 shadow-indigo-400 md:bg-transparent lg:bg-transparent dark:bg-indigo-600 dark:shadow-indigo-400">
+        <div className="mb-2 flex w-full items-center justify-between gap-2">
           {user ? (
             <div className="flex items-center gap-2">
               <h1 className="text-2xl font-bold text-slate-50 md:text-3xl md:text-indigo-300 dark:text-slate-500">
                 Hola,
               </h1>
               <span className="text-2xl font-bold text-slate-50 normal-case md:text-3xl md:text-indigo-500 dark:text-slate-500">
-                {user.name} {user.lastName}
+                {user.user.name} {user.user.lastName}
               </span>
             </div>
           ) : (
@@ -66,12 +66,12 @@ export default function HeaderDashbord({ user, titelPage }) {
           <div>
             {/* boton de cerrar sesión */}
             <button
-              className="group flex items-center gap-2 rounded-md p-2 text-slate-50 transition-all duration-300 hover:bg-slate-700/20 hover:text-slate-700 dark:text-slate-500 dark:hover:bg-slate-300/20 dark:hover:text-slate-300"
+              className="group flex items-center gap-2 rounded-md p-2 transition-all duration-300 hover:bg-slate-700/20 hover:text-slate-700 md:block md:text-red-500 md:hover:bg-slate-700/20 md:hover:text-slate-700 lg:hidden dark:text-slate-500 dark:hover:bg-slate-300/20 dark:hover:text-slate-300"
               onClick={handleLogout}
             >
               <Icon
                 icon={faRightFromBracket}
-                className="cursor-pointer text-slate-50 group-hover:text-slate-700 dark:text-slate-500 dark:group-hover:text-slate-300"
+                className="cursor-pointer group-hover:text-slate-700 dark:text-slate-500 dark:group-hover:text-slate-300"
               />
             </button>
           </div>

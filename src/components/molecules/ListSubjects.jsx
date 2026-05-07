@@ -1,6 +1,5 @@
 import Icon from "../atom/Icon";
 import SubjectActions from "./SubjectActions";
-import { getSubject } from "@/actions/getSubject";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 /**
@@ -11,10 +10,8 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
  * @returns {JSX.Element}
  */
 
-export default async function ListSubjects() {
-  const subjects = await getSubject();
-
-  if (!subjects || subjects.length === 0) {
+export default function ListSubjects({ dataSubjects }) {
+  if (!dataSubjects || dataSubjects.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 p-12 text-center dark:border-slate-500 dark:bg-slate-700">
         <Icon
@@ -36,54 +33,66 @@ export default async function ListSubjects() {
       <h2 className="p-3 text-2xl font-bold text-gray-500 uppercase dark:text-slate-400">
         Lista de materias
       </h2>
-      <div className="p-3">
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-          <table className="w-full border-collapse text-left">
+      <div className="p-4">
+        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <table className="w-full table-auto border-collapse text-left">
             <thead>
-              <tr className="rounded-2xl border-b border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
-                <th className="px-6 py-4 text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-slate-300">
+              <tr className="border-b border-slate-200 bg-slate-50/50 dark:border-slate-700/50 dark:bg-slate-800/50">
+                <th className="px-6 py-4 text-[11px] font-bold tracking-widest text-slate-400 uppercase">
                   Código
                 </th>
-                <th className="px-6 py-4 text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-slate-300">
+                <th className="px-6 py-4 text-[11px] font-bold tracking-widest text-slate-400 uppercase">
                   Materia
                 </th>
-                <th className="px-6 py-4 text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-slate-300">
-                  Año
+                <th className="px-6 py-4 text-[11px] font-bold tracking-widest text-slate-400 uppercase">
+                  Año / Grado
                 </th>
-                <th className="px-6 py-4 text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-slate-300">
-                  Área
-                </th>
-                <th className="px-6 py-4 text-right text-xs font-bold tracking-wider text-slate-500 uppercase dark:text-slate-300">
+
+                <th className="px-6 py-4 text-right text-[11px] font-bold tracking-widest text-slate-400 uppercase">
                   Acciones
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-600">
-              {subjects.map((subject) => (
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {dataSubjects?.map((subject) => (
                 <tr
                   key={subject.id}
-                  className="transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-700/60"
+                  className="group transition-all hover:bg-slate-50/80 dark:hover:bg-slate-800/40"
                 >
-                  <td className="px-6 py-4 text-sm font-medium text-cyan-700">
-                    {subject.code || "S/C"}
+                  <td className="px-6 py-4">
+                    <span className="inline-flex items-center rounded-md bg-cyan-50 px-2 py-1 text-xs font-bold text-cyan-700 ring-1 ring-cyan-700/10 ring-inset dark:bg-cyan-400/10 dark:text-cyan-400">
+                      {subject.code_subject || "S/C"}
+                    </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">
-                    {subject.name}
+                  <td className="px-6 py-4">
+                    <div className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                      {subject.name}
+                    </div>
+                    <div className="text-xs text-slate-400">
+                      {subject.area || "Formación General"}
+                    </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">
-                    {subject.grade}
+                  <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                    {subject.year_subject}
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-300">
-                    {subject.area || "General"}
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    {/* Inyectamos el componente de cliente aquí */}
-                    <SubjectActions subject={subject} />
+
+                  <td className="px-6 py-4">
+                    <div className="flex items-center justify-end gap-3">
+                      <SubjectActions subject={subject} />
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          {/* Footer de la tabla para paginación o info extra */}
+          <div className="border-t border-slate-100 bg-slate-50/30 px-6 py-3 dark:border-slate-800 dark:bg-slate-900/50">
+            <p className="text-[10px] text-slate-400">
+              Mostrando {dataSubjects?.length} materias asignadas al periodo
+              actual.
+            </p>
+          </div>
         </div>
       </div>
     </>

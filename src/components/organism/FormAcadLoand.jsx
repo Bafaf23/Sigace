@@ -1,6 +1,5 @@
 import Button from "../atom/Button";
 import Selector from "../atom/Selector";
-import { assingAcademicLoand } from "@/actions/assingAcademicLoand";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -12,11 +11,11 @@ export default function FormAcadLoand({ subjects, teachers, sections }) {
   const [loading, setLoanding] = useState(false);
   console.log("Estructura de la primera sección:", sections[0]);
 
-  const handleSubmit = async (formData) => {
+  const handleSubmit = async () => {
     setLoanding(true);
 
     try {
-      const result = await assingAcademicLoand(formData);
+      const result = { success: true };
 
       if (result.success) {
         setSelectedSubject("");

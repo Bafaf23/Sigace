@@ -1,16 +1,16 @@
 import Button from "../atom/Button";
 import Input from "../atom/Input";
 import Selector from "../atom/Selector";
-import { registerSubject } from "@/actions/registerSubject";
 import { faSpinner, faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function FormSubjetc() {
+export default function FormSubject({ schoolId }) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     code: "",
+    schoolId: schoolId,
     grade: "",
     area: "Formación General",
   });
@@ -29,13 +29,29 @@ export default function FormSubjetc() {
     e.preventDefault();
     setLoading(true);
 
-    const result = await registerSubject(formData);
-
-    if (result.success) {
-      toast.success("Materia creada exitosamente");
-      setFormData({ name: "", code: "", grade: "", area: "Formación General" });
-    } else {
-      toast.error(result.error);
+    try {
+      const result = await fetch("http://127.0.0.1:5000/subject/create/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (result.ok) {
+        toast.success("Asignatura creada exitosamente");
+        setFormData({
+          name: "",
+          code: "",
+          grade: "",
+          area: "Formación General",
+        });
+      } else {
+        toast.error("Error al crear la asignatura");
+        console.error("Error al crear la asignatura:", result.error);
+      }
+    } catch (error) {
+      toast.error("Error al crear la asignatura");
+      console.error("Error al crear la asignatura:", error);
     }
     setLoading(false);
   };
@@ -44,7 +60,7 @@ export default function FormSubjetc() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <Input
-          label="Nombre de la Materia"
+          label="Nombre de la Asignatura"
           name="name"
           placeholder="Ej: Matemáticas"
           value={formData.name}
@@ -52,7 +68,7 @@ export default function FormSubjetc() {
           required
         />
         <Input
-          label="Código (Opcional)"
+          label="Código de la Asignatura"
           name="code"
           placeholder="Ej: MAT-01"
           value={formData.code}
@@ -61,7 +77,7 @@ export default function FormSubjetc() {
       </div>
 
       <Selector
-        label="Año Escolar correspondiente"
+        label="Año Escolar de la Asignatura"
         options={gradeOptions}
         value={formData.grade}
         onChange={(e) => handleUpdate("grade", e.target.value)}
@@ -69,7 +85,7 @@ export default function FormSubjetc() {
       />
 
       <Input
-        label="Área de Formación"
+        label="Área de Formación de la Asignatura"
         name="area"
         placeholder="Ej: Ciencias Naturales"
         value={formData.area}
@@ -84,7 +100,7 @@ export default function FormSubjetc() {
           classNameBtn={`w-full md:w-auto rounded-xl px-10 py-3 font-bold text-white transition-all 
           ${loading ? "bg-slate-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700 active:scale-95 shadow-md"}`}
         >
-          {loading ? "Guardando..." : "Registrar Materia"}
+          {loading ? "Guardando..." : "Registrar Asignatura"}
         </Button>
       </div>
     </form>

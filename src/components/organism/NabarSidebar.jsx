@@ -4,14 +4,13 @@ import Button from "../atom/Button";
 import SigaceLogo from "../atom/SigaceLogo";
 import VersionTag from "../atom/VersionTag";
 import NavLink from "../molecules/NavLink";
+import { useAuth } from "@/context/AuthContext";
 import {
   faHome,
   faSignOutAlt,
   faListCheck,
   faPenToSquare,
   faUserCheck,
-  faBook,
-  faUserMinus,
   faSitemap,
   faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
@@ -20,15 +19,17 @@ import { usePathname, useRouter } from "next/navigation";
 export default function NavbarSidebar() {
   const patthename = usePathname();
   const router = useRouter();
+  const { user, loading } = useAuth();
 
-  const user = JSON.parse(localStorage.getItem("user")) || "";
+  if (loading) return <div>Cargando...</div>;
+  if (!user) return <div>No hay usuario</div>;
 
   /* cerrar sesión */
   const handleLogout = async () => {
     try {
       const response = await fetch("http://127.0.0.1:5000/logout/");
       if (response.ok) {
-        localStorage.removeItem("user");
+        sessionStorage.clear();
         router.push("/");
       }
     } catch (error) {
@@ -88,34 +89,34 @@ export default function NavbarSidebar() {
       {
         icon: faHome,
         label: "Mi Inicio",
-        direccion: "/dashboard/administrators",
-        active: patthename === `/dashboard/administrators`,
+        direccion: "/dashboard/administrator",
+        active: patthename === `/dashboard/administrator`,
       },
       {
         icon: faSitemap,
         label: "Control de Secciones",
-        active: patthename === `/dashboard/administrators/materias`,
-        direccion: "/dashboard/administrators/materias",
+        active: patthename === `/dashboard/administrator/controlSecciones`,
+        direccion: "/dashboard/administrator/controlSecciones",
       },
       {
         icon: faUserCheck,
         label: "Inscripciones",
-        active: patthename === `/dashboard/administrators/materias`,
-        direccion: "/dashboard/administrators/materias",
+        active: patthename === `/dashboard/administrator/inscripciones`,
+        direccion: "/dashboard/administrator/inscripciones",
       },
-      {
+      /* {
         icon: faUserMinus,
         label: "Retiros y Traslados",
         active: patthename === `/dashboard/administrators/materias`,
         direccion: "/dashboard/administrators/materias",
-      },
+      }, */
 
-      {
+      /*  {
         icon: faBook,
         label: "Gestión de Materias",
         active: patthename === `/dashboard/administrators/materias`,
         direccion: "/dashboard/administrators/materias",
-      },
+      }, */
       {
         icon: faCalendarCheck,
         label: "Configuración de Lapsos",
@@ -125,11 +126,11 @@ export default function NavbarSidebar() {
     ],
   };
 
-  const currentLinks = menuLink[user.role] || [];
+  const currentLinks = menuLink[user?.user?.role || "student"] || [];
 
   return (
     <aside
-      className={`hidden w-70 p-3 transition-all duration-300 md:hidden md:flex-col lg:flex`}
+      className={`hidden p-3 transition-all duration-300 md:hidden md:flex-col lg:flex`}
     >
       <div
         className={`mb-8 flex items-center border-b border-gray-200 pb-3 dark:border-slate-700`}

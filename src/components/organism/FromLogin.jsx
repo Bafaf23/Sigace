@@ -1,4 +1,5 @@
 "use client";
+import { login } from "@/actions/login";
 import Button from "@/components/atom/Button";
 import Input from "@/components/atom/Input";
 import InputPass from "@/components/atom/InputPass";
@@ -8,6 +9,7 @@ import {
   faArrowLeft,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -29,39 +31,22 @@ export default function FromLogin() {
       setLoading(false);
       return;
     }
-    try {
-      const data = await fetch("http://127.0.0.1:5000/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }).then((res) => res.json());
 
-      if (data.error) {
-        toast.error(data.error);
-        return;
-      }
+    const data = await login(formData);
 
-      if (data.success) {
-        toast.success("Inicio de sesión exitoso");
-
-        localStorage.setItem("user", JSON.stringify(data.user));
-        /* rediccionar a la dashboard correspondiente */
-        if (data.user.role === "teacher") {
-          router.push("/dashboard/teachers");
-        } else if (data.user.role === "student") {
-          router.push("/dashboard/students");
-        } else if (data.user.role === "administrator") {
-          router.push("/dashboard/administrators");
-        }
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Error al iniciar sesión: " + error.message);
-    } finally {
+    if (data.error) {
+      toast.error(data.error);
       setLoading(false);
+      return;
+    } else {
+      sessionStorage.setItem("user", JSON.stringify(data));
+
+      const role = data.user?.role || data.role;
+
+      toast.success("Inicio de sesión exitoso");
+      router.push(`/dashboard/${role}`);
     }
+    setLoading(false);
   };
   return (
     <div className="w-full max-w-md">

@@ -27,7 +27,8 @@ export default function TeachersPage() {
     );
   }
 
-  if (!user || user.role !== "teacher") {
+  if (!user || user?.role !== "teacher") {
+    router.push("/");
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p className="animate-pulse text-lg font-semibold text-red-600">
@@ -40,7 +41,7 @@ export default function TeachersPage() {
   return (
     <div className="flex flex-col gap-4">
       <HeaderDashbord user={user} />
-      <Resumenes teachersId={user.id} />
+      <Resumenes teachersId={user?.id} />
       {/* movil */}
       <AccionesRapidas />
       <Reportes />

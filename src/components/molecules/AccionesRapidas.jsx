@@ -1,5 +1,6 @@
 "use client";
 import Icon from "../atom/Icon";
+import { useAuth } from "@/context/AuthContext";
 import {
   faEdit,
   faChartLine,
@@ -23,9 +24,7 @@ import { usePathname } from "next/navigation";
 
 export default function AccionesRapidas() {
   const pathname = usePathname();
-
-  const userRole = JSON.parse(localStorage.getItem("user")).role;
-
+  const { user, loading } = useAuth();
   const menuConfig = {
     teacher: [
       {
@@ -108,7 +107,7 @@ export default function AccionesRapidas() {
     ],
   };
 
-  const acciones = menuConfig[userRole] || [];
+  const acciones = menuConfig[user?.user?.role || "student"] || [];
 
   return (
     <section className="p-3 lg:hidden">
