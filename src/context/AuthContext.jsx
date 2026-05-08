@@ -1,5 +1,5 @@
 "use client";
-import { login } from "@/actions/login";
+import { login } from "@/services/login";
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
     if (data.error) {
       return { error: data.error };
     }
-    
+
     setUser(data);
     sessionStorage.setItem("user", JSON.stringify(data));
     return data;

@@ -2,7 +2,7 @@
 import DataSchoolRegister from "../molecules/DataSchoolRegister";
 import DataUserRegister from "../molecules/DataUserRegister";
 import { StepIndicator } from "../molecules/StepIndicator";
-import { patterns, validate } from "@/app/utils/regex/regex";
+import { patterns, validate } from "@/services/regex/regex";
 import Button from "@/components/atom/Button";
 import {
   faRightLong,

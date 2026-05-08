@@ -1,6 +1,5 @@
 "use client";
 import Button from "../atom/Button";
-import Icon from "../atom/Icon";
 import Input from "../atom/Input";
 import InputPass from "../atom/InputPass";
 import AcademicFields from "../molecules/AcademicBackgroundFields";
@@ -15,10 +14,11 @@ import {
   faLeftLong,
   faRightLong,
   faUserPlus,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
+
+import EnrollmentSchool from "../molecules/EnrollmentSchool";
 
 export default function FormInscrip() {
   const [passed, setPassed] = useState(1);
@@ -145,7 +145,7 @@ export default function FormInscrip() {
       onSubmit={handleSubmit}
       className="w-full max-w-2xl rounded-2xl border border-slate-100 bg-white p-8 shadow-lg"
     >
-      <StepIndicator currentStep={passed} totalSteps={6} />
+      <StepIndicator currentStep={passed} totalSteps={7} />
 
       <div className="mt-6 min-h-[400px]">
         {passed === 1 && (
@@ -174,22 +174,10 @@ export default function FormInscrip() {
           />
         )}
         {passed === 6 && (
+          <EnrollmentSchool data={data} manejoCambio={handleChange} />
+        )}
+        {passed === 7 && (
           <>
-            {/*  <div className="rounded-2xl border border-slate-300 bg-slate-100 p-4">
-              <h2 className="mb-3 font-bold text-indigo-600">
-                Seleciona el liceo en el cual te vas a registar.
-              </h2>
-              <Selector
-                label={"Seleciona un liceo"}
-                options={[
-                  { value: "1", label: "Liceo 1" },
-                  { value: "2", label: "Liceo 2" },
-                  { value: "3", label: "Liceo 3" },
-                ]}
-                onChange={(e) => setSelectedLiceo(e.target.value)}
-              />
-            </div> */}
-
             <Input
               label="Tu usuario para ingresar al sistema"
               placeholder="Ej: juan.fernandez"
@@ -250,10 +238,10 @@ export default function FormInscrip() {
           Anterior
         </Button>
 
-        {passed < 6 ? (
+        {passed < 7 ? (
           <Button
             icon={faRightLong}
-            onClick={() => setPassed((p) => Math.min(6, p + 1))}
+            onClick={() => setPassed((p) => Math.min(7, p + 1))}
             classNameBtn="rounded-lg bg-indigo-600 px-8 py-2 font-bold text-white transition-all hover:bg-indigo-700 active:scale-95 group flex items-center gap-3"
             classNameIcon="group-hover:translate-x-1 transition-transform duration-300"
           >

@@ -1,5 +1,5 @@
 "use client";
-import { getSubjects } from "@/actions/getSuject";
+import { getSubjects } from "@/services/getSuject";
 import ListAcademicLoand from "@/components/molecules/ListAcademicLoand";
 import ListSubjects from "@/components/molecules/ListSubjects";
 import HeaderGestionMaterias from "@/components/organism/HeaderGestionMaterias";

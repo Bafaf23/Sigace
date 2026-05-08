@@ -21,7 +21,8 @@ export const StepIndicator = ({ currentStep, totalSteps = 6, mode }) => {
     { id: 3, label: "Salud" },
     { id: 4, label: "Padres" },
     { id: 5, label: "Representante" },
-    { id: 6, label: "Inicio de sesión" },
+    { id: 6, label: "Plantel" },
+    { id: 7, label: "Inicio de sesión" },
   ];
 
   const stepsUsers = [

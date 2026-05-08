@@ -1,0 +1,29 @@
+/**
+ * Obtiene las instituciones del sistema desde el backend Flask.
+ * @returns {Promise<Array<Object>>}
+ */
+export async function getSchools() {
+  try {
+    const response = await fetch("http://127.0.0.1:5000/school/get/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          console.error(`Error en la API: ${res.status}`);
+          return [];
+        }
+        const data = await res.json();
+        return data;
+      })
+      .then((data) => {
+        return Array.isArray(data) ? data : data.schools || [];
+      });
+    return response;
+  } catch (error) {
+    console.error("Error de conexión con el servidor Flask:", error);
+    return [];
+  }
+}
