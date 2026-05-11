@@ -1,23 +1,29 @@
 "use client";
 import { login } from "@/services/login";
+import { logout } from "@/services/logout";
 import { createContext, useContext, useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const PUBLIC_ROUTES = ["/", "/register"];
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
 
     if (storedUser) {
       setUser(JSON.parse(storedUser));
-    } else {
+    } else if (!PUBLIC_ROUTES.includes(pathname)) {
       router.push("/");
     }
     setLoading(false);
-  }, []);
+  }, [pathname]);
 
   /**
    * Funcion para iniciar sesión
@@ -42,13 +48,17 @@ export function AuthProvider({ children }) {
    * @returns {void}
    */
   const handleLogout = async () => {
-    sessionStorage.clear();
-    setUser(null);
-    router.push("/");
+    const result = await logout();
+
+    if (result.ok) {
+      sessionStorage.clear();
+      setUser(null);
+      router.push("/");
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, handleLogout, handleLogin }}>
       {children}
     </AuthContext.Provider>
   );

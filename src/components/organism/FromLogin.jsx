@@ -9,7 +9,6 @@ import {
   faArrowLeft,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -40,7 +39,6 @@ export default function FromLogin() {
       return;
     } else {
       sessionStorage.setItem("user", JSON.stringify(data));
-
       const role = data.user?.role || data.role;
 
       toast.success("Inicio de sesión exitoso");

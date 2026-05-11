@@ -5,8 +5,9 @@ import { faSpinner, faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function FormSubject({ schoolId }) {
+export default function FormSubject({ schoolId, onSuccess }) {
   const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     code: "",
@@ -14,6 +15,7 @@ export default function FormSubject({ schoolId }) {
     grade: "",
     area: "Formación General",
   });
+
   const gradeOptions = [
     { value: "1ero", label: "1er Año" },
     { value: "2do", label: "2do Año" },
@@ -25,6 +27,7 @@ export default function FormSubject({ schoolId }) {
   const handleUpdate = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -42,9 +45,11 @@ export default function FormSubject({ schoolId }) {
         setFormData({
           name: "",
           code: "",
+          schoolId: schoolId,
           grade: "",
           area: "Formación General",
         });
+        onSuccess?.();
       } else {
         toast.error("Error al crear la asignatura");
         console.error("Error al crear la asignatura:", result.error);

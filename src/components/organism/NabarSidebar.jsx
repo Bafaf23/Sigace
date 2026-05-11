@@ -13,30 +13,18 @@ import {
   faUserCheck,
   faSitemap,
   faCalendarCheck,
+  faBowlRice,
+  faLongArrowAltDown,
+  faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function NavbarSidebar() {
   const patthename = usePathname();
-  const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, loading, handleLogout } = useAuth();
 
   if (loading) return <div>Cargando...</div>;
   if (!user) return <div>No hay usuario</div>;
-
-  /* cerrar sesión */
-  const handleLogout = async () => {
-    try {
-      const response = await fetch("http://127.0.0.1:5000/logout/");
-      if (response.ok) {
-        sessionStorage.clear();
-        router.push("/");
-      }
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error.message);
-      toast.error(error.message);
-    }
-  };
 
   const menuLink = {
     teacher: [
@@ -99,10 +87,16 @@ export default function NavbarSidebar() {
         direccion: "/dashboard/administrator/controlSecciones",
       },
       {
-        icon: faUserCheck,
-        label: "Inscripciones",
-        active: patthename === `/dashboard/administrator/inscripciones`,
-        direccion: "/dashboard/administrator/inscripciones",
+        icon: faBowlRice,
+        label: "Asignaturas",
+        active: patthename === `/dashboard/administrator/gestionAsignaturas`,
+        direccion: "/dashboard/administrator/gestionAsignaturas",
+      },
+      {
+        icon: faClipboardList,
+        label: "Carga Academica",
+        active: patthename === `/dashboard/administrator/cargaAcademica`,
+        direccion: "/dashboard/administrator/cargaAcademica",
       },
       /* {
         icon: faUserMinus,

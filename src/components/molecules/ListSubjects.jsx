@@ -10,8 +10,8 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
  * @returns {JSX.Element}
  */
 
-export default function ListSubjects({ dataSubjects }) {
-  if (!dataSubjects || dataSubjects.length === 0) {
+export default function ListSubjects({ dataSubjects, onSubjectDeleted }) {
+  if (!dataSubjects || dataSubjects?.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 p-12 text-center dark:border-slate-500 dark:bg-slate-700">
         <Icon
@@ -78,7 +78,10 @@ export default function ListSubjects({ dataSubjects }) {
 
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-end gap-3">
-                      <SubjectActions subject={subject} />
+                      <SubjectActions
+                        subject={subject}
+                        onSubjectDeleted={onSubjectDeleted}
+                      />
                     </div>
                   </td>
                 </tr>

@@ -4,16 +4,27 @@ import Selector from "../atom/Selector";
 import { faCheck, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { getTeachersAll } from "@/services/getTeachersAll";
+import { useAuth } from "@/context/AuthContext";
 
 export default function FormSection() {
   const [loading, setLoading] = useState(false);
-  const [teachers, setTeachers] = useState([]);
+  const [teachers, setTeachers] = useState([
+    {
+      value: "",
+      label: "",
+    },
+  ]);
   const [formData, setFormData] = useState({
     grade: "",
     identifier: "",
     teacherId: "",
     capacity: 35,
   });
+
+  const { user } = useAuth();
+
+  const school_id = user.user.school_id;
 
   const handleUpdate = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -34,22 +45,12 @@ export default function FormSection() {
   ];
 
   useEffect(() => {
-    let isMounted = true;
-    const loadTeachers = async () => {
-      try {
-        const data = [];
-        if (isMounted) setTeachers(data);
-      } catch (error) {
-        toast.error("No se pudieron cargar los docentes");
-      }
-    };
-
-    loadTeachers();
-    return () => {
-      isMounted = false; // Cleanup correcto
-    };
+    getTeachersAll(school_id).then((data) => {
+      setTeachers(data);
+    });
   }, []);
 
+  console.log(teachers);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

@@ -6,18 +6,36 @@ import FormSection from "@/components/organism/FormSection";
 import Modal from "@/components/organism/Modal";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import { getSection } from "@/services/getSection";
+import { useAuth } from "@/context/AuthContext";
+import { useCallback } from "react";
+import Loading from "./loading";
 
-/* export const metadata = {
-  title: "Control de Secciones",
-};
- */
 export default function controlSecciones() {
+  const { user } = useAuth();
   const [secciones, setSecciones] = useState([]);
-  const [availableStudents, setAvailableStudents] = useState([]);
   const [isOpen, setIsopen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const school_id = user?.user?.school_id;
+
+  const loadSections = useCallback(() => {
+    if (school_id) {
+      setLoading(true);
+      getSection(school_id)
+        .then((data) => setSecciones(data))
+        .finally(() => setLoading(false));
+    }
+  }, [school_id]);
+
+  useEffect(() => {
+    loadSections();
+  }, [loadSections]);
+
+  if (loading) return <Loading />;
 
   return (
-    <>
+    <div className="p-4">
       <div className="flex flex-col md:flex-row md:justify-between">
         <HeaderDashbord titelPage={"Control de Secciones"} />
         <div className="p-3">
@@ -40,10 +58,7 @@ export default function controlSecciones() {
           </Modal>
         </div>
       </div>
-      <CardGridSetion
-        dataSet={secciones}
-        availableStudents={availableStudents}
-      />
-    </>
+      <CardGridSetion dataSet={secciones} />
+    </div>
   );
 }
