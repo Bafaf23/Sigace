@@ -1,19 +1,29 @@
 "use client";
-
+import AccessDenied from "@/components/molecules/AccessDenied";
 import Button from "@/components/atom/Button";
 import Selector from "@/components/atom/Selector";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import FormCargaPV from "@/components/molecules/FormCargaPV";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
+import { useAuth } from "@/context/AuthContext";
 import Modal from "@/components/organism/Modal";
 import TablaPV from "@/components/organism/TablaPV";
 import { faPrint, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import Loading from "@/app/dashboard/loading";
 
 export default function PlanEvaluativo() {
+  const { user, loading } = useAuth();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const user = {
+  if (loading) return <Loading />;
+
+  if (!user || user?.role !== "teacher") {
+    return <AccessDenied />;
+  }
+
+  const materias = {
     materias: [
       { id: 1, label: "Matemática", value: "matematica" },
       { id: 2, label: "Física", value: "fisica" },
@@ -42,7 +52,7 @@ export default function PlanEvaluativo() {
   ];
 
   return (
-    <>
+    <div className="animate-in fade-in duration-500">
       <div className="flex flex-col justify-between md:flex-row md:items-center">
         <HeaderDashbord titelPage={"Plan Evaluativo"} />
         <div className="p-3">
@@ -75,7 +85,7 @@ export default function PlanEvaluativo() {
             <Selector
               id={"selectorPV"}
               label={"Selecciona la Asignatura"}
-              options={user.materias || []}
+              options={materias || []}
             />
           </div>
           <Button
@@ -91,6 +101,6 @@ export default function PlanEvaluativo() {
 
         <TablaPV evaluaciones={evaluacionesEjemplo} />
       </section>
-    </>
+    </div>
   );
 }
