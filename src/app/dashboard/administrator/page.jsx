@@ -3,7 +3,7 @@ import AccessDenied from "@/components/molecules/AccessDenied";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import { useAuth } from "@/context/AuthContext";
-import Loading from "./loading";
+import Loading from "../loading";
 
 export default function AdminPage() {
   const { user, loading } = useAuth();
