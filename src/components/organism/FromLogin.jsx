@@ -50,7 +50,7 @@ export default function FromLogin() {
     <div className="w-full max-w-md">
       {/* Botón para volver */}
       <Links
-        direction="/"
+        direction="https://sigce-page.vercel.app"
         className="group mb-8 inline-flex items-center gap-2 text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400"
         label={"Volver al inicio"}
         classNameIcon={"transition-transform group-hover:-translate-x-1 "}
