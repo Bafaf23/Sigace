@@ -1,6 +1,5 @@
 "use client";
 
-import { generadorPV } from "@/app/services/generadorPV";
 import Button from "@/components/atom/Button";
 import Selector from "@/components/atom/Selector";
 import AccionesRapidas from "@/components/molecules/AccionesRapidas";
