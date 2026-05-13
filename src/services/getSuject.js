@@ -7,7 +7,7 @@
 export async function getSubjects(schoolId) {
   try {
     const response = await fetch(
-      `http://127.0.0.1:5000/subject/get/${schoolId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/subject/get/${schoolId}`,
       {
         method: "GET",
         headers: {

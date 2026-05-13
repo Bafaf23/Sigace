@@ -8,7 +8,7 @@
 export async function getTeachersAll(schoolId) {
   try {
     const result = await fetch(
-      `http://127.0.0.1:5000/get_user_teachers/${schoolId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/get_user_teachers/${schoolId}`,
       {
         method: "GET",
         headers: {

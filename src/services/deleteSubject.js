@@ -6,7 +6,7 @@
 export async function deleteSubject(id) {
   try {
     const response = await fetch(
-      `http://127.0.0.1:5000/subject/delete/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/subject/delete/${id}`,
       {
         method: "DELETE",
         headers: {
