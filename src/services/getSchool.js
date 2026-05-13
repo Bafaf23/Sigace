@@ -4,12 +4,15 @@
  */
 export async function getSchools() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/school/get/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/school/get/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    })
+    )
       .then(async (res) => {
         if (!res.ok) {
           console.error(`Error en la API: ${res.status}`);
