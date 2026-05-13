@@ -4,6 +4,7 @@ import Button from "@/components/atom/Button";
 import Input from "@/components/atom/Input";
 import InputPass from "@/components/atom/InputPass";
 import Links from "@/components/atom/Links";
+import Link from "next/link";
 import {
   faKey,
   faArrowLeft,
@@ -114,9 +115,15 @@ export default function FromLogin() {
 
         <p className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
           ¿No tienes acceso?,{" "}
-          <span className="cursor-pointer font-bold text-indigo-600 dark:text-indigo-500">
-            Contacta al administrador
-          </span>
+          <Link
+            href="https://wa.link/a6tg3m"
+            className="text-indigo-600 dark:text-indigo-500"
+          >
+            {" "}
+            <span className="cursor-pointer font-bold text-indigo-600 dark:text-indigo-500">
+              Contacta al administrador
+            </span>
+          </Link>
         </p>
       </div>
     </div>
