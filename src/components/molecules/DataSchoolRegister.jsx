@@ -1,6 +1,7 @@
 import Icon from "../atom/Icon";
 import Input from "../atom/Input";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
+import Terms from "@/components/atom/Terms";
 
 export default function DataSchoolRegister({ data, manejoCambio }) {
   return (
@@ -30,6 +31,14 @@ export default function DataSchoolRegister({ data, manejoCambio }) {
           </p>
         </div>
       </div>
+      <Terms
+        onChange={(e) =>
+          manejoCambio({
+            target: { name: "accepted", value: e.target.checked },
+          })
+        }
+        accepted={data.accepted}
+      />
     </div>
   );
 }

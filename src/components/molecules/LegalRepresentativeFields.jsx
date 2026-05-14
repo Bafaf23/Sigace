@@ -33,7 +33,7 @@ const LegalRepresentativeFields = ({ datos, manejarCambio }) => {
         Datos del Representante Legal
       </h4>
 
-      <div className="grid grid-cols-2 items-end gap-4">
+      <div className="grid md:grid-cols-2 grid-cols-1 items-end gap-4">
         <SelectorInput
           id="repDniType"
           name={"repdniType"}
@@ -54,7 +54,7 @@ const LegalRepresentativeFields = ({ datos, manejarCambio }) => {
         />
       </div>
 
-      <div className="grid grid-cols-2 items-end gap-2">
+      <div className="grid md:grid-cols-2 grid-cols-1 items-end gap-2">
         <Input
           name="repName"
           label="Nombres"
@@ -71,7 +71,7 @@ const LegalRepresentativeFields = ({ datos, manejarCambio }) => {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
         <Input
           name="repEmail"
           label="Correo Electrónico"

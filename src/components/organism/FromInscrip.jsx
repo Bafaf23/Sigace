@@ -17,8 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 import EnrollmentSchool from "../molecules/EnrollmentSchool";
+import Terms from "@/components/atom/Terms";
 
 export default function FormInscrip() {
   const [passed, setPassed] = useState(1);
@@ -29,8 +29,123 @@ export default function FormInscrip() {
   const [success, setSuccess] = useState(false);
   const [resulData, setResulData] = useState(null);
 
+  /**
+   * Objeto data de estudiantes para la inscripcion de estudiantes.
+   * @typedef {Object} dataEnrollment - Objeto de datos para la inscripcion de estudiante.
+   * @property {string} dniType - Tipo de documento de identidad del estudiante.
+   * @property {string} dni - Numero de documento de identidad del estudiante.
+   * @property {string} name - Nombre del estudiante.
+   * @property {string} lastName - Apellido del estudiante.
+   * @property {string} email - Correo electronico del estudiante.
+   * @property {string} phone - Numero de telefono del estudiante.
+   * @property {string} gender - Genero del estudiante.
+   * @property {string} birthDate - Fecha de nacimiento del estudiante.
+   * @property {string} pass - Contraseña del estudiante.
+   * @property {boolean} isNewEntry - Indica si el estudiante viene de otra institucion academica.
+   * @property {string} previousSchool - Nombre de la institucion academica anterior del estudiante.
+   * @property {string} previousSchoolCode - Codigo de la institucion academica anterior del estudiante.
+   * @property {string} previousYear - Ano de la institucion academica anterior del estudiante.
+   * @property {string} previousSection - Seccion de la institucion academica anterior del estudiante.
+   * @property {string} canaimaSerial - Serial de la canaima del estudiante.
+   * @property {string} year - Ano de la canaima del estudiante.
+   * @property {string} section - Seccion de la canaima del estudiante.
+   * @property {string} state - Estado de la canaima del estudiante.
+   * @property {string} municipality - Municipio de la canaima del estudiante.
+   * @property {string} parish - Parroquia de la canaima del estudiante.
+   * @property {string} addressDetail - Detalle de la direccion del estudiante.
+   * @property {string} housingCondition - Condicion de vivienda del estudiante.
+   * @property {string} bloodType - Tipo de sangre del estudiante.
+   * @property {string} allergies - Alergias del estudiante.
+   * @property {string} shirtSize - Talla de camisa del estudiante.
+   * @property {string} pantSize - Talla de pantalon del estudiante.
+   * @property {string} shoeSize - Talla de zapato del estudiante.
+   * @property {string} weight - Peso del estudiante.
+   * @property {string} medicalCondition - Condicion medica del estudiante.
+   * @property {string} height - Altura del estudiante.
+   * @property {string} motherName - Nombre de la madre del estudiante.
+   * @property {string} motherDni - Numero de documento de identidad de la madre del estudiante.
+   * @property {string} motherEmail - Correo electronico de la madre del estudiante.
+   * @property {string} motherPhone - Numero de telefono de la madre del estudiante.
+   * @property {string} fatherName - Nombre del padre del estudiante.
+   * @property {string} fatherDni - Numero de documento de identidad del padre del estudiante.
+   * @property {string} fatherEmail - Correo electronico del padre del estudiante.
+   * @property {string} fatherPhone - Numero de telefono del padre del estudiante.
+   * @property {string} repDni - Numero de documento de identidad del representante legal del estudiante.
+   * @property {string} repName - Nombre del representante legal del estudiante.
+   * @property {string} repLastName - Apellido del representante legal del estudiante.
+   * @property {string} repPhone - Numero de telefono del representante legal del estudiante.
+   * @property {string} relationship - Parentesco del representante legal del estudiante.
+   * @property {string} repEmail - Correo electronico del representante legal del estudiante.
+   * @property {string} sig - Codigo unico dado por el sistema que identifica a la institucion.
+   * @property {boolean} accepted - Indica si el estudiante acepta los términos y condiciones de uso del sistema.
+   * @property {string} role - Rol del usuario (teacher, student, administrator). por defecto es teacher. En este registro solo se puede registrar un usuario de tipo teacher.
+   * @property {string} birthdate - Fecha de nacimiento del estudiante.
+   * @property {string} section - Seccion del estudiante.
+   * @property {string} state - Estado del estudiante.
+   * @property {string} municipality - Municipio del estudiante.
+   * @property {string} parish - Parroquia del estudiante.
+   * @property {string} addressDetail - Detalle de la direccion del estudiante.
+   * @property {string} housingCondition - Condicion de vivienda del estudiante.
+   * @property {string} bloodType - Tipo de sangre del estudiante.
+   * @property {string} allergies - Alergias del estudiante.
+   * @property {string} shirtSize - Talla de camisa del estudiante.
+   * @property {string} pantSize - Talla de pantalon del estudiante.
+   * @property {string} shoeSize - Talla de zapato del estudiante.
+   * @property {string} weight - Peso del estudiante.
+   * @property {string} medicalCondition - Condicion medica del estudiante.
+   * @property {string} height - Altura del estudiante.
+   * @property {string} motherName - Nombre de la madre del estudiante.
+   * @property {string} motherDni - Numero de documento de identidad de la madre del estudiante.
+   * @property {string} motherEmail - Correo electronico de la madre del estudiante.
+   * @property {string} motherPhone - Numero de telefono de la madre del estudiante.
+   * @property {string} fatherName - Nombre del padre del estudiante.
+   * @property {string} fatherDni - Numero de documento de identidad del padre del estudiante.
+   * @property {string} fatherEmail - Correo electronico del padre del estudiante.
+   * @property {string} fatherPhone - Numero de telefono del padre del estudiante.
+   * @property {string} repDni - Numero de documento de identidad del representante legal del estudiante.
+   * @property {string} repName - Nombre del representante legal del estudiante.
+   * @property {string} repLastName - Apellido del representante legal del estudiante.
+   * @property {string} repPhone - Numero de telefono del representante legal del estudiante.
+   * @property {string} relationship - Parentesco del representante legal del estudiante.
+   * @property {string} repEmail - Correo electronico del representante legal del estudiante.
+   * @property {string} sig - Codigo unico dado por el sistema que identifica a la institucion.
+   * @property {boolean} accepted - Indica si el estudiante acepta los términos y condiciones de uso del sistema.
+   * @property {string} role - Rol del usuario (teacher, student, administrator). por defecto es teacher. En este registro solo se puede registrar un usuario de tipo teacher.
+   * @property {string} birthdate - Fecha de nacimiento del estudiante.
+   * @property {string} section - Seccion del estudiante.
+   * @property {string} state - Estado del estudiante.
+   * @property {string} municipality - Municipio del estudiante.
+   * @property {string} parish - Parroquia del estudiante.
+   * @property {string} addressDetail - Detalle de la direccion del estudiante.
+   * @property {string} housingCondition - Condicion de vivienda del estudiante.
+   * @property {string} bloodType - Tipo de sangre del estudiante.
+   * @property {string} allergies - Alergias del estudiante.
+   * @property {string} shirtSize - Talla de camisa del estudiante.
+   * @property {string} pantSize - Talla de pantalon del estudiante.
+   * @property {string} shoeSize - Talla de zapato del estudiante.
+   * @property {string} weight - Peso del estudiante.
+   * @property {string} medicalCondition - Condicion medica del estudiante.
+   * @property {string} height - Altura del estudiante.
+   * @property {string} motherName - Nombre de la madre del estudiante.
+   * @property {string} motherDni - Numero de documento de identidad de la madre del estudiante.
+   * @property {string} motherEmail - Correo electronico de la madre del estudiante.
+   * @property {string} motherPhone - Numero de telefono de la madre del estudiante.
+   * @property {string} fatherName - Nombre del padre del estudiante.
+   * @property {string} fatherDni - Numero de documento de identidad del padre del estudiante.
+   * @property {string} fatherEmail - Correo electronico del padre del estudiante.
+   * @property {string} fatherPhone - Numero de telefono del padre del estudiante.
+   * @property {string} repDni - Numero de documento de identidad del representante legal del estudiante.
+   * @property {string} repName - Nombre del representante legal del estudiante.
+   * @property {string} repLastName - Apellido del representante legal del estudiante.
+   * @property {string} repPhone - Numero de telefono del representante legal del estudiante.
+   * @property {string} relationship - Parentesco del representante legal del estudiante.
+   * @property {string} repEmail - Correo electronico del representante legal del estudiante.
+   * @property {string} sig - Codigo unico dado por el sistema que identifica a la institucion.
+   * @property {boolean} accepted - Indica si el estudiante acepta los términos y condiciones de uso del sistema.
+   * @property {string} username - Usuario para ingresar al sistema.
+   */
   const [data, setData] = useState({
-    // Paso 1: Personales + Académicos
+    // Paso 1: Personales + Academicos
     dniType: "V-",
     dni: "",
     name: "",
@@ -50,14 +165,14 @@ export default function FormInscrip() {
     year: "",
     section: "",
 
-    // Paso 2: Ubicación
+    // Paso 2: Location
     state: "",
     municipality: "",
     parish: "",
     addressDetail: "",
     housingCondition: "",
 
-    // Paso 3: Salud
+    // Paso 3: Health
     bloodType: "",
     allergies: "",
     shirtSize: "",
@@ -67,7 +182,7 @@ export default function FormInscrip() {
     medicalCondition: "",
     height: "",
 
-    // Paso 4: Padres
+    // Paso 4: Parents
     motherName: "",
     motherDni: "",
     motherEmail: "",
@@ -78,7 +193,7 @@ export default function FormInscrip() {
     fatherEmail: "",
     fatherPhone: "",
 
-    // Paso 5: Representante
+    // Paso 5: Legal Representative
     repDni: "",
     repName: "",
     repLastName: "",
@@ -87,6 +202,7 @@ export default function FormInscrip() {
     repEmail: "",
 
     sig: "",
+    accepted: false, // Indica si el estudiante acepta los términos y condiciones de uso del sistema.
   });
 
   const handleChange = (e) => {
@@ -141,125 +257,115 @@ export default function FormInscrip() {
   if (success && resulData) return <EnrollmentSuccessPage data={resulData} />;
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full max-w-2xl rounded-2xl border border-slate-100 bg-white p-8 shadow-lg"
-    >
-      <StepIndicator currentStep={passed} totalSteps={7} />
+    <div className="w-full max-w-2xl p-3 md:p-0">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full rounded-2xl border border-slate-100 bg-white p-8 shadow-lg"
+      >
+        <StepIndicator currentStep={passed} totalSteps={7} />
 
-      <div className="mt-6 min-h-[400px]">
-        {passed === 1 && (
-          <div className="animate-in fade-in space-y-8 duration-500">
-            <PersonalDataFields datos={data} manejarCambio={handleChange} />
-            <AcademicFields datos={data} manejarCambio={handleChange} />
-          </div>
-        )}
+        <div className="mt-6 min-h-[400px]">
+          {passed === 1 && (
+            <div className="animate-in fade-in space-y-8 duration-500">
+              <PersonalDataFields datos={data} manejarCambio={handleChange} />
+              <AcademicFields datos={data} manejarCambio={handleChange} />
+            </div>
+          )}
 
-        {passed === 2 && (
-          <div className="animate-in slide-in-from-right-4 duration-300">
-            <LocationFields datos={data} manejarCambio={handleChange} />
-          </div>
-        )}
+          {passed === 2 && (
+            <div className="animate-in slide-in-from-right-4 duration-300">
+              <LocationFields datos={data} manejarCambio={handleChange} />
+            </div>
+          )}
 
-        {passed === 3 && (
-          <HealthPhysicalFields datos={data} manejarCambio={handleChange} />
-        )}
-        {passed === 4 && (
-          <ParentsFields datos={data} manejarCambio={handleChange} />
-        )}
-        {passed === 5 && (
-          <LegalRepresentativeFields
-            datos={data}
-            manejarCambio={handleChange}
-          />
-        )}
-        {passed === 6 && (
-          <EnrollmentSchool data={data} manejoCambio={handleChange} />
-        )}
-        {passed === 7 && (
-          <>
-            <Input
-              label="Tu usuario para ingresar al sistema"
-              placeholder="Ej: juan.fernandez"
-              name="username"
-              onChange={handleChange}
-              value={data.email}
-              readOnly={true}
+          {passed === 3 && (
+            <HealthPhysicalFields datos={data} manejarCambio={handleChange} />
+          )}
+          {passed === 4 && (
+            <ParentsFields datos={data} manejarCambio={handleChange} />
+          )}
+          {passed === 5 && (
+            <LegalRepresentativeFields
+              datos={data}
+              manejarCambio={handleChange}
             />
-
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <InputPass
-                label={"Ingresa tu contraseña para ingresar al sistema"}
-                placeholder={"*********"}
-                value={data.pass}
-                name={"pass"}
+          )}
+          {passed === 6 && (
+            <EnrollmentSchool data={data} manejoCambio={handleChange} />
+          )}
+          {passed === 7 && (
+            <>
+              <Input
+                label="Tu usuario para ingresar al sistema"
+                placeholder="Ej: juan.fernandez"
+                name="username"
                 onChange={handleChange}
+                value={data.email}
+                readOnly={true}
               />
-              <InputPass
-                label={"Confirma tu contraseña"}
-                placeholder={"*********"}
-                value={confirmPass}
-                name={"confirmPass"}
-                onChange={(e) => setConfirmPass(e.target.value)}
-              />
-            </div>
 
-            {data.pass && confirmPass && data.pass !== confirmPass && (
-              <p className="mt-3 animate-pulse text-xs font-medium text-red-500">
-                ⚠️ Las contraseñas no coinciden.
-              </p>
-            )}
-            <div className="mt-4 flex items-start gap-3">
-              <input
-                type="checkbox"
-                id="terms"
+              <div className="mt-7 grid md:grid-cols-2 grid-cols-1 gap-3">
+                <InputPass
+                  label={"Ingresa tu contraseña para ingresar al sistema"}
+                  placeholder={"*********"}
+                  value={data.pass}
+                  name={"pass"}
+                  onChange={handleChange}
+                />
+                <InputPass
+                  label={"Confirma tu contraseña"}
+                  placeholder={"*********"}
+                  value={confirmPass}
+                  name={"confirmPass"}
+                  onChange={(e) => setConfirmPass(e.target.value)}
+                />
+              </div>
+
+              {data.pass && confirmPass && data.pass !== confirmPass && (
+                <p className="mt-3 animate-pulse text-xs font-medium text-red-500">
+                  ⚠️ Las contraseñas no coinciden.
+                </p>
+              )}
+              <Terms
                 onChange={(e) => setAccepted(e.target.checked)}
-                required
-                className="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                accepted={accepted}
               />
-              <label htmlFor="terms" className="text-sm text-gray-600">
-                Acepto los{" "}
-                <button type="button" className="text-indigo-600 underline">
-                  Términos y Condiciones
-                </button>{" "}
-                y la Política de Privacidad de SIGACE.
-              </label>
-            </div>
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
 
-      <div className="mt-8 flex justify-between border-t border-gray-100 pt-6">
-        <Button
-          icon={faLeftLong}
-          onClick={() => setPassed((p) => Math.max(1, p - 1))}
-          classNameBtn={`text-slate-400 hover:text-slate-600 font-medium ${passed === 1 ? "invisible" : ""}`}
-        >
-          Anterior
-        </Button>
-
-        {passed < 7 ? (
+        <div className="mt-8 flex justify-between border-t border-gray-100 pt-6">
           <Button
-            icon={faRightLong}
-            onClick={() => setPassed((p) => Math.min(7, p + 1))}
-            classNameBtn="rounded-lg bg-indigo-600 px-8 py-2 font-bold text-white transition-all hover:bg-indigo-700 active:scale-95 group flex items-center gap-3"
-            classNameIcon="group-hover:translate-x-1 transition-transform duration-300"
+            icon={faLeftLong}
+            onClick={() => setPassed((p) => Math.max(1, p - 1))}
+            classNameBtn={`text-slate-400 hover:text-slate-600 font-medium ${passed === 1 ? "invisible" : ""}`}
           >
-            Siguiente
+            Anterior
           </Button>
-        ) : (
-          <>
+
+          {passed < 7 ? (
             <Button
-              icon={faUserPlus}
-              type="submit"
-              disabled={loading || !accepted}
-              classNameBtn="rounded-lg bg-green-600 px-8 py-2 font-bold text-white transition-all hover:bg-green-700 disabled:bg-slate-300 flex items-center gap-2 shadow-lg shadow-green-100"
+              icon={faRightLong}
+              onClick={() => setPassed((p) => Math.min(7, p + 1))}
+              classNameBtn="rounded-lg bg-indigo-600 px-8 py-2 font-bold text-white transition-all hover:bg-indigo-700 active:scale-95 group flex items-center gap-5"
+              classNameIcon="group-hover:translate-x-1 transition-transform duration-300"
             >
-              {loading ? "Procesando..." : "Finalizar Inscripción"}
+              Siguiente
             </Button>
-          </>
-        )}
-      </div>
-    </form>
+          ) : (
+            <>
+              <Button
+                icon={faUserPlus}
+                type="submit"
+                disabled={loading || !accepted}
+                classNameBtn="rounded-lg bg-green-600 px-8 py-2 font-bold text-white transition-all hover:bg-green-700 disabled:bg-slate-300 flex items-center gap-2 shadow-lg shadow-green-100"
+              >
+                {loading ? "Procesando..." : "Inscribir"}
+              </Button>
+            </>
+          )}
+        </div>
+      </form>
+    </div>
   );
 }

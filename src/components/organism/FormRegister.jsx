@@ -46,6 +46,7 @@ export default function FormRegister() {
     password: "",
     passwordConfir: "",
     sig: "",
+    accepted: false,
     role: "teacher",
   });
 
@@ -135,9 +136,10 @@ export default function FormRegister() {
       setLoading(false);
     }
   }
+  console.log(data.accepted);
 
   return (
-    <div className="w-full max-w-3xl p-3 md:p-0">
+    <div className="w-full max-w-2xl p-3 md:p-0">
       <div className="w-full rounded-2xl border border-gray-100 bg-white p-8 shadow">
         <div className="mb-2 text-center">
           <h1 className="mb-1 text-3xl font-black text-indigo-900">
@@ -189,7 +191,7 @@ export default function FormRegister() {
                 <Button
                   icon={faUserPlus}
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !data.accepted}
                   classNameBtn="rounded-lg bg-green-600 px-8 py-2 font-bold text-white transition-all hover:bg-green-700 disabled:bg-slate-300 flex items-center gap-2 shadow-lg shadow-green-100"
                 >
                   {loading ? "Procesando..." : "Registrar"}

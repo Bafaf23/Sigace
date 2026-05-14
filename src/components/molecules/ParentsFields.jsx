@@ -34,7 +34,7 @@ const ParentsFields = ({ datos, manejarCambio }) => {
         <h5 className="text-sm font-bold text-indigo-500 uppercase">
           Datos de la Madre
         </h5>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
           <Input
             name="motherDni"
             placeholder="V-1234567"
@@ -51,13 +51,15 @@ const ParentsFields = ({ datos, manejarCambio }) => {
             onChange={manejarCambio}
           />
 
-          <Input
-            name="motherPhone"
-            placeholder="0424XXXXX"
-            label="Numero de telefono"
-            value={datos.motherPhone}
-            onChange={manejarCambio}
-          />
+          <div className="col-span-2 md:col-span-1">
+            <Input
+              name="motherPhone"
+              placeholder="0424XXXXX"
+              label="Numero de telefono"
+              value={datos.motherPhone}
+              onChange={manejarCambio}
+            />
+          </div>
         </div>
       </div>
 
@@ -66,7 +68,7 @@ const ParentsFields = ({ datos, manejarCambio }) => {
         <h5 className="text-sm font-bold text-indigo-500 uppercase">
           Datos del Padre
         </h5>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
           <Input
             name="fatherDni"
             placeholder="V-1234567"
@@ -82,13 +84,15 @@ const ParentsFields = ({ datos, manejarCambio }) => {
             onChange={manejarCambio}
           />
 
-          <Input
-            name="fatherPhone"
-            placeholder="0424XXXXX"
-            label="Numero de telefono"
-            value={datos.fatherPhone}
-            onChange={manejarCambio}
-          />
+          <div className="col-span-2 md:col-span-1">
+            <Input
+              name="fatherPhone"
+              placeholder="0424XXXXX"
+              label="Numero de telefono"
+              value={datos.fatherPhone}
+              onChange={manejarCambio}
+            />
+          </div>
         </div>
       </div>
     </div>
