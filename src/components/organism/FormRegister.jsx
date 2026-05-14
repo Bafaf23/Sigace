@@ -137,7 +137,7 @@ export default function FormRegister() {
   }
 
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full max-w-3xl p-3 md:p-0">
       <div className="w-full rounded-2xl border border-gray-100 bg-white p-8 shadow">
         <div className="mb-2 text-center">
           <h1 className="mb-1 text-3xl font-black text-indigo-900">

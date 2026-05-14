@@ -48,7 +48,7 @@ export default function FromLogin() {
     setLoading(false);
   };
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md p-4 md:p-0">
       {/* Botón para volver */}
       <Links
         direction="https://sigce-page.vercel.app"
@@ -87,21 +87,21 @@ export default function FromLogin() {
             onChange={handleChange}
           />
 
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center justify-between gap-2 flex-col md:flex-row md:justify-between">
+            <Links
+              icon={faKey}
+              direction="#"
+              className="text-sm font-semibold text-cyan-600 hover:text-cyan-700 text-center md:text-left gap-2"
+              label={"¿Olvidaste tu contraseña?"}
+            ></Links>
             <Links
               direction="/register"
               icon={faUserPlus}
-              className="flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700"
+              className="flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700 text-center md:text-left"
               label={"Registrate"}
             >
               Registrate
             </Links>
-            <Links
-              icon={faKey}
-              direction="#"
-              className="col-span-2 col-start-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700"
-              label={"¿Olvidaste tu contraseña?"}
-            ></Links>
           </div>
 
           <Button
