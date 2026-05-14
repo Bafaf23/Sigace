@@ -1,5 +1,11 @@
 import Link from "next/link";
-export default function Polity({ onChange, accepted }) {
+/**
+ * Componente de checkbox para aceptar los términos y condiciones de uso del sistema.
+ * @param {Function} onChange - Funcion para manejar el cambio de estado del checkbox.
+ * @param {boolean} accepted - Estado del checkbox.
+ * @returns {JSX.Element}
+ */
+export default function Terms({ onChange, accepted }) {
   return (
     <div className="mt-4 flex items-start gap-3">
       <input

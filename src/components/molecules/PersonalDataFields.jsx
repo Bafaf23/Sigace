@@ -17,13 +17,12 @@ import SelectorInput from "./SelectorInput";
 const PersonalDataFields = ({ datos, manejarCambio }) => {
   const dniType = [
     { value: "V-", label: "Venezolano" },
-    { value: "E-", label: "Extranjero" },
     { value: "CE-", label: "Cedula Estudiantil" },
   ];
 
   const genderSel = [
-    { label: "Femenino", value: "femenino" },
-    { label: "Masculino", value: "masculino" },
+    { label: "Femenino", value: "F" },
+    { label: "Masculino", value: "M" },
   ];
 
   const handleToggle = (e) => {
@@ -38,13 +37,13 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
       </h4>
       <div>
         <ToggleSimple
-          label={"¿Vienes de otra institución académica?"}
+          label={"¿Vienes de otra institución academica?"}
           name={"isNewEntry"}
           value={datos.isNewEntry}
           onChange={handleToggle}
         />
       </div>
-      <div className="grid grid-cols-3 items-end gap-4">
+      <div className="grid md:grid-cols-3 items-end gap-4">
         <div className="col-span-2">
           <SelectorInput
             id={"dniType"}
@@ -59,17 +58,19 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
           />
         </div>
 
-        <Input
-          name={"birthDate"}
-          label={"Fecha de nacimiento"}
-          placeholder={"23/12/2002"}
-          type={"date"}
-          onChange={manejarCambio}
-          value={datos.birthDate || ""}
-        />
+        <div className="col-span-2 md:col-span-1">
+          <Input
+            name={"birthDate"}
+            label={"Fecha de nacimiento"}
+            placeholder={"23/12/2002"}
+            type={"date"}
+            onChange={manejarCambio}
+            value={datos.birthDate || ""}
+          />
+        </div>
       </div>
 
-      <div className="grid grid-cols-3 place-items-end gap-2">
+      <div className="grid grid-cols-2 place-items-end gap-2 md:grid-cols-3">
         <Input
           name={"name"}
           label={"Nombre"}
@@ -84,26 +85,28 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
           onChange={manejarCambio}
           value={datos?.lastName}
         />
-        <Selector
-          name={"gender"}
-          label={"Género / Sexo"}
-          options={genderSel}
-          onChange={manejarCambio}
-          value={datos?.gender}
-        />
+        <div>
+          <Selector
+            name={"gender"}
+            label={"Género / Sexo"}
+            options={genderSel}
+            onChange={manejarCambio}
+            value={datos?.gender}
+          />
+        </div>
       </div>
-      <div className="grid grid-cols-2 place-items-end gap-2">
+      <div className="grid md:grid-cols-2 place-items-end gap-2">
         <Input
           name={"email"}
-          label={"Correo"}
+          label={"Correo Electronico"}
           placeholder={"ejemplo@correo.com"}
           onChange={manejarCambio}
           value={datos?.email}
         />
         <Input
           name={"phone"}
-          label={"Numero de telefono"}
-          placeholder={"0424XXXX"}
+          label={"Numero de Telefono"}
+          placeholder={"0424XXXXXXX"}
           onChange={manejarCambio}
           value={datos?.phone}
         />

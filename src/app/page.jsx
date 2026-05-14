@@ -1,7 +1,8 @@
 import FromLogin from "@/components/organism/FromLogin";
 
 export const metadata = {
-  title: "Iniciar Sesión",
+  title: "SIGACE - Iniciar Sesión",
+  description: "Inicia sesión en SIGACE para acceder a la plataforma",
 };
 
 export default function LoginPage() {

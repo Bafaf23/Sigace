@@ -35,7 +35,7 @@ const HealthPhysicalFields = ({ datos, manejarCambio }) => {
       <h4 className="border-b pb-2 font-bold text-blue-700">
         Información Médica y Tallas
       </h4>
-      <div className="grid grid-cols-3 items-end gap-4">
+      <div className="grid md:grid-cols-3 grid-cols-2 items-end gap-4">
         <Selector
           id={"bloodType"}
           name={"bloodType"}
@@ -58,7 +58,7 @@ const HealthPhysicalFields = ({ datos, manejarCambio }) => {
           onChange={manejarCambio}
           value={datos.allergies}
         />
-        <div className="col-span-3">
+        <div className="col-span-2 md:col-span-3">
           <Input
             name="neurodevelopmentConditions"
             label="Condiciones de Neurodesarrollo"
@@ -77,7 +77,7 @@ const HealthPhysicalFields = ({ datos, manejarCambio }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid md:grid-cols-3 grid-cols-2 gap-2">
         <Input
           name={"shirtSize"}
           label={"Talla de camisa"}
@@ -100,7 +100,7 @@ const HealthPhysicalFields = ({ datos, manejarCambio }) => {
           value={datos.shoeSize}
         />
       </div>
-      <div className="grid grid-cols-3 place-items-end gap-2">
+      <div className="grid md:grid-cols-3 grid-cols-2 place-items-end gap-2">
         <Input
           name={"medicalCondition"}
           label={"¿Tienes alguna enfermedad o condición médica?"}
