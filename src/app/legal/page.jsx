@@ -1,4 +1,8 @@
-export default function TermsAndConditions() {
+export const metadata = {
+  title: "SIGACE - Términos y Condiciones",
+  description: "Términos y Condiciones de uso del sistema SIGACE",
+};
+export default function LegalPage() {
   return (
     <article className="m-auto max-w-3xl space-y-6 p-5 text-justify leading-relaxed">
       {/* Titulo y descripcion */}

@@ -17,8 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 import EnrollmentSchool from "../molecules/EnrollmentSchool";
+import Terms from "@/components/atom/Terms";
 
 export default function FormInscrip() {
   const [passed, setPassed] = useState(1);
@@ -209,22 +209,10 @@ export default function FormInscrip() {
                 ⚠️ Las contraseñas no coinciden.
               </p>
             )}
-            <div className="mt-4 flex items-start gap-3">
-              <input
-                type="checkbox"
-                id="terms"
-                onChange={(e) => setAccepted(e.target.checked)}
-                required
-                className="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              />
-              <label htmlFor="terms" className="text-sm text-gray-600">
-                Acepto los{" "}
-                <button type="button" className="text-indigo-600 underline">
-                  Términos y Condiciones
-                </button>{" "}
-                y la Política de Privacidad de SIGACE.
-              </label>
-            </div>
+            <Terms
+              onChange={(e) => setAccepted(e.target.checked)}
+              accepted={accepted}
+            />
           </>
         )}
       </div>

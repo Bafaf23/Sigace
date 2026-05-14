@@ -48,7 +48,7 @@ export default function FromLogin() {
     setLoading(false);
   };
   return (
-    <div className="w-full max-w-md p-4 md:p-0">
+    <div className="w-full max-w-md px-5 md:py-0">
       {/* Botón para volver */}
       <Links
         direction="https://sigce-page.vercel.app"

@@ -1,7 +1,7 @@
 import FormInscrip from "@/components/organism/FromInscrip";
 
 export const metadata = {
-  title: "Inscripcion",
+  title: "SIGACE - Inscripcion",
 };
 
 export default function EnrollmentPage() {
