@@ -13,8 +13,8 @@ export const patterns = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   password:
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-  name: /^[a-zA-Z]+$/,
-  lastName: /^[a-zA-Z]+$/,
+  name: /^[a-zA-Z]+( [a-zA-Z]+)*$/,
+  lastName: /^[a-zA-Z]+( [a-zA-Z]+)*$/,
   dni: /^[0-9]{8}$/,
   phone: /^0(412|414|416|424|426)\d{7}$/,
   address: /^[a-zA-Z0-9\s]+$/,

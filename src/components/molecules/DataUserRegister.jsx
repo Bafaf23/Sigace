@@ -35,7 +35,7 @@ export default function DataUserRegister({ data, manejoCambio }) {
   return (
     <div className="space-y-3">
       <hr className="border border-slate-100" />
-      <div className="grid grid-cols-3 items-center gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 items-center gap-2">
         <div className="col-span-2">
           <SelectorInput
             label={"Tipo de Identidad"}
@@ -50,14 +50,16 @@ export default function DataUserRegister({ data, manejoCambio }) {
           />
         </div>
 
-        <Input
-          label={"Fecha de Nacimiento"}
-          type={"date"}
-          placeholder={"23-09-2003"}
-          value={data.birthdate}
-          name={"birthdate"}
-          onChange={manejoCambio}
-        />
+        <div className="col-span-2 md:col-span-1">
+          <Input
+            label={"Fecha de Nacimiento"}
+            type={"date"}
+            placeholder={"23-09-2003"}
+            value={data.birthdate}
+            name={"birthdate"}
+            onChange={manejoCambio}
+          />
+        </div>
       </div>
 
       <div className="flex gap-2">
@@ -97,7 +99,7 @@ export default function DataUserRegister({ data, manejoCambio }) {
           onChange={manejoCambio}
         />
       </div>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <InputPass
           label={"Contrasena"}
           placeholder={"******"}
