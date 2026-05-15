@@ -6,7 +6,10 @@ import { Toaster } from "react-hot-toast";
 config.autoAddCss = false;
 
 export const metadata = {
-  title: "Sigace | Gestión Escolar",
+  title: {
+    template: "Sigace | %s",
+    default: "Sigace - Gestión Escolar",
+  },
   description: "Sistema de Control de Estudios para Liceos",
 };
 

@@ -11,98 +11,105 @@ import {
   faUserCheck,
   faSitemap,
   faCalendarCheck,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 /**
- * Aciones rapidas para el usuario, en vista moviles, con soprte al component Icon
+ * Acciones rapidas para el usuario, en vista moviles, con soprte al component Icon
  * Con opciones dependiendo al rol del Usuario [TEACHER, STUDENT, ADMIN]
  *
+ * @component
  * @returns {JSX.Element}
  */
-
-export default function AccionesRapidas() {
+export default function QuickActions() {
   const pathname = usePathname();
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const menuConfig = {
     teacher: [
       {
         name: "Inicio",
-        src: "/dashboard/teachers",
+        src: "/dashboard/teacher",
         icon: faHome,
-        active: pathname === "/dashboard/teachers" ? "hidden" : "",
+        active: pathname === "/dashboard/teacher" ? "hidden" : "",
+      },
+      {
+        name: "Mi Perfil",
+        src: "/dashboard/profile",
+        icon: faUser,
+        active: pathname === "/dashboard/profile" ? "hidden" : "",
       },
       {
         name: "Cargar Notas",
-        src: "/dashboard/teachers/cargarNotas",
+        src: "/dashboard/teacher/cargarNotas",
         icon: faEdit,
-        active: pathname === "/dashboard/teachers/cargarNotas" ? "hidden" : "",
+        active: pathname === "/dashboard/teacher/cargarNotas" ? "hidden" : "",
       },
       {
         name: "Plan Evaluativo",
-        src: "/dashboard/teachers/planEvaluativo",
+        src: "/dashboard/teacher/planEvaluativo",
         icon: faChartLine,
         active:
-          pathname === "/dashboard/teachers/planEvaluativo" ? "hidden" : "",
+          pathname === "/dashboard/teacher/planEvaluativo" ? "hidden" : "",
       },
     ],
     student: [
       {
         name: "Inicio",
-        src: "/dashboard/students",
+        src: "/dashboard/student",
         icon: faHome,
-        active: pathname === "/dashboard/students" ? "hidden" : "",
+        active: pathname === "/dashboard/student" ? "hidden" : "",
       },
       {
         name: "Notas",
-        src: "/dashboard/students/notas",
+        src: "/dashboard/student/notas",
         icon: faEdit,
-        active: pathname === "/dashboard/students/notas" ? "hidden" : "",
+        active: pathname === "/dashboard/student/notas" ? "hidden" : "",
       },
     ],
     administrator: [
       {
         icon: faHome,
         name: "Mi Inicio",
-        src: "/dashboard/administrators",
-        active: pathname === `/dashboard/administrators` ? "hidden" : "",
+        src: "/dashboard/administrator",
+        active: pathname === `/dashboard/administrator` ? "hidden" : "",
       },
       {
         icon: faSitemap,
         name: "Control de Secciones",
-        active: pathname === `/dashboard/administrators/materias`,
-        src: "/dashboard/administrators/materias",
+        active: pathname === `/dashboard/administrator/controlSecciones`,
+        src: "/dashboard/administrator/controlSecciones",
       },
       {
         icon: faUserCheck,
         name: "Inscripciones",
-        active: pathname === `/dashboard/administrators/materias`,
-        src: "/dashboard/administrators/materias",
+        active: pathname === `/dashboard/administrator/inscripciones`,
+        src: "/dashboard/administrator/inscripciones",
       },
       {
         icon: faUserMinus,
         name: "Retiros y Traslados",
-        active: pathname === `/dashboard/administrators/materias`,
-        src: "/dashboard/administrators/materias",
+        active: pathname === `/dashboard/administrator/retirosYTraslados`,
+        src: "/dashboard/administrator/retirosYTraslados",
       },
       {
         icon: faChalkboardTeacher,
         name: "Carga Académica",
-        active: pathname === `/dashboard/administrators/materias`,
-        src: "/dashboard/administrators/materias",
+        active: pathname === `/dashboard/administrator/cargaAcademica`,
+        src: "/dashboard/administrator/cargaAcademica",
       },
       {
         icon: faBook,
         name: "Gestión de Materias",
-        active: pathname === `/dashboard/administrators/materias`,
-        src: "/dashboard/administrators/materias",
+        active: pathname === `/dashboard/administrator/gestionAsignaturas`,
+        src: "/dashboard/administrator/gestionAsignaturas",
       },
       {
         icon: faCalendarCheck,
         name: "Configuración de Lapsos",
-        active: pathname === `/dashboard/administrators/materias`,
-        src: "/dashboard/administrators/materias",
+        active: pathname === `/dashboard/administrator/configuracionLapsos`,
+        src: "/dashboard/administrator/configuracionLapsos",
       },
     ],
   };
@@ -111,7 +118,7 @@ export default function AccionesRapidas() {
 
   return (
     <section className="p-3 lg:hidden">
-      <h1 className="font-bold text-gray-400 uppercase">Acciones</h1>
+      <h1 className="font-bold text-gray-400 uppercase">Acciones rápidas</h1>
       <nav className="mt-4 flex justify-evenly rounded-2xl bg-gray-400/30 p-3">
         {acciones.map((accion, index) => (
           <Link

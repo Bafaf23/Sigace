@@ -1,8 +1,8 @@
 "use client";
 import AccessDenied from "@/components/molecules/AccessDenied";
-import AccionesRapidas from "@/components/molecules/AccionesRapidas";
+import AccionesRapidas from "@/components/molecules/QuickActions";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
-import Resumenes from "@/components/molecules/Resumenes";
+import Resumenes from "@/components/molecules/SummaryCards";
 import { useAuth } from "@/context/AuthContext";
 import Loading from "@/app/dashboard/loading";
 
@@ -11,7 +11,8 @@ export default function dashboardStudiantPage() {
 
   if (loading) return <Loading />;
 
-  if (!user || user?.role !== "student") {
+  const role = user?.user?.role ?? user?.role;
+  if (!user || role !== "student") {
     return <AccessDenied />;
   }
 

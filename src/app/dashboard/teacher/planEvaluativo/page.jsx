@@ -2,7 +2,7 @@
 import AccessDenied from "@/components/molecules/AccessDenied";
 import Button from "@/components/atom/Button";
 import Selector from "@/components/atom/Selector";
-import AccionesRapidas from "@/components/molecules/AccionesRapidas";
+import AccionesRapidas from "@/components/molecules/QuickActions";
 import FormCargaPV from "@/components/molecules/FormCargaPV";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import { useAuth } from "@/context/AuthContext";
@@ -19,7 +19,8 @@ export default function PlanEvaluativo() {
 
   if (loading) return <Loading />;
 
-  if (!user || user?.role !== "teacher") {
+  const role = user?.user?.role ?? user?.role;
+  if (!user || role !== "teacher") {
     return <AccessDenied />;
   }
 
