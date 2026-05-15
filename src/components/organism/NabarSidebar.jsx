@@ -14,63 +14,63 @@ import {
   faSitemap,
   faCalendarCheck,
   faBowlRice,
-  faLongArrowAltDown,
   faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
+import ItemProfile from "../atom/ItemProfile";
 
 export default function NavbarSidebar() {
   const patthename = usePathname();
   const { user, loading, handleLogout } = useAuth();
 
-  if (loading) return <div>Cargando...</div>;
-  if (!user) return <div>No hay usuario</div>;
+  if (loading) return;
+  if (!user) return;
 
   const menuLink = {
     teacher: [
       {
         icon: faHome,
         label: "Inicio",
-        active: patthename === `/dashboard/teachers`,
-        direccion: `/dashboard/teachers`,
+        active: patthename === `/dashboard/teacher`,
+        direccion: `/dashboard/teacher`,
       },
       {
         icon: faListCheck,
         label: "Plan Evaluativo",
-        active: patthename === `/dashboard/teachers/planEvaluativo`,
-        direccion: `/dashboard/teachers/planEvaluativo`,
+        active: patthename === `/dashboard/teacher/planEvaluativo`,
+        direccion: `/dashboard/teacher/planEvaluativo`,
       },
       {
         icon: faPenToSquare,
         label: "Cargas de Notas",
-        active: patthename === `/dashboard/teachers/cargarNotas`,
-        direccion: `/dashboard/teachers/cargarNotas`,
+        active: patthename === `/dashboard/teacher/cargarNotas`,
+        direccion: `/dashboard/teacher/cargarNotas`,
       },
       {
         icon: faUserCheck,
         label: "Asistencias",
-        active: patthename === `/dashboard/teachers/asistencia`,
-        direccion: `/dashboard/teachers/asistencia`,
+        active: patthename === `/dashboard/teacher/asistencia`,
+        direccion: `/dashboard/teacher/asistencia`,
       },
     ],
     student: [
       {
         icon: faHome,
         label: "Mi Inicio",
-        direccion: "/dashboard/students",
-        active: patthename === `/dashboard/students`,
+        direccion: "/dashboard/student",
+        active: patthename === `/dashboard/student`,
       },
       {
         icon: faListCheck,
         label: "Mis Notas",
-        active: patthename === `/dashboard/students/notas`,
-        direccion: "/dashboard/students/notas",
+        active: patthename === `/dashboard/student/notas`,
+        direccion: "/dashboard/student/notas",
       },
       {
         icon: faUserCheck,
         label: "Mi Asistencia",
-        active: patthename === `/dashboard/students/asistencia`,
-        direccion: "/dashboard/students/asistencia",
+        active: patthename === `/dashboard/student/asistencia`,
+        direccion: "/dashboard/student/asistencia",
       },
     ],
     administrator: [
@@ -149,7 +149,7 @@ export default function NavbarSidebar() {
 
       {/* Cerrar sesion */}
       <div className="flex items-center justify-between">
-        <VersionTag />
+        <ItemProfile user={user} />
       </div>
       <div className="mt-auto border-t border-slate-400/30 pt-4 dark:border-slate-700">
         <Button

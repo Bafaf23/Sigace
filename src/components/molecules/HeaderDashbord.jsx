@@ -30,7 +30,7 @@ export default function HeaderDashbord({ user, titelPage }) {
       <div className="w-full rounded-b-2xl bg-indigo-500 p-3 text-slate-100 shadow-indigo-400 md:bg-transparent lg:bg-transparent dark:bg-indigo-600 dark:shadow-indigo-400">
         <div className="mb-2 flex w-full items-center justify-between gap-2">
           {user ? (
-            <div>
+            <div className="flex flex-col justify-between w-full">
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-bold text-slate-50 md:text-3xl md:text-indigo-300 dark:text-slate-500">
                   Hola,

@@ -1,6 +1,6 @@
 "use client";
 import AccessDenied from "@/components/molecules/AccessDenied";
-import AccionesRapidas from "@/components/molecules/AccionesRapidas";
+import AccionesRapidas from "@/components/molecules/QuickActions";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import { useAuth } from "@/context/AuthContext";
 import Loading from "../loading";

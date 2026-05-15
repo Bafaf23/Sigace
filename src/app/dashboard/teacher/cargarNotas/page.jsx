@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/atom/Button";
-import AccionesRapidas from "@/components/molecules/AccionesRapidas";
+import AccionesRapidas from "@/components/molecules/QuickActions";
 import FormCargaNotas from "@/components/molecules/FromCargaNotas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import Modal from "@/components/organism/Modal";

@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-hot-toast";
 
-export default function Reportes() {
+export default function Reports() {
   return (
     <section className="mt-5 flex flex-col gap-5 p-3">
       <h1 className="text-xl font-bold text-gray-600/60 uppercase dark:text-slate-400">

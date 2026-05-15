@@ -6,8 +6,10 @@ import {
   faUsers,
   faUser,
   faClock,
+  faBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import Icon from "../atom/Icon";
 
 /**
  * Tarjetas de informacion del profesor para el profesor.
@@ -18,19 +20,20 @@ import { useEffect, useState } from "react";
  * @returns {JSX.Element}
  */
 
-export default function Resumenes({ teachersId }) {
+export default function SummaryCards({ teachersId }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
   if (!data || Object.keys(data).length === 0) {
     return (
-      <div className="flex items-center justify-center p-3">
-        <div className="w-full rounded-2xl border border-slate-200 bg-slate-200 p-5 text-center text-slate-400 dark:border-slate-600 dark:bg-slate-600">
+      <div className="flex items-center justify-center p-3 mt-5">
+        <div className="w-full rounded-2xl border border-dashed border-slate-500 bg-slate-100 p-5 text-center text-slate-400 dark:border-slate-600 dark:bg-slate-600 flex flex-col items-center justify-center gap-2">
+          <Icon icon={faBook} className="text-4xl text-slate-400" />
           <h3 className="text-lg font-semibold text-slate-500 dark:text-slate-200">
-            No hay informacion que mostrar
+            No hay información que mostrar
           </h3>
           <p className="text-sm text-slate-400">
-            Parece que aún no se han creado informacion en este año escolar.
+            Parece que aún no se han creado información en este año escolar.
           </p>
         </div>
       </div>
