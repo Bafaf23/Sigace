@@ -20,6 +20,86 @@ import toast from "react-hot-toast";
 import EnrollmentSchool from "../molecules/EnrollmentSchool";
 import Terms from "@/components/atom/Terms";
 
+const GENDER_TO_DB = { F: "femenino", M: "masculino" };
+
+const RELATIONSHIP_TO_DB = {
+  madre: "mamá",
+  mamá: "mamá",
+  padre: "papá",
+  papá: "papá",
+  tutor: "tutor",
+  proteccionIntegral: "institucional",
+  institucional: "institucional",
+};
+
+function buildFullDni(type, number) {
+  if (!type || !number) return "";
+  return `${type}${number}`;
+}
+
+function buildConditionDescription(formData) {
+  if (!formData.isNewEntry) return "Ingreso regular";
+
+  const parts = [
+    formData.previousSchool && `Plantel: ${formData.previousSchool}`,
+    formData.previousSchoolCode && `DEA: ${formData.previousSchoolCode}`,
+    formData.previousYear && `Año cursado: ${formData.previousYear}`,
+    formData.previousSection && `Sección: ${formData.previousSection}`,
+    formData.canaimaSerial && `Canaima: ${formData.canaimaSerial}`,
+  ].filter(Boolean);
+
+  return parts.length > 0 ? parts.join(" | ") : "Nuevo ingreso";
+}
+
+/** Arma el cuerpo del POST alineado con users, students y legal_representatives. */
+function buildEnrollmentPayload(formData) {
+  const repDni = buildFullDni(formData.repdniType, formData.repdni);
+  const relationship =
+    RELATIONSHIP_TO_DB[formData.relationship] || formData.relationship;
+
+  return {
+    documentType: formData.documentType,
+    document: formData.document,
+    name: formData.name,
+    lastName: formData.lastName,
+    email: formData.email,
+    phone: formData.phone,
+    birthDate: formData.birthDate,
+    pass: formData.pass,
+    sig: formData.sig,
+    section: formData.section,
+    year: formData.year,
+    gender: GENDER_TO_DB[formData.gender] || formData.gender,
+    birthCountry: formData.birthCountry || "Venezuela",
+    state: formData.state,
+    municipality: formData.municipality,
+    addressDetail: formData.addressDetail,
+    bloodType: formData.bloodType,
+    allergies: formData.allergies || "Ninguna",
+    weight: formData.weight,
+    height: formData.height,
+    shirtSize: formData.shirtSize,
+    shoeSize: formData.shoeSize,
+    pantSize: formData.pantSize,
+    medicalCondition: formData.medicalCondition || "Ninguna",
+    repdni: repDni,
+    repName: formData.repName,
+    repLastName: formData.repLastName,
+    repEmail: formData.repEmail,
+    repPhone: formData.repPhone,
+    relationship,
+    legalRepresentativeDni: repDni,
+    legalRepresentativeName: formData.repName,
+    legalRepresentativeLastName: formData.repLastName,
+    legalRepresentativePhone: formData.repPhone,
+    legalRepresentativeEmail: formData.repEmail,
+    legalRepresentativeRelationship: relationship,
+    condition: formData.isNewEntry ? "nuevo_ingreso" : "regular",
+    conditionDescription: buildConditionDescription(formData),
+    codeCertificate: `C${String(formData.document).padStart(9, "0")}`,
+  };
+}
+
 export default function FormInscrip() {
   const [passed, setPassed] = useState(1);
   const [confirmPass, setConfirmPass] = useState("");
@@ -146,14 +226,15 @@ export default function FormInscrip() {
    */
   const [data, setData] = useState({
     // Paso 1: Personales + Academicos
-    dniType: "V-",
-    dni: "",
+    documentType: "V-",
+    document: "",
     name: "",
     lastName: "",
     email: "",
     phone: "",
     gender: "",
     birthDate: "",
+    birthCountry: "Venezuela",
     pass: "",
     isNewEntry: false,
     previousSchool: "",
@@ -177,6 +258,7 @@ export default function FormInscrip() {
     allergies: "",
     shirtSize: "",
     pantSize: "",
+
     shoeSize: "",
     weight: "",
     medicalCondition: "",
@@ -187,22 +269,22 @@ export default function FormInscrip() {
     motherDni: "",
     motherEmail: "",
     motherPhone: "",
-
+    lateralidad: "",
     fatherName: "",
     fatherDni: "",
     fatherEmail: "",
     fatherPhone: "",
 
-    // Paso 5: Legal Representative
-    repDni: "",
+    // Paso 5: Representante legal (legal_representatives + rep_* en students)
+    repdniType: "V-",
+    repdni: "",
     repName: "",
     repLastName: "",
     repPhone: "",
     relationship: "",
     repEmail: "",
-
+    birthCertificate: "",
     sig: "",
-    accepted: false, // Indica si el estudiante acepta los términos y condiciones de uso del sistema.
   });
 
   const handleChange = (e) => {
@@ -216,38 +298,63 @@ export default function FormInscrip() {
 
     if (loading) return;
 
-    if (!data.dni || !data.name || !data.lastName) {
+    if (!data.document || !data.name || !data.lastName) {
       return toast.error(
         "Por favor, rellena los campos obligatorios del estudiante.",
       );
     }
 
-    if (data.pass !== confirmPass) {
+    if (!data.repdni || !data.repName || !data.repLastName) {
       return toast.error(
-        "Las contraseñas no coinciden. Por favor, verifícalas.",
+        "Por favor, completa los datos del representante legal.",
       );
+    }
+
+    if (!data.sig || !data.section || !data.year) {
+      return toast.error(
+        "Selecciona la institución, el año y la sección a inscribir.",
+      );
+    }
+
+    if (data.pass !== confirmPass) {
+      return toast.error("Las contraseñas no coinciden.");
     }
 
     setLoading(true);
 
+    const payload = buildEnrollmentPayload(data);
+
     try {
-      const result = await fetch("http://127.0.0.1:5000/register/", {
-        headers: {
-          "Content-Type": "application/json",
+      const result = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/create_enrollment/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(payload),
         },
-        method: "POST",
-        body: JSON.stringify(data),
-      });
+      );
+
+      const responseData = await result.json().catch(() => ({}));
 
       if (result.ok) {
         toast.success("¡Inscripción procesada con éxito!");
-        setResulData(result);
+        setResulData({
+          ...payload,
+          ...responseData,
+          user: {
+            name: data.name,
+            lastName: data.lastName,
+            email: data.email,
+            dni: buildFullDni(data.documentType, data.document),
+          },
+        });
         setSuccess(true);
       } else {
-        toast.error(result.error || "Hubo un error al registrar.");
-        setLoading(false);
+        toast.error(responseData.error || "Hubo un error al registrar.");
       }
-    } catch (error) {
+    } catch {
       toast.error("Error de conexión con el servidor.");
     } finally {
       setLoading(false);
@@ -291,7 +398,7 @@ export default function FormInscrip() {
             />
           )}
           {passed === 6 && (
-            <EnrollmentSchool data={data} manejoCambio={handleChange} />
+            <EnrollmentSchool data={data} manejarCambio={handleChange} />
           )}
           {passed === 7 && (
             <>

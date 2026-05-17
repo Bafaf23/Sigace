@@ -15,11 +15,10 @@ import SelectorInput from "./SelectorInput";
 
 const LegalRepresentativeFields = ({ datos, manejarCambio }) => {
   const relationshipOptions = [
-    { value: "madre", label: "Madre" },
-    { value: "padre", label: "Padre" },
+    { value: "mamá", label: "Madre" },
+    { value: "papá", label: "Padre" },
     { value: "tutor", label: "Tutor" },
-    { value: "proteccionIntegral", label: "Protección Integral" },
-    { value: "otro", label: "Otro" },
+    { value: "institucional", label: "Protección Integral / Institucional" },
   ];
 
   const dniType = [
@@ -88,6 +87,13 @@ const LegalRepresentativeFields = ({ datos, manejarCambio }) => {
           value={datos.repPhone}
         />
       </div>
+      <Input
+        name="birthCertificate"
+        label="Codigo "
+        placeholder="Folio del acta de nacimiento o documento emitido por la autoridad"
+        onChange={manejarCambio}
+        value={datos.birthCertificate}
+      />
     </div>
   );
 };

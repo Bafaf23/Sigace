@@ -47,6 +47,7 @@ const HealthPhysicalFields = ({ datos, manejarCambio }) => {
         <Selector
           id="Lateralidad"
           label="Lateralidad"
+          name="lateralidad"
           options={lateralidad}
           value={datos.lateralidad}
           onChange={manejarCambio}
