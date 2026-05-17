@@ -15,7 +15,7 @@ import SelectorInput from "./SelectorInput";
  */
 
 const PersonalDataFields = ({ datos, manejarCambio }) => {
-  const dniType = [
+  const documentType = [
     { value: "V-", label: "Venezolano" },
     { value: "CE-", label: "Cedula Estudiantil" },
   ];
@@ -46,15 +46,15 @@ const PersonalDataFields = ({ datos, manejarCambio }) => {
       <div className="grid md:grid-cols-3 items-end gap-4">
         <div className="col-span-2">
           <SelectorInput
-            id={"dniType"}
-            name={"dniType"}
-            nameInput={"dni"}
+            id={"dni"}
+            name={"documentType"}
+            nameInput={"document"}
             placeholder={"323233"}
             label={"Selecciona tipo de documento"}
-            options={dniType}
+            options={documentType}
             onChange={manejarCambio}
-            valueSel={datos.dniType}
-            valueInput={datos.dni}
+            valueSel={datos.documentType}
+            valueInput={datos.document}
           />
         </div>
 

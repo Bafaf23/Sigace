@@ -14,10 +14,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-export default function FromLogin() {
+export default function FromRestablecerPass() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +26,7 @@ export default function FromLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (!formData.email || !formData.password) {
+    if (!formData.email) {
       toast.error("Los campos no pueden estar vacios");
       setLoading(false);
       return;
@@ -47,11 +47,12 @@ export default function FromLogin() {
     }
     setLoading(false);
   };
+
   return (
     <div className="w-full max-w-md px-5 md:py-0">
       {/* Botón para volver */}
       <Links
-        direction="https://sigce-page.vercel.app"
+        direction="/"
         className="group mb-8 inline-flex items-center gap-2 text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400"
         label={"Volver al inicio"}
         classNameIcon={"transition-transform group-hover:-translate-x-1 "}
@@ -78,53 +79,14 @@ export default function FromLogin() {
             onChange={handleChange}
           />
 
-          <InputPass
-            label="Contraseña"
-            name="password"
-            type="password"
-            placeholder="••••••••"
-            value={formData.password}
-            onChange={handleChange}
-          />
-
-          <div className="flex items-center justify-between gap-2 flex-col md:flex-row md:justify-between">
-            <Links
-              icon={faKey}
-              direction="/resetpass"
-              className="text-sm font-semibold text-cyan-600 hover:text-cyan-700 text-center md:text-left gap-2"
-              label={"¿Olvidaste tu contraseña?"}
-            ></Links>
-            <Links
-              direction="/register"
-              icon={faUserPlus}
-              className="flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700 text-center md:text-left"
-              label={"Registrate"}
-            >
-              Registrate
-            </Links>
-          </div>
-
           <Button
             classNameBtn="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-200 dark:shadow-indigo-500/30 transition-all flex justify-center items-center gap-2"
             icon={faKey}
             type="submit"
             disabled={loading}
-            children={loading ? "Verificando..." : "Iniciar Sesión"}
+            children={loading ? "Verificando..." : "Restablecer Contraseña"}
           ></Button>
         </form>
-
-        <p className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
-          ¿No tienes acceso?,{" "}
-          <Link
-            href="https://wa.link/a6tg3m"
-            className="text-indigo-600 dark:text-indigo-500"
-          >
-            {" "}
-            <span className="cursor-pointer font-bold text-indigo-600 dark:text-indigo-500">
-              Contacta al administrador
-            </span>
-          </Link>
-        </p>
       </div>
     </div>
   );
