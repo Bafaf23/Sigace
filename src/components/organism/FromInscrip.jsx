@@ -52,6 +52,19 @@ function buildConditionDescription(formData) {
 }
 
 /** Arma el cuerpo del POST alineado con users, students y legal_representatives. */
+/** IDs devueltos por POST /create_enrollment/ */
+function pickEnrollmentIds(response) {
+  if (!response || typeof response !== "object") return {};
+  const userId = response.user_id ?? response.userId;
+  const studentId = response.student_id ?? response.studentId;
+  const resolved = userId ?? studentId ?? response.id;
+  if (resolved == null || resolved === "") return {};
+  return {
+    user_id: resolved,
+    student_id: studentId ?? resolved,
+  };
+}
+
 function buildEnrollmentPayload(formData) {
   const repDni = buildFullDni(formData.repdniType, formData.repdni);
   const relationship =
@@ -226,6 +239,7 @@ export default function FormInscrip() {
    */
   const [data, setData] = useState({
     // Paso 1: Personales + Academicos
+    user_id: "",
     documentType: "V-",
     document: "",
     name: "",
@@ -265,15 +279,15 @@ export default function FormInscrip() {
     height: "",
 
     // Paso 4: Parents
-    motherName: "",
-    motherDni: "",
-    motherEmail: "",
-    motherPhone: "",
+    motherName: "" || "ausente",
+    motherDni: "" || "ausente",
+    motherEmail: "" || "ausente",
+    motherPhone: "" || "ausente",
     lateralidad: "",
-    fatherName: "",
-    fatherDni: "",
-    fatherEmail: "",
-    fatherPhone: "",
+    fatherName: "" || "ausente",
+    fatherDni: "" || "ausente",
+    fatherEmail: "" || "ausente",
+    fatherPhone: "" || "ausente",
 
     // Paso 5: Representante legal (legal_representatives + rep_* en students)
     repdniType: "V-",
@@ -285,6 +299,8 @@ export default function FormInscrip() {
     repEmail: "",
     birthCertificate: "",
     sig: "",
+    nameInstitution: "" || "Liceo seleccionado",
+    createdAt: new Date().toISOString(),
   });
 
   const handleChange = (e) => {
@@ -339,17 +355,15 @@ export default function FormInscrip() {
       const responseData = await result.json().catch(() => ({}));
 
       if (result.ok) {
+        const ids = pickEnrollmentIds(responseData);
+        if (!ids.user_id) {
+          console.warn(
+            "create_enrollment sin user_id/student_id:",
+            responseData,
+          );
+        }
         toast.success("¡Inscripción procesada con éxito!");
-        setResulData({
-          ...payload,
-          ...responseData,
-          user: {
-            name: data.name,
-            lastName: data.lastName,
-            email: data.email,
-            dni: buildFullDni(data.documentType, data.document),
-          },
-        });
+        setResulData({ ...data, ...ids });
         setSuccess(true);
       } else {
         toast.error(responseData.error || "Hubo un error al registrar.");

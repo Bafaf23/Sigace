@@ -76,7 +76,17 @@ export default function EnrollmentSchool({ data, manejarCambio }) {
             value: school.code_sig,
             label: school.name,
           }))}
-          onChange={manejarCambio}
+          onChange={(e) => {
+            const selected = schools.find(
+              (school) => `${school.code_sig}` === e.target.value,
+            );
+            manejarCambio(e);
+            if (selected) {
+              manejarCambio({
+                target: { name: "nameInstitution", value: selected.name },
+              });
+            }
+          }}
           id="sig"
         />
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

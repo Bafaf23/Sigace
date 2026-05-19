@@ -9,6 +9,7 @@ import {
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import PlanillaInscripsion from "@/docs/PlanillaInscripsion";
 
 export default function Success({ data }) {
   const [isClient, setIsCliente] = useState(false);
@@ -16,12 +17,13 @@ export default function Success({ data }) {
   useEffect(() => {
     setIsCliente(true);
   }, []);
+
   return (
-    <div>
+    <div className="p-4">
       <div className="w-full max-w-md rounded-3xl border border-slate-100 bg-white p-8 text-center shadow-xl">
         {/* Icono de Éxito Animado */}
         <div className="mb-6 flex justify-center">
-          <div className="animate-bounce rounded-full bg-green-100 p-4">
+          <div className="rounded-full bg-green-100 p-4">
             <Icon icon={faCheckCircle} className="text-5xl text-green-600" />
           </div>
         </div>
@@ -30,8 +32,8 @@ export default function Success({ data }) {
           ¡Registro Exitoso!
         </h1>
         <p className="mb-8 text-slate-500">
-          El estudiante ha sido inscrito correctamente en el sistema **SIGACE**.
-          Ya puedes gestionar su ficha académica.
+          Tu inscripción ha sido procesada correctamente. Ya puedes gestionar su
+          ficha académica.
         </p>
 
         {/* Card de Resumen Rápido */}
@@ -44,11 +46,15 @@ export default function Success({ data }) {
           </div>
           <div className="mb-2 flex justify-between text-sm">
             <span className="text-slate-400">Estado:</span>
-            <span className="font-bold text-green-600 uppercase">Activo</span>
+            <span className="font-bold text-orange-600 uppercase">
+              Pendiente
+            </span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-slate-400">Sistema:</span>
-            <span className="font-semibold text-slate-700">SIGACE v1.0</span>
+            <span className="text-slate-400">Liceo:</span>
+            <span className="font-semibold text-slate-700">
+              {data?.institution?.name || "Esperando..."}
+            </span>
           </div>
         </div>
 
@@ -56,30 +62,25 @@ export default function Success({ data }) {
         <div className="space-y-3">
           {isClient ? (
             <PDFDownloadLink
-              key={data?.user?.id}
-              document={<MyDocument data={data} />}
-              fileName={`Planilla_${data?.user?.dni || "inscripcion"}.pdf`}
-              className="flex w-full items-center justify-center gap-3 rounded-xl bg-indigo-600 py-4 font-bold text-white shadow-lg shadow-indigo-200 transition-all hover:bg-indigo-700 active:scale-95"
+              key={data?.user?.dni || data?.user?.document}
+              document={<PlanillaInscripsion data={data} />}
+              fileName={`Planilla_${data?.user?.dni || data?.user?.document || "inscripcion"}.pdf`}
+              className="flex w-full items-center justify-center gap-3 rounded-xl bg-cyan-600 py-4 font-bold text-white transition-all hover:bg-indigo-700 active:scale-95 disabled:cursor-wait disabled:opacity-70"
             >
-              {({ loading }) => (
+              {({ loading, error }) => (
                 <>
                   <Icon icon={faFilePdf} />
                   {loading
-                    ? "Generando documento..."
-                    : "Descargar Planilla PDF"}
+                    ? "Generando PDF..."
+                    : error
+                      ? "Error al generar PDF"
+                      : "Descargar Planilla PDF"}
                 </>
               )}
             </PDFDownloadLink>
           ) : (
-            <div className="w-full animate-pulse rounded-xl bg-slate-200 py-4" />
+            <div className="w-full animate-pulse border border-dashed border-slate-400 rounded-xl py-4 bg-slate-100" />
           )}
-          {/*  <button
-            onClick={() => MyDocument(data)}
-            className="flex w-full items-center justify-center gap-3 rounded-xl bg-indigo-600 py-3 font-bold text-white shadow-lg shadow-indigo-100 transition-all hover:bg-indigo-700"
-          >
-            <Icon icon={faPrint} />
-            Imprimir Planilla
-          </button> */}
 
           <div className="grid grid-cols-2 gap-3">
             <Link
@@ -87,10 +88,11 @@ export default function Success({ data }) {
               className="flex items-center justify-center gap-2 rounded-xl bg-slate-100 py-3 font-semibold text-slate-700 transition-all hover:bg-slate-200"
             >
               <Icon icon={faHome} />
-              Inicio
+              Inicia sesión
             </Link>
             <Link
               href="/enrollment"
+              onClick={() => sessionStorage.removeItem("enrollmentResult")}
               className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 py-3 font-semibold text-slate-600 transition-all hover:bg-slate-50"
             >
               Nuevo Registro
