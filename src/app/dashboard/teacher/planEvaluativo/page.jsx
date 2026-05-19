@@ -8,6 +8,8 @@ import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import { useAuth } from "@/context/AuthContext";
 import Modal from "@/components/organism/Modal";
 import TablaPV from "@/components/organism/TablaPV";
+import Icon from "@/components/atom/Icon";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { faPrint, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Loading from "@/app/dashboard/loading";
@@ -24,15 +26,10 @@ export default function PlanEvaluativo() {
     return <AccessDenied />;
   }
 
-  const materias = {
-    materias: [
-      { id: 1, label: "Matemática", value: "matematica" },
-      { id: 2, label: "Física", value: "fisica" },
-    ],
-  };
+  const materias = [];
 
   const evaluacionesEjemplo = [
-    /* {
+    /*  {
       semana: "02",
       contenido: "Ecuaciones de 2do Grado",
       actividad: "Taller Práctico",
@@ -76,12 +73,13 @@ export default function PlanEvaluativo() {
         </div>
       </div>
       <AccionesRapidas />
+
       <section className="p-3">
         <h1 className="text-2xl font-bold text-gray-500/60 dark:text-slate-500">
           Plan de Evaluación por Materia
         </h1>
 
-        <div className="mt-3 mb-6 flex items-center justify-between">
+        <div className="flex items-end justify-between mb-6 gap-2">
           <div className="max-w-xs">
             <Selector
               id={"selectorPV"}
@@ -100,7 +98,14 @@ export default function PlanEvaluativo() {
           </Button>
         </div>
 
-        <TablaPV evaluaciones={evaluacionesEjemplo} />
+        {evaluacionesEjemplo.length > 0 ? (
+          <TablaPV evaluaciones={evaluacionesEjemplo} />
+        ) : (
+          <div className="flex flex-col items-center bg-slate-100/50 justify-center gap-2 rounded-xl border border-slate-200 border-dashed p-6 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900/50">
+            <Icon icon={faInfoCircle} className="text-slate-500 text-2xl" />
+            No hay evaluaciones cargadas.
+          </div>
+        )}
       </section>
     </div>
   );

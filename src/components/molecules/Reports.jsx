@@ -32,7 +32,7 @@ export default function Reports() {
           classNameBtn={`group relative py-4 px-6 bg-indigo-600 cursor-pointer rounded-2xl flex flex-col items-center justify-center gap-3 text-white shadow-lg shadow-indigo-200 transition-all duration-300 ease-outhover hover:bg-indigo-700 hover:shadow-indigo-300 hover:-translate-y-1 active:scale-95 active:translate-y-0 dark:shadow-indigo-800 dark:hover:shadow-indigo-600`}
           icon={faUserCheck}
         >
-          {"Reporte Acistencia"}
+          {"Reporte asistencia"}
           <span className="absolute top-2 right-2 rounded-full border border-white/30 bg-white/20 px-2 py-0.5 text-[9px] font-black tracking-tighter uppercase backdrop-blur-md">
             Proximante
           </span>
