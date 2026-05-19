@@ -1,9 +1,6 @@
 "use client";
-import MyDocument from "@/app/services/MyDocuemt";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import PlanillaInscripsion from "@/docs/PlanillaInscripsion";
 import dynamic from "next/dynamic";
-
-// Importa el que creamos arriba
 
 const PDFViewer = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
@@ -27,7 +24,7 @@ export default function PDFpage() {
 
       {/* El visor del PDF con el documento adentro */}
       <PDFViewer style={{ flex: 1, border: "none" }}>
-        <MyDocument />
+        <PlanillaInscripsion />
       </PDFViewer>
     </div>
   );
