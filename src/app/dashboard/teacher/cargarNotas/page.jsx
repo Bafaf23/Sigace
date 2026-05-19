@@ -6,139 +6,16 @@ import FormCargaNotas from "@/components/molecules/FromCargaNotas";
 import HeaderDashbord from "@/components/molecules/HeaderDashbord";
 import Modal from "@/components/organism/Modal";
 import TablaNotas from "@/components/organism/TablaNotas";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Icon from "@/components/atom/Icon";
+import Selector from "@/components/atom/Selector";
+import { faInfoCircle, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 export default function cargarNotas() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const db = {
-    infoMateria: {
-      id: "8902",
-      nombre: "Matemática",
-      anio: "5to",
-      seccion: "A",
-      profesor: "Bryant Facenda",
-    },
-
-    lapsos: [
-      {
-        id_lapso: 1,
-        nombre: "Primer Lapso",
-        estatus: "cerrado",
-        alumnos: [
-          {
-            id: "V-28.123.456",
-            nombre: "Juan Pérez",
-            n1: 15.0,
-            n2: 12.5,
-            n3: 18.0,
-          },
-          {
-            id: "CI-28.123.476",
-            nombre: "Antonio Pérez",
-            n1: 10.0,
-            n2: 10.0,
-            n3: 14.5,
-          },
-          {
-            id: "V-29.999.888",
-            nombre: "María García",
-            n1: 20.0,
-            n2: 19.0,
-            n3: 20.0,
-          },
-        ],
-      },
-      {
-        id_lapso: 2,
-        nombre: "Segundo Lapso",
-        estatus: "cerrado",
-        alumnos: [
-          {
-            id: "V-28.123.456",
-            nombre: "Juan Pérez",
-            n1: 14.0,
-            n2: 16.0,
-            n3: 15.0,
-          },
-          {
-            id: "V-28.123.476",
-            nombre: "Antonio Pérez",
-            n1: 0.0,
-            n2: 0.0,
-            n3: 0.0,
-          },
-        ],
-      },
-      {
-        id_lapso: "3",
-        nombre: "Tercer Lapso",
-        estatus: "abierto",
-        alumnos: [
-          {
-            id: "V-28.123.456",
-            nombre: "Juan Pérez",
-            n1: 14.0,
-            n2: 16.0,
-            n3: 15.0,
-          },
-          {
-            id: "V-28.123.476",
-            nombre: "Antonio Pérez",
-            n1: 0.0,
-            n2: 0.0,
-            n3: 0.0,
-          },
-        ],
-      },
-    ],
-  };
-
-  const alumnosDisponibles = [
-    {
-      id: "V-30123456",
-      nombre: "Adriana Villalobos",
-      seccion: "A",
-      anio: "5to",
-    },
-    {
-      id: "V-31987654",
-      nombre: "Brayan Martínez",
-      seccion: "A",
-      anio: "5to",
-    },
-    {
-      id: "CE-29555444",
-      nombre: "Carlos Rodríguez",
-      seccion: "A",
-      anio: "5to",
-    },
-    {
-      id: "V-32111222",
-      nombre: "Daniela Sosa",
-      seccion: "A",
-      anio: "5to",
-    },
-    {
-      id: "V-30888999",
-      nombre: "Esteban Quito",
-      seccion: "A",
-      anio: "5to",
-    },
-  ];
-
-  /*  const materias = [
-    ...new Map(user.materias.map((materia) => [materia.id, materia])).values(),
-  ]; */
-
-  /*   const materia = user.materias.find((m) => m.id === MateriaSelecioada); */
-
-  /* const yearMateria = materia?.year.map((y) => ({ value: y, label: y }) || []); */
-  /* 
-  const secctioMateria = materia?.section.map(
-    (set) => ({ value: set, label: set }) || [],
-  ); */
+  const alumnosDisponibles = [];
+  const data = [];
+  const materias = [];
 
   return (
     <>
@@ -164,7 +41,6 @@ export default function cargarNotas() {
             <FormCargaNotas
               listaAlumnosSinNotas={alumnosDisponibles}
               onSave={(data) => {
-                // Aquí haces el fetch POST a tu base de datos
                 console.log("Guardando nueva nota para:", data.alumnoId);
               }}
               onCancel={() => setIsModalOpen(false)}
@@ -174,14 +50,22 @@ export default function cargarNotas() {
       </div>
 
       <AccionesRapidas />
+
       <div className="mt-6 flex flex-col gap-5 p-3 font-bold text-gray-500/60">
         <div className="flex flex-col justify-between md:flex-row md:items-center lg:flex-row">
-          <h1 className="text-2xl">Notas cargadas por lapso</h1>
-          <p>Materia</p>
+          <h1 className="text-2xl">Notas Cargadas</h1>
+          <div className="max-w-xs">
+            <Selector options={materias} name="materia" label="Materia" />
+          </div>
         </div>
-        {db.lapsos.map((lapso) => (
-          <TablaNotas data={lapso} key={lapso.id_lapso} />
-        ))}
+        {data.length > 0 ? (
+          data.map((lapso) => <TablaNotas data={lapso} key={lapso.id} />)
+        ) : (
+          <div className="flex flex-col items-center bg-slate-100/50 justify-center gap-2 rounded-xl border border-slate-200 border-dashed p-6 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900/50">
+            <Icon icon={faInfoCircle} className="text-slate-500 text-2xl" />
+            No hay notas cargadas en esta materia.
+          </div>
+        )}
       </div>
     </>
   );
